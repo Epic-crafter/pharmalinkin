@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-
 :root  {
   --background: 210 0% 100%;
   --foreground: 210 0% 10%;
@@ -25,7 +24,9 @@
   --input: 210 20% 50%;
   --ring: 210 90.2% 40%;
   --radius: 0.5rem;
+  --primary-color: #4640DE;
 }
+
 .dark  {
   --background: 210 10% 10%;
   --foreground: 210 0% 100%;

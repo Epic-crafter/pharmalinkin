@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
         <button
           type="submit"
-          className="w-full py-2 bg-[#4640DE] text-white rounded-lg hover:bg-[#4e49ee]"
+          className="w-full py-2 bg-[--primary-color] text-white rounded-lg hover:bg-[#4e49ee]"
         >
           Continue
         </button>
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
       </div>
         <Link
           href="/signup"
-          className="w-48 py-1 flex justify-center items-center bg-white border-2 border-[#4640DE] text-[#4640DE] rounded-lg hover:bg-gray-100"
+          className="w-48 py-1 flex justify-center items-center bg-white border-2 border-[--primary-color] text-[--primary-color] rounded-lg hover:bg-gray-100"
         >
             Sign Up
         </Link>
