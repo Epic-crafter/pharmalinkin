@@ -54,7 +54,7 @@ const Login: React.FC = () => {
       </div>
         <Link
           href="/signup"
-          className="w-48 py-1 flex justify-center items-center bg-white border border-2 border-[#4640DE] text-[#4640DE] rounded-lg hover:bg-gray-100"
+          className="w-48 py-1 flex justify-center items-center bg-white border-2 border-[#4640DE] text-[#4640DE] rounded-lg hover:bg-gray-100"
         >
             Sign Up
         </Link>

@@ -65,8 +65,8 @@ const JoinPage = () => {
           onMouseUp={handleUserMouseUp}
           onMouseLeave={handleUserMouseUp}
           className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 ${
-            isUser ? 'border border-2 border-[#4640DE] bg-[#00000005]' : 'border border-2 border-gray-300 bg-white text-gray-800'
-          } ${isUserButtonPressed ? 'scale-95' : ''} hover:border hover:border-2 hover:border-[#4640DE] hover:bg-[#00000005] relative`}
+            isUser ? 'border-2 border-[#4640DE] bg-[#00000005]' : 'border-2 border-gray-300 bg-white text-gray-800'
+          } ${isUserButtonPressed ? 'scale-95' : ''} hover:border-2 hover:border-[#4640DE] hover:bg-[#00000005] relative`}
         >
           <div>
             <FaUser size="1.5em"/>
@@ -85,8 +85,8 @@ const JoinPage = () => {
           onMouseUp={handleCompanyMouseUp}
           onMouseLeave={handleCompanyMouseUp}
           className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 ${
-            isCompanyManager ? 'border border-2 border-[#4640DE] bg-[#00000005]' : 'border border-2 border-gray-300 bg-white text-gray-800'
-          } ${isCompanyButtonPressed ? 'scale-95' : ''} hover:border hover:border-2 hover:border-[#4640DE] hover:bg-[#00000005] relative`}
+            isCompanyManager ? 'border-2 border-[#4640DE] bg-[#00000005]' : 'border-2 border-gray-300 bg-white text-gray-800'
+          } ${isCompanyButtonPressed ? 'scale-95' : ''} hover:border-2 hover:border-[#4640DE] hover:bg-[#00000005] relative`}
         >
           <div>
             <ImOffice size="1.5em"/>
