@@ -1,80 +1,96 @@
-import type { Config } from "tailwindcss"
-
-const config = {
-  darkMode: ["class"],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-  prefix: "",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+        white: "#fff",
+        midnightblue: {
+          "100": "#113ca5",
+          "200": "#0c2e82",
+          "300": "#0b2b82",
+          "400": "#0e0359",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+        slateblue: "#123eaa",
+        mediumslateblue: {
+          "100": "#9480ff",
+          "200": "#7b66ff",
+          "300": "#6f5cf9",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+        cornflowerblue: {
+          "100": "#a39adf",
+          "200": "#8b81d0",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+        lavender: {
+          "100": "#f1efff",
+          "200": "#efebff",
+          "300": "#e3ebff",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+        steelblue: "#6d82b4",
+        ghostwhite: {
+          "100": "#f7f5ff",
+          "200": "#f3f1ff",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+        darkslateblue: "#3d589b",
+        gainsboro: {
+          "100": "#e8e8e8",
+          "200": "#e6e6e6",
+          "300": "#ddd",
         },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+        thistle: {
+          "100": "#d8d1ff",
+          "200": "#d4cdff",
         },
+        lightsteelblue: {
+          "100": "#a1adcb",
+          "200": "#9eabcd",
+        },
+        whitesmoke: "#ededed",
+      },
+      spacing: {},
+      fontFamily: {
+        "bai-jamjuree": "'Bai Jamjuree'",
+        outfit: "Outfit",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        "26xl": "45px",
+        "27xl": "46px",
+        "3xs": "10px",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
+    },
+    fontSize: {
+      base: "16px",
+      "5xl": "24px",
+      lgi: "19px",
+      lg: "18px",
+      xs: "12px",
+      "37xl": "56px",
+      "26xl": "45px",
+      "15xl": "34px",
+      "53xl": "72px",
+      "39xl": "58px",
+      "24xl": "43px",
+      inherit: "inherit",
+    },
+    screens: {
+      mq1300: {
+        raw: "screen and (max-width: 1300px)",
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      mq1125: {
+        raw: "screen and (max-width: 1125px)",
+      },
+      mq800: {
+        raw: "screen and (max-width: 800px)",
+      },
+      mq450: {
+        raw: "screen and (max-width: 450px)",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
-
-export default config
+  corePlugins: {
+    preflight: false,
+  },
+};
