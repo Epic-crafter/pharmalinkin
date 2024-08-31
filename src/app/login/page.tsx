@@ -43,15 +43,15 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          <Button
+          <div
             onClick={() => alert("Sign in with Google")}
-            className="w-full max-w-sm py-2 flex flex-row items-center justify-center bg-[#4285f4] text-white rounded-lg"
+            className="w-full max-w-sm py-2 flex flex-row items-center justify-center bg-[#4285f4] text-white rounded-lg cursor-pointer"
           >
             <div className="bg-white p-1 mx-2 rounded-lg">
               <FcGoogle size="1.5em" />
             </div>
             <p>Continue with Google</p>
-          </Button>
+          </div>
         </CardContent>
         <CardContent className="w-full flex flex-col justify-center items-center">
           <div className="flex items-center justify-center my-6 w-full max-w-sm">
