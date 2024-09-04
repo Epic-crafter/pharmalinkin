@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Epilogue } from "next/font/google";  // Importing the Epilogue font
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// Importing the Epilogue font from Google Fonts with all weights and italics
+const epilogue = Epilogue({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={epilogue.className}>{children}</body>  {/* Apply Epilogue font */}
     </html>
   );
 }

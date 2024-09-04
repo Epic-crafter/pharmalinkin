@@ -1,25 +1,23 @@
 import type { NextPage } from "next";
-import FrameComponent from "../components/frame-component";
-import Category from "../components/category";
-import FrameComponent1 from "../components/frame-component1";
-import FrameComponent2 from "../components/frame-component2";
-import FrameComponent3 from "../components/frame-component3";
+import Header1Desktop from "../components/header1-desktop";
+import LandingPageCompanyDeskt from "../components/landing-page-company-deskt";
+import LandingPageCategoryDesk from "../components/landing-page-category-desk";
+import LandingPageCTADesktop from "../components/landing-page-c-t-a-desktop";
+import LandingPageFeaturedJobs from "../components/landing-page-featured-jobs";
+import LandingPageLatestJobOpen from "../components/landing-page-latest-job-open";
 import Footer from "../components/footer";
-import "./globals.css";
 
-const Desktop: NextPage = () => {
+const LandingPage: NextPage = () => {
   return (
-    <div className="w-full relative bg-white overflow-hidden flex flex-col items-start justify-start leading-[normal] tracking-[normal]">
-      <FrameComponent />
-      <section className="self-stretch flex flex-col items-start justify-start max-w-full">
-        <Category />
-        <FrameComponent1 />
-      </section>
-      <FrameComponent2 />
-      <FrameComponent3 />
+    <div className="w-full relative bg-color-white overflow-hidden flex flex-col items-start justify-start leading-[normal] tracking-[normal]">
+      <Header1Desktop />
+      <LandingPageCompanyDeskt />
+      <LandingPageCategoryDesk />
+      <LandingPageCTADesktop />
+      <LandingPageFeaturedJobs />
+      <LandingPageLatestJobOpen />
       <Footer />
     </div>
   );
 };
-
-export default Desktop;
+export default LandingPage;
