@@ -86,7 +86,7 @@ const Login: React.FC = () => {
 
               <Button
                 type="submit"
-                className="w-full rounded-none bg-[--primary-color] text-white hover:bg-[#4e49ee]"
+                className="w-full"
               >
                 Login
               </Button>
@@ -114,7 +114,7 @@ const Login: React.FC = () => {
 
             <Dialog open={otpPopup} onOpenChange={setOtpPopup}>
               <DialogTrigger asChild>
-                <Button className="w-full text-white rounded-none bg-[--primary-color] text-white hover:bg-[#4e49ee]">
+                <Button className="w-full text-white rounded-none bg-[--primary-color]  hover:bg-[#4e49ee]">
                   Request OTP
                 </Button>
               </DialogTrigger>

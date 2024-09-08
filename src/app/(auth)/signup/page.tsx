@@ -79,11 +79,11 @@ const JoinPage = () => {
             onMouseLeave={handleUserMouseUp}
             className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 cursor-pointer ${
               isUser
-                ? "border-2 border-[--primary-color] bg-[#00000005]"
+                ? "border-2 border-primary bg-[#00000005]"
                 : "border-2 border-gray-300 bg-white text-gray-800"
             } ${
               isUserButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-[--primary-color] hover:bg-[#00000005] relative`}
+            } hover:border-2 hover:border-primary hover:bg-secondary/90 relative`}
           >
             <div>
               <FaUser size="1.5em" />
@@ -93,7 +93,7 @@ const JoinPage = () => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isUser ? "bg-[--primary-color] border-none" : "bg-white"
+                isUser ? "bg-primary border-none" : "bg-white"
               }`}
             >
               <div className="w-3 h-3 border border-white rounded-full"></div>
@@ -133,11 +133,11 @@ const JoinPage = () => {
 
         <Button
           disabled={isButtonDisabled}
-          className={`px-6 py-2 font-semibold rounded-lg ${
-            isButtonDisabled
-              ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-              : "bg-[--primary-color] text-white hover:bg-[#4e49ee]"
-          }`}
+          // className={`px-6 py-2 font-semibold rounded-lg ${
+          //   isButtonDisabled
+          //     ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+          //     : "bg-[--primary-color] text-white hover:bg-[#4e49ee]"
+          // }`}
           onClick={handleCreateAccount}
         >
           {getButtonText()}
