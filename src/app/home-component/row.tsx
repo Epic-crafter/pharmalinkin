@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import Tag from "./tag";
-import r from '../assets/r.png';
-import dr from '../assets/dr.png';
-import pilch from '../assets/pilch.png';
-import design from '../assets/designn.png';
+import r from '../../assets/r.png';
+import dr from '../../assets/dr.png';
+import pilch from '../../assets/pilch.png';
+import design from '../../assets/designn.png';
 import Image from 'next/image'
 import Label from "./label";
 

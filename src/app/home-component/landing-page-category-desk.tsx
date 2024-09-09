@@ -1,17 +1,17 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import JobCategory from "./job-category";
-import explore from '../assets/Explore by category.png'
-import ryt from '../assets/ryt.png'
-import bag from '../assets/bag.png'
-import code from '../assets/code.png'
-import finance from '../assets/finance.png'
-import plane from '../assets/plane.png'
-import ppl from '../assets/ppl.png'
-import sales from '../assets/sales.png'
-import tech from '../assets/tech.png'
-import speaker from '../assets/speaker.png'
-import next from '../assets/next.png'
+import explore from '../../assets/Explore by category.png'
+import ryt from '../../assets/ryt.png'
+import bag from '../../assets/bag.png'
+import code from '../../assets/code.png'
+import finance from '../../assets/finance.png'
+import plane from '../../assets/plane.png'
+import ppl from '../../assets/ppl.png'
+import sales from '../../assets/sales.png'
+import tech from '../../assets/tech.png'
+import speaker from '../../assets/speaker.png'
+import next from '../../assets/next.png'
 
 export type LandingPageCategoryDeskType = {
   className?: string;

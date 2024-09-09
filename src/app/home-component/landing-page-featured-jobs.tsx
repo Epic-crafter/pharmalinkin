@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import Row from "./row";
 import Row1 from "./row1";
 import Image from 'next/image'
-import featured from '../assets/Featured jobs.png'
-import ryt from '../assets/ryt.png'
+import featured from '../../assets/Featured jobs.png'
+import ryt from '../../assets/ryt.png'
 export type LandingPageFeaturedJobsType = {
   className?: string;
 };

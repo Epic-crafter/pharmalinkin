@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import insta from '../assets/insta.png';
-import twitter from '../assets/Twitter.png';
-import fb from '../assets/fb.png';
-import link from '../assets/LinkedIn.png';
-import dribble from '../assets/Dribbble.png'; 
+import insta from '../../assets/insta.png';
+import twitter from '../../assets/Twitter.png';
+import fb from '../../assets/fb.png';
+import link from '../../assets/LinkedIn.png';
+import dribble from '../../assets/Dribbble.png'; 
 import Image from "next/image";
-import divider from '../assets/Divider.png';
+import divider from '../../assets/Divider.png';
 
 export type DividerSocialType = {
   className?: string;

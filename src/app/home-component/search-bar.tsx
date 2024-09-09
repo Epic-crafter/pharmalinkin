@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import Button from "./button";
-import search from '../assets/search.png'
-import location from '../assets/location.png'
-import arrow from '../assets/arrow.png'
+import search from '../../assets/search.png'
+import location from '../../assets/location.png'
+import arrow from '../../assets/arrow.png'
 import Image from "next/image"
+import { Button } from "../../components/ui/button";
 export type SearchBarType = {
   className?: string;
 };
@@ -47,14 +47,15 @@ const SearchBar: NextPage<SearchBarType> = ({ className = "" }) => {
           <div className="self-stretch h-px relative bg-neutrals-20" />
         </div>
       </div>
-      <Button
+      {/* <Button
         caption="Search my job"
         propBackgroundColor="#4640de"
         propBorderRadius="unset"
         propDisplay="unset"
         propMinWidth="unset"
         propColor="#fff"
-      />
+      /> */}
+      <Button className="p-6 text-lg">Search my job</Button>
     </form>
   );
 };

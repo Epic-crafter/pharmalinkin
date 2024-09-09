@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import Tag from "./tag";
 import CompanyLogo from "./company-logo";
 import Label from "./label";
-import product from '../assets/product.png';
-import canva from '../assets/canva.png';
-import strategy from '../assets/strategy.png';
-import analyst from '../assets/analyst.png';
+import product from '../../assets/product.png';
+import canva from '../../assets/canva.png';
+import strategy from '../../assets/strategy.png';
+import analyst from '../../assets/analyst.png';
 import Image from 'next/image';
 
 export type Row1Type = {

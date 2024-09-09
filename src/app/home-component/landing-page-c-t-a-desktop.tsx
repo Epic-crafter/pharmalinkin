@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 import Image from 'next/image'
-import rectangle from '../assets/Rectangle 2742.png'
-import startPosting from '../assets/Start posting jobs today.png'
-import dash from '../assets/3.1 Dashboard Company.png'
-
-import Button from "./button";
+import rectangle from '../../assets/Rectangle 2742.png'
+import startPosting from '../../assets/Start posting jobs today.png'
+import dash from '../../assets/3.1 Dashboard Company.png'
+import { Button } from "@/components/ui/button";
 
 export type LandingPageCTADesktopType = {
   className?: string;
@@ -31,14 +30,7 @@ const LandingPageCTADesktop: NextPage<LandingPageCTADesktopType> = ({
             <div className="self-stretch relative leading-[26px] font-small text-[#ffffff]">
               Start posting jobs for only $10.
             </div>
-            <Button
-            caption="Sign Up For Free"
-            propBackgroundColor="#ffffff"
-            // propBorderRadius="4px"
-            propDisplay="inline-block"
-            propMinWidth="44px"
-            propColor="#4640de"
-          />
+           <Button variant="outline">Sign Up For Free</Button>
           </div>
         </div>
         <div className="h-[346px] flex-1 bg-color-white overflow-hidden flex flex-row items-start justify-start min-w-[367px] max-w-full z-[1] text-3xs-4 text-color-black font-red-hat-display mq450:h-auto mq800:min-w-full">

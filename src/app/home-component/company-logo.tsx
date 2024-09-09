@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import canva from '../assets/canva.png'
+import canva from '../../assets/canva.png'
 import Image from "next/image";
 export type CompanyLogoType = {
   className?: string;

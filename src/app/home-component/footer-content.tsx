@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Input1 from "./input1";
-import Button from "./button";
-import logo from '../assets/Frame 3.png'
+import logo from '../../assets/Frame 3.png'
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 export type FooterContentType = {
   className?: string;
 };
@@ -91,14 +91,8 @@ const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
         <div className="self-stretch flex flex-row items-start justify-start max-w-full">
           <div className="flex-1 flex flex-row items-start justify-start gap-2 max-w-full mq450:flex-wrap">
             <Input1 />
-            <Button
-            caption="Subscribe"
-            propBackgroundColor="#4640de"
-            // propBorderRadius="4px"
-            propDisplay="inline-block"
-            propMinWidth="44px"
-            propColor="#ffffff"
-          />          </div>
+            <Button className="p-4" >Subscribe</Button>
+                     </div>
         </div>
       </div>
     </div>

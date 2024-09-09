@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import Image from 'next/image';
-import vodafone from '../assets/vodafone-2017-logo.png';
-import tesla from '../assets/tesla-9 1.png';
-import amd from '../assets/amd-logo-1.png';
-import intel from '../assets/intel-3.png';
-import talkit from '../assets/talkit 1.png';
+import vodafone from '../../assets/vodafone-2017-logo.png';
+import tesla from '../../assets/tesla-9 1.png';
+import amd from '../../assets/amd-logo-1.png';
+import intel from '../../assets/intel-3.png';
+import talkit from '../../assets/talkit 1.png';
 import { IMAGES_MANIFEST } from "next/dist/shared/lib/constants";
 export type LandingPageCompanyDesktType = {
   className?: string;

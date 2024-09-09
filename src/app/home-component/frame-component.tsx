@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import SearchBar from "./search-bar";
 
-import title from '../assets/Title.png'
+import title from '../../assets/Title.png'
 export type FrameComponentType = {
   className?: string;
 };

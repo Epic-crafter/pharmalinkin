@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import JobList from "./job-list";
 import Image from "next/image";
-import jobopen from '../assets/Latest jobs open.png'
-import ryt from '../assets/ryt.png'
+import jobopen from '../../assets/Latest jobs open.png'
+import ryt from '../../assets/ryt.png'
 export type LandingPageLatestJobOpenType = {
   className?: string;
 };

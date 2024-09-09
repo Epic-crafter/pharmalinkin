@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import Image from "next/image"; // Import Image from next/image
 import TopMenu from "./top-menu";
-import Button from "./button";
 import FrameComponent from "./frame-component";
-import frame from '../assets/Frame 3.png'; // Import the image
-import pattern from '../assets/Pattern.png';
-import pic from '../assets/1x.png';
+import frame from '../../assets/Frame 3.png'; // Import the image
+import pattern from '../../assets/Pattern.png';
+import pic from '../../assets/1x.png';
+import { Button } from "@/components/ui/button";
 
 export type Header1DesktopType = {
   className?: string;
@@ -58,25 +58,11 @@ const Header1Desktop: NextPage<Header1DesktopType> = ({ className = "" }) => {
           </div>
         </div>
         <div className="flex flex-row items-start justify-start py-3.5 px-0 gap-[15.5px] mq450:hidden">
-          <Button
-            caption="Login"
-            propBackgroundColor="transparent"
-            propBorderRadius="4px"
-            propDisplay="inline-block"
-            propMinWidth="44px"
-            propColor="#4640de"
-          />
+          <Button variant="ghost" className="p-4">Login</Button>
           <div className="h-[49px] flex flex-col items-start justify-start pt-px px-0 pb-0 box-border">
             <div className="w-px h-[49px] relative border-neutrals-20 border-r-[1px] border-solid box-border" />
           </div>
-          <Button
-            caption="Sign Up"
-            propBackgroundColor="#4640de"
-            propBorderRadius="unset"
-            propDisplay="inline-block"
-            propMinWidth="60px"
-            propColor="#fff"
-          />
+          <Button className="p-4">Sign Up</Button>
         </div>
       </header>
       <FrameComponent />
