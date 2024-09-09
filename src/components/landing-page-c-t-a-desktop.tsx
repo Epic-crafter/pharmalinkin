@@ -1,14 +1,7 @@
 import type { NextPage } from "next";
 import Image from 'next/image'
-import SideBarDashboardCompany from "./side-bar-dashboard-company";
-import TopNav from "./top-nav";
-import Dropdown from "./dropdown";
-import PillTab from "./pill-tab";
-import Tabs from "./tabs";
-import Label from "./label";
 import rectangle from '../assets/Rectangle 2742.png'
 import startPosting from '../assets/Start posting jobs today.png'
-import btn from '../assets/btn.png'
 import dash from '../assets/3.1 Dashboard Company.png'
 
 import Button from "./button";
