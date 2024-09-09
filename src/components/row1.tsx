@@ -2,6 +2,11 @@ import type { NextPage } from "next";
 import Tag from "./tag";
 import CompanyLogo from "./company-logo";
 import Label from "./label";
+import product from '../assets/product.png';
+import canva from '../assets/canva.png';
+import strategy from '../assets/strategy.png';
+import analyst from '../assets/analyst.png';
+import Image from 'next/image';
 
 export type Row1Type = {
   className?: string;
@@ -14,11 +19,11 @@ const Row1: NextPage<Row1Type> = ({ className = "" }) => {
     >
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-9@2x.png"
+            src={product}
           />
           <Tag />
         </div>
@@ -39,19 +44,49 @@ const Row1: NextPage<Row1Type> = ({ className = "" }) => {
           </div>
         </div>
         <div className="self-stretch relative text-base leading-[160%] font-body-small-regular text-neutrals-60">
-          ClassPass is looking for Product Designer to help us...
+          ClassPass is looking for Product Designer to help us.
         </div>
         <div className="flex flex-row items-start justify-start gap-2">
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-chocolate-200 rounded-61xl flex flex-row items-start justify-start hover:bg-chocolate-100">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
-              Marketing
-            </div>
-          </button>
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-mediumaquamarine rounded-61xl flex flex-row items-start justify-start hover:bg-seagreen">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left inline-block min-w-[48px]">
-              Design
-            </div>
-          </button>
+        <Label
+            caption="Marketing"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(235,133,51,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#EB8533"
+            propColor="#EB8533"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
+        <Label
+            caption="Design"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(86,205,173,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#56CDAD"
+            propColor="#56CDAD"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
         </div>
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
@@ -79,26 +114,55 @@ const Row1: NextPage<Row1Type> = ({ className = "" }) => {
           Canva is looking for Lead Engineer to help develop n ...
         </div>
         <div className="flex flex-row items-start justify-start gap-2">
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-mediumaquamarine rounded-61xl flex flex-row items-start justify-start hover:bg-seagreen">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left inline-block min-w-[48px]">
-              Design
-            </div>
-          </button>
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-blueviolet rounded-61xl flex flex-row items-start justify-start gap-2">
-            <div className="h-3 w-3 relative rounded-[50%] bg-brands-primary hidden" />
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-brands-primary text-left inline-block min-w-[63px]">
-              Business
-            </div>
-          </button>
+        <Label
+            caption="Design"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(86,205,173,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#56CDAD"
+            propColor="#56CDAD"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
+          <Label
+            caption="Buisness"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(70,64,222,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#4640DE"
+            propColor="#4640DE"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
         </div>
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-10@2x.png"
+            src={strategy}
           />
           <Tag />
         </div>
@@ -119,29 +183,39 @@ const Row1: NextPage<Row1Type> = ({ className = "" }) => {
         <div className="self-stretch relative text-base leading-[160%] font-body-small-regular text-neutrals-60">
           GoDaddy is looking for Brand Strategist to join the team...
         </div>
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-2">
-          <div className="rounded-61xl bg-chocolate-200 flex flex-row items-start justify-start py-1 px-4">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
-              Marketing
-            </div>
-          </div>
-          <div className="rounded-61xl bg-mediumaquamarine hidden flex-row items-center justify-center py-1 px-4">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left">
-              Tech
-            </div>
-          </div>
-        </button>
+        <Label
+            caption="Marketing"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(235,133,51,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#EB8533"
+            propColor="#EB8533"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[205px] max-w-[274px] text-base text-brands-primary">
         <div className="self-stretch flex flex-row items-start justify-between gap-5 text-center">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-11@2x.png"
+            src={analyst}
           />
           <Tag />
+          
         </div>
+        
         <div className="flex flex-col items-start justify-start gap-0.5 text-lg text-neutrals-100">
           <div className="relative leading-[29px] font-semibold inline-block min-w-[114px]">
             Data Analyst

@@ -1,5 +1,11 @@
 import type { NextPage } from "next";
 import Tag from "./tag";
+import r from '../assets/r.png';
+import dr from '../assets/dr.png';
+import pilch from '../assets/pilch.png';
+import design from '../assets/designn.png';
+import Image from 'next/image'
+import Label from "./label";
 
 export type RowType = {
   className?: string;
@@ -12,11 +18,11 @@ const Row: NextPage<RowType> = ({ className = "" }) => {
     >
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-5@2x.png"
+            src={r}
           />
           <Tag />
         </div>
@@ -40,25 +46,55 @@ const Row: NextPage<RowType> = ({ className = "" }) => {
           Revolut is looking for Email Marketing to help team ma ...
         </div>
         <div className="flex flex-row items-start justify-start gap-2">
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-chocolate-200 rounded-61xl flex flex-row items-start justify-start hover:bg-chocolate-100">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
-              Marketing
-            </div>
-          </button>
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-mediumaquamarine rounded-61xl flex flex-row items-start justify-start hover:bg-seagreen">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left inline-block min-w-[48px]">
-              Design
-            </div>
-          </button>
+        <Label
+            caption="Marketing"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(235,133,51,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#EB8533"
+            propColor="#EB8533"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
+        <Label
+            caption="Design"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(86,205,173,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#56CDAD"
+            propColor="#56CDAD"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
         </div>
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative"
             loading="lazy"
             alt=""
-            src="/company-logo-6.svg"
+            src={dr}
           />
           <Tag />
         </div>
@@ -80,26 +116,55 @@ const Row: NextPage<RowType> = ({ className = "" }) => {
           Dropbox is looking for Brand Designer to help the team t ...
         </div>
         <div className="flex flex-row items-start justify-start gap-2">
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-mediumaquamarine rounded-61xl flex flex-row items-start justify-start hover:bg-seagreen">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left inline-block min-w-[48px]">
-              Design
-            </div>
-          </button>
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-blueviolet rounded-61xl flex flex-row items-start justify-start gap-2">
-            <div className="h-3 w-3 relative rounded-[50%] bg-brands-primary hidden" />
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-brands-primary text-left inline-block min-w-[63px]">
-              Business
-            </div>
-          </button>
+        <Label
+            caption="Design"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(86,205,173,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#56CDAD"
+            propColor="#56CDAD"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
+        <Label
+            caption="Buisness"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(70,64,222,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#4640DE"
+            propColor="#4640DE"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
         </div>
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-7@2x.png"
+            src={pilch}
           />
           <Tag />
         </div>
@@ -122,26 +187,35 @@ const Row: NextPage<RowType> = ({ className = "" }) => {
         <div className="self-stretch relative text-base leading-[160%] font-body-small-regular text-neutrals-60">
           Pitch is looking for Customer Manager to join marketing t ...
         </div>
-        <button className="cursor-pointer [border:none] p-0 bg-[transparent] flex flex-row items-start justify-start gap-2">
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-chocolate-200 rounded-61xl flex flex-row items-start justify-start hover:bg-chocolate-100">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
-              Marketing
-            </div>
-          </button>
-          <div className="rounded-61xl bg-mediumaquamarine hidden flex-row items-center justify-center py-1 px-4">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left">
-              Tech
-            </div>
-          </div>
-        </button>
+        <Label
+            caption="Marketing"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(235,133,51,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#EB8533"
+            propColor="#EB8533"
+            propDisplay="inline-flex"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+            
+          />
       </div>
       <div className="flex-1 bg-color-white border-neutrals-20 border-[1px] border-solid box-border flex flex-col items-start justify-start py-[22px] px-[23px] gap-4 min-w-[244px] max-w-[274px]">
         <div className="self-stretch flex flex-row items-start justify-between gap-5">
-          <img
+          <Image
             className="h-12 w-12 relative object-cover"
             loading="lazy"
             alt=""
-            src="/company-logo-8@2x.png"
+            src={design}
           />
           <Tag />
         </div>
@@ -170,11 +244,26 @@ const Row: NextPage<RowType> = ({ className = "" }) => {
               Marketing
             </div>
           </div>
-          <button className="cursor-pointer [border:none] py-1 px-4 bg-mediumaquamarine rounded-61xl flex flex-row items-start justify-start hover:bg-seagreen">
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-green text-left inline-block min-w-[48px]">
-              Design
-            </div>
-          </button>
+          <Label
+            caption="Design"
+            propWidth="unset"
+            propBorderRadius="80px"
+            propBorder="unset"
+            propGap="8px"
+            propAlignSelf="unset"
+            propFlex="unset"
+            propPadding="8px 16px"
+            propBackgroundColor="rgba(86,205,173,0.1)"
+            propHeight="12px"
+            propWidth1="12px"
+            propBackgroundColor1="#56CDAD"
+            propColor="#56CDAD"
+            propDisplay="inline-block"
+            propMinWidth="82px"
+            propAlignSelf1="unset"
+            propFlex1="unset"
+            propWidth2="unset"
+          />
         </div>
       </div>
     </div>
