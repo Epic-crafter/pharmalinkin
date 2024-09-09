@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Input1 from "./input1";
 import Button from "./button";
-
+import logo from '../assets/Frame 3.png'
+import Image from "next/image";
 export type FooterContentType = {
   className?: string;
 };
@@ -15,16 +16,17 @@ const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
         <div className="self-stretch flex flex-col items-start justify-start gap-8 mq450:gap-4">
           <div className="flex flex-row items-start justify-start gap-2">
             <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0">
-              <img
+              <Image
                 className="w-8 h-8 relative overflow-hidden shrink-0"
                 loading="lazy"
                 alt=""
-                src="/frame-3-3.svg"
+                src={logo}
               />
             </div>
-            <h3 className="m-0 relative text-inherit tracking-[-0.01em] leading-[150%] font-bold font-[inherit] inline-block min-w-[120px] mq450:text-lgi mq450:leading-[29px]">
-              JobHuntly
+            <h3 className="m-0 relative text-inherit tracking-[-0.01em] leading-[150%] font-bold font-[inherit] inline-block min-w-[120px] text-base mq450:text-sm mq450:leading-[29px] mt-2">
+                JobHuntly
             </h3>
+
           </div>
           <div className="self-stretch relative text-base leading-[160%] font-body-normal-regular text-neutrals-20">
             Great platform for the job seeker that passionate about startups.
@@ -89,8 +91,14 @@ const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
         <div className="self-stretch flex flex-row items-start justify-start max-w-full">
           <div className="flex-1 flex flex-row items-start justify-start gap-2 max-w-full mq450:flex-wrap">
             <Input1 />
-            <Button caption="Subscribe" />
-          </div>
+            <Button
+            caption="Subscribe"
+            propBackgroundColor="#4640de"
+            // propBorderRadius="4px"
+            propDisplay="inline-block"
+            propMinWidth="44px"
+            propColor="#ffffff"
+          />          </div>
         </div>
       </div>
     </div>

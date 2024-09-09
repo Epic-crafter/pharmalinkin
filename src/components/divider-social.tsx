@@ -1,4 +1,11 @@
 import type { NextPage } from "next";
+import insta from '../assets/insta.png';
+import twitter from '../assets/Twitter.png';
+import fb from '../assets/fb.png';
+import link from '../assets/LinkedIn.png';
+import dribble from '../assets/Dribbble.png'; 
+import Image from "next/image";
+import divider from '../assets/Divider.png';
 
 export type DividerSocialType = {
   className?: string;
@@ -9,11 +16,11 @@ const DividerSocial: NextPage<DividerSocialType> = ({ className = "" }) => {
     <div
       className={`w-[1192px] flex flex-col items-start justify-start gap-10 max-w-full text-left text-base text-color-white font-body-normal-regular mq800:gap-5 ${className}`}
     >
-      <img
+      <Image
         className="self-stretch relative max-w-full overflow-hidden max-h-full mt-[-2px]"
         loading="lazy"
         alt=""
-        src="/divider.svg"
+        src={divider}
       />
       <div className="self-stretch flex flex-row items-start justify-between gap-5 mq800:flex-wrap">
         <div className="w-[295px] flex flex-col items-start justify-start pt-0.5 px-0 pb-0 box-border">
@@ -24,35 +31,35 @@ const DividerSocial: NextPage<DividerSocialType> = ({ className = "" }) => {
           </div>
         </div>
         <div className="flex flex-row items-start justify-start gap-6">
-          <img
+          <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
             alt=""
-            src="/facebook.svg"
+            src={fb}
           />
-          <img
+          <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
             alt=""
-            src="/instagram.svg"
+            src={insta}
           />
-          <img
+          <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
             alt=""
-            src="/dribbble.svg"
+            src={dribble}
           />
-          <img
+          <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
             alt=""
-            src="/linkedin.svg"
+            src={link}
           />
-          <img
+          <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
             alt=""
-            src="/twitter.svg"
+            src={twitter}
           />
         </div>
       </div>
