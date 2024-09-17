@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { useMemo, type CSSProperties } from "react";
 import Label from "./label";
-
+import {Button} from '../components/ui/button'
+// Define the prop types for JobList component
 export type JobListType = {
   className?: string;
   companyLogo?: string;
@@ -26,8 +27,6 @@ export type JobListType = {
   propAlignSelf1?: string;
   propFlex1?: string;
   propWidth2?: string;
-
-  /** Style props */
   propDisplay?: CSSProperties["display"];
   propMinWidth?: CSSProperties["minWidth"];
   propMinWidth1?: CSSProperties["minWidth"];
@@ -35,6 +34,7 @@ export type JobListType = {
   propMinWidth2?: CSSProperties["minWidth"];
 };
 
+// JobList component
 const JobList: NextPage<JobListType> = ({
   className = "",
   companyLogo,
@@ -65,26 +65,22 @@ const JobList: NextPage<JobListType> = ({
   propFlex1,
   propWidth2,
 }) => {
-  const socialMediaAssistantStyle: CSSProperties = useMemo(() => {
-    return {
-      display: propDisplay,
-      minWidth: propMinWidth,
-    };
-  }, [propDisplay, propMinWidth]);
+  // Styles for dynamic elements using useMemo hook
+  const socialMediaAssistantStyle = useMemo<CSSProperties>(() => ({
+    display: propDisplay,
+    minWidth: propMinWidth,
+  }), [propDisplay, propMinWidth]);
 
-  const nomadStyle: CSSProperties = useMemo(() => {
-    return {
-      minWidth: propMinWidth1,
-    };
-  }, [propMinWidth1]);
+  const nomadStyle = useMemo<CSSProperties>(() => ({
+    minWidth: propMinWidth1,
+  }), [propMinWidth1]);
 
-  const parisFranceStyle: CSSProperties = useMemo(() => {
-    return {
-      display: propDisplay1,
-      minWidth: propMinWidth2,
-    };
-  }, [propDisplay1, propMinWidth2]);
+  const parisFranceStyle = useMemo<CSSProperties>(() => ({
+    display: propDisplay1,
+    minWidth: propMinWidth2,
+  }), [propDisplay1, propMinWidth2]);
 
+  // Render component
   return (
     <div
       className={`self-stretch bg-color-white flex flex-row items-start justify-start py-6 px-10 gap-6 text-left text-xl text-neutrals-100 font-body-normal-regular mq800:flex-wrap ${className}`}
@@ -122,12 +118,12 @@ const JobList: NextPage<JobListType> = ({
             </div>
           </div>
           <div className="h-[34px] w-px relative bg-neutrals-20 mq450:w-full mq450:h-px" />
-          <button className="cursor-pointer border-accents-yellow border-[1px] border-solid py-1 px-[9px] bg-[transparent] flex-1 rounded-61xl box-border flex flex-row items-start justify-start gap-2 min-w-[60px]">
-            <div className="h-3 w-3 relative rounded-[50%] bg-accents-yellow hidden" />
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
-              Marketing
-            </div>
-          </button>
+          <Button>
+  <div className="h-3 w-3 relative rounded-[50%] bg-accents-yellow hidden" />
+  <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
+    Marketing
+  </div>
+</Button>
           <Label
             caption={caption}
             propWidth={propWidth}

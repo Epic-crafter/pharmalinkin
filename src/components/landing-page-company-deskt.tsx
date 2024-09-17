@@ -5,7 +5,6 @@ import tesla from '../assets/tesla-9 1.png';
 import amd from '../assets/amd-logo-1.png';
 import intel from '../assets/intel-3.png';
 import talkit from '../assets/talkit 1.png';
-import { IMAGES_MANIFEST } from "next/dist/shared/lib/constants";
 export type LandingPageCompanyDesktType = {
   className?: string;
 };
