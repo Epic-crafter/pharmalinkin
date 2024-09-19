@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Input1 from "./input1";
-import logo from '../../assets/Frame 3.png'
+import logo from '../../assets/frame.png'
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 export type FooterContentType = {

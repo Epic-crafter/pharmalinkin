@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image"; // Import Image from next/image
 import TopMenu from "./top-menu";
 import FrameComponent from "./frame-component";
-import frame from '../../assets/Frame 3.png'; // Import the image
+import frame from '../../assets/frame.png'; // Import the image
 import pattern from '../../assets/Pattern.png';
 import pic from '../../assets/1x.png';
 import { Button } from "@/components/ui/button";
