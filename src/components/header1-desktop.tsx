@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import Image from "next/image"; // Import Image from next/image
+import Image from "next/image";
+import { Button } from "@/components/ui/button"; // Use shadcn Button component
 import TopMenu from "./top-menu";
-import Button from "./button";
 import FrameComponent from "./frame-component";
-import frame from '../assets/Frame 3.png'; // Import the image
+import frame from '../assets/Frame 3.png';
 import pattern from '../assets/Pattern.png';
 import pic from '../assets/1x.png';
 
@@ -22,7 +22,6 @@ const Header1Desktop: NextPage<Header1DesktopType> = ({ className = "" }) => {
           alt=""
           src={pattern}
         />
-        
       </div>
       <Image
         className="w-[486.5px] h-[918.9px] relative object-cover hidden max-w-full z-[1]"
@@ -35,11 +34,11 @@ const Header1Desktop: NextPage<Header1DesktopType> = ({ className = "" }) => {
             <div className="flex flex-row items-start justify-start">
               <div className="flex flex-row items-start justify-start gap-2 z-[1] ml-[-160px]">
                 <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0">
-                  <Image // Use Image component for imported image
+                  <Image
                     className="w-8 h-8 relative overflow-hidden shrink-0"
                     loading="lazy"
                     alt="Frame"
-                    src={frame} // Use the imported image as src
+                    src={frame}
                   />
                 </div>
                 <h6 className="m-0 relative text-inherit tracking-[-0.01em] leading-[100%] font-bold font-[inherit] inline-block min-w-[120px] whitespace-nowrap text-sm-3">
@@ -58,25 +57,21 @@ const Header1Desktop: NextPage<Header1DesktopType> = ({ className = "" }) => {
           </div>
         </div>
         <div className="flex flex-row items-start justify-start py-3.5 px-0 gap-[15.5px] mq450:hidden">
+          {/* Use shadcn Button component */}
           <Button
-            caption="Login"
-            propBackgroundColor="transparent"
-            propBorderRadius="4px"
-            propDisplay="inline-block"
-            propMinWidth="44px"
-            propColor="#4640de"
-          />
+            variant="outline"
+            className="border-none text-[#4640de] inline-block min-w-[44px] rounded-md"
+          >
+            Login
+          </Button>
           <div className="h-[49px] flex flex-col items-start justify-start pt-px px-0 pb-0 box-border">
             <div className="w-px h-[49px] relative border-neutrals-20 border-r-[1px] border-solid box-border" />
           </div>
           <Button
-            caption="Sign Up"
-            propBackgroundColor="#4640de"
-            propBorderRadius="unset"
-            propDisplay="inline-block"
-            propMinWidth="60px"
-            propColor="#fff"
-          />
+            className="bg-[#4640de] text-white inline-block min-w-[60px]"
+          >
+            Sign Up
+          </Button>
         </div>
       </header>
       <FrameComponent />

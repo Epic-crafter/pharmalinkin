@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useMemo, type CSSProperties } from "react";
+import { Button as ShadcnButton } from '@/components/ui/button';
 
 export type ButtonType = {
   className?: string;
@@ -38,7 +39,7 @@ const Button: NextPage<ButtonType> = ({
   }, [propDisplay, propMinWidth, propColor]);
 
   return (
-    <button
+    <ShadcnButton
       className={`cursor-pointer [border:none] py-3 px-6 bg-brands-primary flex flex-row items-start justify-start hover:bg-mediumslateblue ${className}`}
       style={buttonStyle}
     >
@@ -48,7 +49,7 @@ const Button: NextPage<ButtonType> = ({
       >
         {caption}
       </b>
-    </button>
+    </ShadcnButton>
   );
 };
 

@@ -41,7 +41,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
           <div className="self-stretch flex flex-row items-start justify-start flex-wrap content-start gap-8 max-w-full text-xl font-body-normal-regular mq800:gap-4">
             <div className="flex-1 flex flex-col items-start justify-start gap-4 min-w-[377px] max-w-full mq800:min-w-full">
               <JobList
-                companyLogo="../assets/socialM.png"
+                companyLogo="/images/socialM.png"
                 socialMediaAssistant="Social Media Assistant"
                 nomad="Nomad"
                 parisFrance="Paris, France"
@@ -70,7 +70,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-13.svg"
+                companyLogo="/images/brand.png"
                 socialMediaAssistant="Brand Designer"
                 nomad="Dropbox"
                 parisFrance="San Fransisco, USA"
@@ -99,7 +99,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-14.svg"
+                companyLogo="/images/interactive.png"
                 socialMediaAssistant="Interactive Developer"
                 nomad="Terraform"
                 parisFrance="Hamburg, Germany"
@@ -128,7 +128,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-15.svg"
+                companyLogo="/images/hr.png"
                 socialMediaAssistant="HR Manager"
                 nomad="Packer"
                 parisFrance="Lucern, Switzerland"
@@ -159,7 +159,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
             </div>
             <div className="flex-1 flex flex-col items-start justify-start gap-4 min-w-[377px] max-w-full mq800:min-w-full">
               <JobList
-                companyLogo="/company-logo-16@2x.png"
+                companyLogo="/images/socialM1.png"
                 socialMediaAssistant="Social Media Assistant"
                 nomad="Netlify"
                 parisFrance="Paris, France"
@@ -188,7 +188,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-17@2x.png"
+                companyLogo="/images/brand1.png"
                 socialMediaAssistant="Brand Designer"
                 nomad="Maze"
                 parisFrance="San Fransisco, USA"
@@ -217,7 +217,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-18@2x.png"
+                companyLogo="/images/interactive1.png"
                 socialMediaAssistant="Interactive Developer"
                 nomad="Udacity"
                 parisFrance="Hamburg, Germany"
@@ -246,7 +246,7 @@ const LandingPageLatestJobOpen: NextPage<LandingPageLatestJobOpenType> = ({
                 propWidth2="unset"
               />
               <JobList
-                companyLogo="/company-logo-19@2x.png"
+                companyLogo="/images/hr1.png"
                 socialMediaAssistant="HR Manager"
                 nomad="Webflow"
                 parisFrance="Lucern, Switzerland"
