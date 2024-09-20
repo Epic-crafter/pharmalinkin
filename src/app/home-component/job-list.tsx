@@ -1,5 +1,8 @@
 import type { NextPage } from "next";
 import { useMemo, type CSSProperties } from "react";
+import { Button } from "@/components/ui/button"; // Import ShadCN components
+import { Card } from "@/components/ui/card";
+import { Badge } from "lucide-react";
 import Label from "./label";
 
 export type JobListType = {
@@ -86,7 +89,7 @@ const JobList: NextPage<JobListType> = ({
   }, [propDisplay1, propMinWidth2]);
 
   return (
-    <div
+    <Card
       className={`self-stretch bg-color-white flex flex-row items-start justify-start py-6 px-10 gap-6 text-left text-xl text-neutrals-100 font-body-normal-regular mq800:flex-wrap ${className}`}
     >
       <img
@@ -116,18 +119,21 @@ const JobList: NextPage<JobListType> = ({
           </div>
         </div>
         <div className="self-stretch flex flex-row items-start justify-start gap-2 text-sm text-accents-green mq450:flex-wrap">
-          <div className="rounded-61xl bg-mediumaquamarine flex flex-row items-start justify-start py-1.5 px-2.5">
+          <Badge className="rounded-61xl bg-mediumaquamarine flex flex-row items-start justify-start py-1.5 px-2.5">
             <div className="relative leading-[160%] font-semibold inline-block min-w-[63px]">
               Full-Time
             </div>
-          </div>
+          </Badge>
           <div className="h-[34px] w-px relative bg-neutrals-20 mq450:w-full mq450:h-px" />
-          <button className="cursor-pointer border-accents-yellow border-[1px] border-solid py-1 px-[9px] bg-[transparent] flex-1 rounded-61xl box-border flex flex-row items-start justify-start gap-2 min-w-[60px]">
+          <Button
+            variant="outline"
+            className="cursor-pointer border-accents-yellow border-[1px] border-solid py-1 px-[9px] bg-[transparent] flex-1 rounded-61xl box-border flex flex-row items-start justify-start gap-2 min-w-[60px]"
+          >
             <div className="h-3 w-3 relative rounded-[50%] bg-accents-yellow hidden" />
             <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
               Marketing
             </div>
-          </button>
+          </Button>
           <Label
             caption={caption}
             propWidth={propWidth}
@@ -150,7 +156,7 @@ const JobList: NextPage<JobListType> = ({
           />
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
-import insta from '../../assets/insta.png';
-import twitter from '../../assets/Twitter.png';
-import fb from '../../assets/fb.png';
-import link from '../../assets/LinkedIn.png';
-import dribble from '../../assets/Dribbble.png'; 
+import { cn } from "@/lib/utils"; // Helper function from shadcn to combine class names
 import Image from "next/image";
-import divider from '../../assets/Divider.png';
+import insta from '../assets/insta.png';
+import twitter from '../assets/Twitter.png';
+import fb from '../assets/fb.png';
+import link from '../assets/LinkedIn.png';
+import dribble from '../assets/Dribbble.png'; 
+import divider from '../assets/Divider.png';
 
 export type DividerSocialType = {
   className?: string;
@@ -14,12 +15,15 @@ export type DividerSocialType = {
 const DividerSocial: NextPage<DividerSocialType> = ({ className = "" }) => {
   return (
     <div
-      className={`w-[1192px] flex flex-col items-start justify-start gap-10 max-w-full text-left text-base text-color-white font-body-normal-regular mq800:gap-5 ${className}`}
+      className={cn(
+        "w-[1192px] flex flex-col items-start justify-start gap-10 max-w-full text-left text-base text-color-white font-body-normal-regular mq800:gap-5",
+        className
+      )}
     >
       <Image
         className="self-stretch relative max-w-full overflow-hidden max-h-full mt-[-2px]"
         loading="lazy"
-        alt=""
+        alt="divider"
         src={divider}
       />
       <div className="self-stretch flex flex-row items-start justify-between gap-5 mq800:flex-wrap">
@@ -34,31 +38,31 @@ const DividerSocial: NextPage<DividerSocialType> = ({ className = "" }) => {
           <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
-            alt=""
+            alt="facebook"
             src={fb}
           />
           <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
-            alt=""
+            alt="instagram"
             src={insta}
           />
           <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
-            alt=""
+            alt="dribbble"
             src={dribble}
           />
           <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
-            alt=""
+            alt="linkedin"
             src={link}
           />
           <Image
             className="h-8 w-8 relative min-h-[32px]"
             loading="lazy"
-            alt=""
+            alt="twitter"
             src={twitter}
           />
         </div>
