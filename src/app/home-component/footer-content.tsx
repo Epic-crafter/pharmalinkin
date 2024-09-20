@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
+import { cn } from "@/lib/utils"; // shadcn utility for combining class names
 import Input1 from "./input1";
-import logo from '../../assets/frame.png'
+import logo from '../assets/Frame 3.png';
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; // shadcn button import
+
+
 export type FooterContentType = {
   className?: string;
 };
@@ -10,7 +13,10 @@ export type FooterContentType = {
 const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
   return (
     <div
-      className={`flex flex-row items-start justify-start gap-[71px] max-w-full text-left text-lg text-color-white font-body-normal-regular mq800:gap-[18px] mq1350:gap-[35px] mq1350:flex-wrap ${className}`}
+      className={cn(
+        "flex flex-row items-start justify-start gap-[71px] max-w-full text-left text-lg text-color-white font-body-normal-regular mq800:gap-[18px] mq1350:gap-[35px] mq1350:flex-wrap",
+        className
+      )}
     >
       <div className="w-[393px] flex flex-col items-start justify-start py-0 pl-0 pr-[17px] box-border max-w-full text-5xl font-red-hat-display">
         <div className="self-stretch flex flex-col items-start justify-start gap-8 mq450:gap-4">
@@ -19,14 +25,13 @@ const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
               <Image
                 className="w-8 h-8 relative overflow-hidden shrink-0"
                 loading="lazy"
-                alt=""
+                alt="logo"
                 src={logo}
               />
             </div>
             <h3 className="m-0 relative text-inherit tracking-[-0.01em] leading-[150%] font-bold font-[inherit] inline-block min-w-[120px] text-base mq450:text-sm mq450:leading-[29px] mt-2">
-                JobHuntly
+              JobHuntly
             </h3>
-
           </div>
           <div className="self-stretch relative text-base leading-[160%] font-body-normal-regular text-neutrals-20">
             Great platform for the job seeker that passionate about startups.
@@ -91,8 +96,12 @@ const FooterContent: NextPage<FooterContentType> = ({ className = "" }) => {
         <div className="self-stretch flex flex-row items-start justify-start max-w-full">
           <div className="flex-1 flex flex-row items-start justify-start gap-2 max-w-full mq450:flex-wrap">
             <Input1 />
-            <Button className="p-4" >Subscribe</Button>
-                     </div>
+            <Button
+      className="bg-[#4640de] inline-block min-w-[44px] text-white"
+    >
+      Subscribe
+    </Button>
+          </div>
         </div>
       </div>
     </div>
