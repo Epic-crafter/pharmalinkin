@@ -3,9 +3,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button"; // Use shadcn Button component
 import TopMenu from "./top-menu";
 import FrameComponent from "./frame-component";
-import frame from '../assets/Frame 3.png';
-import pattern from '../assets/Pattern.png';
-import pic from '../assets/1x.png';
+import frame from '../../assets/frame.png';
+import pattern from '../../assets/Pattern.png';
+import pic from '../../assets/1x.png';
 
 export type Header1DesktopType = {
   className?: string;

@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import SearchBar from "./search-bar";
 
-import title from '../../assets/Title.png'
+import title from "../../assets/Title.png";
 export type FrameComponentType = {
   className?: string;
 };
@@ -27,9 +27,9 @@ const FrameComponent: NextPage<FrameComponentType> = ({ className = "" }) => {
             />
           </div>
           <div className="w-[441px] relative text-l leading-[160%] text-[#515B6F] inline-block max-w-full box-border pr-5 mq450:text-base mq450:leading-[26px]">
-  Great platform for the job seeker that searching for new career
-  heights and passionate about startups.
-</div>
+            Great platform for the job seeker that searching for new career
+            heights and passionate about startups.
+          </div>
 
           <div className="w-[852px] flex flex-col items-start justify-start gap-4 max-w-[136%] shrink-0 text-base text-gray-100">
             <SearchBar />
@@ -43,18 +43,17 @@ const FrameComponent: NextPage<FrameComponentType> = ({ className = "" }) => {
         </div>
       </div>
       <div className="h-[1800px] w-[600px] relative min-w-[600px] shrink-0 max-w-full z-[1] mq1125:min-w-[600px] mq1350:flex-1 ml-auto mr-4">
-  {/* <Image
+        {/* <Image
     className="absolute top-[0px] left-[0px] w-[1400px] h-[960px] object-cover"
     alt=""
     src={pattern}
   /> */}
-  {/* <Image
+        {/* <Image
     className="absolute top-[350px] left-[50px] w-[600px] h-[400px] object-contain z-[1]"
     alt=""
     src={pic1x}
   /> */}
-</div>
-
+      </div>
     </div>
   );
 };

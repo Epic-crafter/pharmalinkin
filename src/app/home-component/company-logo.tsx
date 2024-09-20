@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { cn } from "@/lib/utils"; // Helper function from shadcn to combine class names
 import Image from "next/image";
-import canva from '../assets/canva.png';
+import canva from '../../assets/canva.png';
 
 export type CompanyLogoType = {
   className?: string;

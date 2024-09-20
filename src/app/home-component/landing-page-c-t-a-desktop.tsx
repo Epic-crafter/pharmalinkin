@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Image from 'next/image'
-import rectangle from '../assets/Rectangle 2742.png'
-import startPosting from '../assets/Start posting jobs today.png'
-import dash from '../assets/3.1 Dashboard Company.png'
+import rectangle from '../../assets/Rectangle 2742.png'
+import startPosting from '../../assets/Start posting jobs today.png'
+import dash from '../../assets/3.1 Dashboard Company.png'
 
 import {Button} from '../../components/ui/button'
 export type LandingPageCTADesktopType = {

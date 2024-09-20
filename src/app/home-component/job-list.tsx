@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 import { useMemo, type CSSProperties } from "react";
-import { Button } from "@/components/ui/button"; // Import ShadCN components
 import { Card } from "@/components/ui/card";
-import { Badge } from "lucide-react";
-import Label from "./label";
+import { Badge } from "@/components/ui/badge";
 
 export type JobListType = {
   className?: string;
@@ -49,24 +47,6 @@ const JobList: NextPage<JobListType> = ({
   propMinWidth1,
   propDisplay1,
   propMinWidth2,
-  caption,
-  propWidth,
-  propBorderRadius,
-  propBorder,
-  propGap,
-  propAlignSelf,
-  propFlex,
-  propPadding,
-  propBackgroundColor,
-  propHeight,
-  propWidth1,
-  propBackgroundColor1,
-  propColor,
-  propDisplay2,
-  propMinWidth3,
-  propAlignSelf1,
-  propFlex1,
-  propWidth2,
 }) => {
   const socialMediaAssistantStyle: CSSProperties = useMemo(() => {
     return {
@@ -111,49 +91,20 @@ const JobList: NextPage<JobListType> = ({
           >
             {nomad}
           </div>
-          <div className="flex flex-col items-start justify-start pt-[11px] px-0 pb-0">
-            <div className="w-1 h-1 relative rounded-[50%] bg-neutrals-80" />
-          </div>
           <div className="relative leading-[26px]" style={parisFranceStyle}>
             {parisFrance}
           </div>
         </div>
         <div className="self-stretch flex flex-row items-start justify-start gap-2 text-sm text-accents-green mq450:flex-wrap">
-          <Badge className="rounded-61xl bg-mediumaquamarine flex flex-row items-start justify-start py-1.5 px-2.5">
-            <div className="relative leading-[160%] font-semibold inline-block min-w-[63px]">
+          <Badge className="py-1.5 px-2.5">
               Full-Time
-            </div>
           </Badge>
-          <div className="h-[34px] w-px relative bg-neutrals-20 mq450:w-full mq450:h-px" />
-          <Button
-            variant="outline"
-            className="cursor-pointer border-accents-yellow border-[1px] border-solid py-1 px-[9px] bg-[transparent] flex-1 rounded-61xl box-border flex flex-row items-start justify-start gap-2 min-w-[60px]"
-          >
-            <div className="h-3 w-3 relative rounded-[50%] bg-accents-yellow hidden" />
-            <div className="relative text-sm leading-[160%] font-semibold font-body-normal-regular text-accents-yellow text-left inline-block min-w-[72px]">
+          <Badge variant='outline' className="py-1.5 px-2.5">
               Marketing
-            </div>
-          </Button>
-          <Label
-            caption={caption}
-            propWidth={propWidth}
-            propBorderRadius={propBorderRadius}
-            propBorder={propBorder}
-            propGap={propGap}
-            propAlignSelf={propAlignSelf}
-            propFlex={propFlex}
-            propPadding={propPadding}
-            propBackgroundColor={propBackgroundColor}
-            propHeight={propHeight}
-            propWidth1={propWidth1}
-            propBackgroundColor1={propBackgroundColor1}
-            propColor={propColor}
-            propDisplay={propDisplay2}
-            propMinWidth={propMinWidth3}
-            propAlignSelf1={propAlignSelf1}
-            propFlex1={propFlex1}
-            propWidth2={propWidth2}
-          />
+          </Badge>
+          <Badge className="py-1.5 px-2.5">
+              Marketing
+          </Badge>
         </div>
       </div>
     </Card>

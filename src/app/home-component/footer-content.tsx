@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { cn } from "@/lib/utils"; // shadcn utility for combining class names
 import Input1 from "./input1";
-import logo from '../assets/Frame 3.png';
+import logo from '../../assets/frame.png';
 import Image from "next/image";
 import { Button } from "@/components/ui/button"; // shadcn button import
 

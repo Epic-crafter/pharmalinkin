@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import {Card} from '../../components/ui/card' 
+import { Card } from '../../components/ui/card'; 
 import JobCategory from "./job-category"; // Assuming JobCategory component is already using ShadCN components
 import explore from '../../assets/Explore by category.png';
 import ryt from '../../assets/ryt.png';
@@ -13,6 +13,90 @@ import sales from '../../assets/sales.png';
 import tech from '../../assets/tech.png';
 import speaker from '../../assets/speaker.png';
 import next from '../../assets/next.png';
+
+// Dummy data for job categories
+const jobCategories = [
+  {
+    icon: plane,
+    design: "Design",
+    jobsAvailable: "235 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: sales,
+    design: "Sales",
+    jobsAvailable: "756 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: speaker,
+    design: "Marketing",
+    jobsAvailable: "140 jobs available",
+    icon1: next,
+    propBackgroundColor: "#4640de",
+    propBorder: "unset",
+    propColor: "#fff",
+    propColor1: "#fff",
+  },
+  {
+    icon: finance,
+    design: "Finance",
+    jobsAvailable: "325 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: tech,
+    design: "Technology",
+    jobsAvailable: "436 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: code,
+    design: "Engineering",
+    jobsAvailable: "542 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: bag,
+    design: "Business",
+    jobsAvailable: "211 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  },
+  {
+    icon: ppl,
+    design: "Human Resource",
+    jobsAvailable: "346 jobs available",
+    icon1: next,
+    propBackgroundColor: "#fff",
+    propBorder: "1px solid #d6ddeb",
+    propColor: "#25324b",
+    propColor1: "#7c8493",
+  }
+];
 
 export type LandingPageCategoryDeskType = {
   className?: string;
@@ -36,104 +120,32 @@ const LandingPageCategoryDesk: NextPage<LandingPageCategoryDeskType> = ({
       </div>
       <div className="w-[1192px] flex flex-col items-start justify-start gap-8 max-w-full text-5xl mq800:gap-4">
         <div className="self-stretch flex flex-row items-start justify-center flex-wrap content-start gap-8 mq800:gap-4">
-          <Card>
-            <JobCategory
-              icon={plane}
-              design="Design"
-              jobsAvailable="235 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={sales}
-              design="Sales"
-              jobsAvailable="756 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={speaker}
-              design="Marketing"
-              jobsAvailable="140 jobs available"
-              icon1={next}
-              propBackgroundColor="#4640de"
-              propBorder="unset"
-              propColor="#fff"
-              propColor1="#fff"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={finance}
-              design="Finance"
-              jobsAvailable="325 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
+          {jobCategories.slice(0, 4).map((category, index) => (
+            <Card key={index}>
+              <JobCategory
+                icon={category.icon}
+                design={category.design}
+                jobsAvailable={category.jobsAvailable}
+                icon1={category.icon1}
+              />
+            </Card>
+          ))}
         </div>
         <div className="self-stretch flex flex-row items-start justify-center flex-wrap content-start gap-8 mq800:gap-4">
-          <Card>
-            <JobCategory
-              icon={tech}
-              design="Technology"
-              jobsAvailable="436 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={code}
-              design="Engineering"
-              jobsAvailable="542 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={bag}
-              design="Business"
-              jobsAvailable="211 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
-          <Card>
-            <JobCategory
-              icon={ppl}
-              design="Human Resource"
-              jobsAvailable="346 jobs available"
-              icon1={next}
-              propBackgroundColor="#fff"
-              propBorder="1px solid #d6ddeb"
-              propColor="#25324b"
-              propColor1="#7c8493"
-            />
-          </Card>
+          {jobCategories.slice(4).map((category, index) => (
+            <Card key={index + 4}>
+              <JobCategory
+                icon={category.icon}
+                design={category.design}
+                jobsAvailable={category.jobsAvailable}
+                icon1={category.icon1}
+                propBackgroundColor={category.propBackgroundColor}
+                propBorder={category.propBorder}
+                propColor={category.propColor}
+                propColor1={category.propColor1}
+              />
+            </Card>
+          ))}
         </div>
       </div>
     </section>

@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import { cn } from "@/lib/utils"; // Helper function from shadcn to combine class names
 import Image from "next/image";
-import insta from '../assets/insta.png';
-import twitter from '../assets/Twitter.png';
-import fb from '../assets/fb.png';
-import link from '../assets/LinkedIn.png';
-import dribble from '../assets/Dribbble.png'; 
-import divider from '../assets/Divider.png';
+import insta from '../../assets/insta.png';
+import twitter from '../../assets/Twitter.png';
+import fb from '../../assets/fb.png';
+import link from '../../assets/LinkedIn.png';
+import dribble from '../../assets/Dribbble.png'; 
+import divider from '../../assets/Divider.png';
 
 export type DividerSocialType = {
   className?: string;

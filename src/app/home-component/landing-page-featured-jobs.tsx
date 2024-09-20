@@ -37,7 +37,7 @@ const LandingPageFeaturedJobs: NextPage<LandingPageFeaturedJobsType> = ({
       </div>
       <div className="w-[1192px] flex flex-col items-start justify-start gap-8 max-w-full text-lg font-body-normal-regular mq800:gap-4">
         <Row />
-        <Row1 />
+        <Row />
       </div>
     </section>
   );

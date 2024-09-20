@@ -3,10 +3,10 @@ import Image from "next/image";
 import Tag from "./tag"; // Assuming you will convert this to ShadCN
 import CompanyLogo from "./company-logo"; // Assuming you will convert this to ShadCN
 import Label from "./label"; // Assuming you will convert this to ShadCN
-import product from "../assets/product.png";
-import canva from "../assets/canva.png";
-import strategy from "../assets/strategy.png";
-import analyst from "../assets/analyst.png";
+import product from "../../assets/product.png";
+import canva from "../../assets/canva.png";
+import strategy from "../../assets/strategy.png";
+import analyst from "../../assets/analyst.png";
 
 // Assuming these are ShadCN components
 import { CardTitle } from "@/components/ui/card";
