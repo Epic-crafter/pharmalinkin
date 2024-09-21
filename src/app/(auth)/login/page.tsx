@@ -97,7 +97,7 @@ const Login: React.FC = () => {
                     Forgot Password?
                   </span>
                   <Link
-                    href="/password-recoveryx"
+                    href="/password-recovery"
                     className="text-[--primary-color] hover:underline"
                   >
                     click
