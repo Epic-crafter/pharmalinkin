@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Separator } from "@/components/ui/separator"
-import { Nav } from "./SideNav"
+import {Sidebar} from './Sidebar/SideNav'
 import { useState } from "react"
 
 interface MailProps {
@@ -72,35 +72,7 @@ export function MainLayout({
           >
           </div>
           <Separator />
-          <Nav
-            isCollapsed={isCollapsed}
-            links={[
-              {
-                title: "Dashboard",
-                label: "128",
-                icon: Gauge,
-                href:'/',
-              },
-              {
-                title: "Leads",
-                label: "9",
-                icon: File,
-                href:'leads',
-              },
-              {
-                title: "Sent",
-                label: "",
-                icon: Send,
-                href:'admin',
-              },
-              {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
-                href:'new',
-              },
-            ]}
-          />
+<Sidebar/>
           <Separator />
         </ResizablePanel>
         <ResizableHandle withHandle />
