@@ -1,20 +1,75 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useRef } from 'react';
+import {
+  Chart,
+  DoughnutController,
+  ArcElement,
+  Tooltip,
+  Legend,
+  Title,
+} from 'chart.js';
+
+Chart.register(DoughnutController, ArcElement, Tooltip, Legend, Title);
 
 const JobsAppliedStatus: React.FC = () => {
+  const chartRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (chartRef.current) {
+      const myChart = new Chart(chartRef.current, {
+        type: 'doughnut',
+        data: {
+          datasets: [
+            {
+              data: [60, 40],
+              backgroundColor: ['#0ea5e9', '#ddd6fe'], // Customize colors
+              borderWidth: 0, // No border for the doughnut segments
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '70%', // Control inner radius
+          plugins: {
+            tooltip: {
+              enabled: true, // Enable tooltips for better interactivity
+            },
+            legend: {
+              display: false, // Optionally hide the legend
+            },
+          },
+          elements: {
+            arc: {
+              borderWidth: 0, // No border on the arcs
+            },
+          },
+          layout: {
+            padding: 0, // Ensure no padding around the chart
+          },
+        },
+      });
+
+      return () => {
+        myChart.destroy();
+      };
+    }
+  }, []);
+
   return (
     <div className="flex flex-col items-start px-6 py-7 bg-white border border-solid border-zinc-200 min-w-[240px] w-[352px] max-md:px-5">
       <h3 className="text-xl font-semibold leading-tight text-center text-slate-800">Jobs Applied Status</h3>
       <div className="flex gap-6 items-center self-stretch mt-11 max-md:mt-10">
-        <div className="flex flex-col self-stretch my-auto w-[152px]">
-          <div className="flex relative flex-col justify-center p-1 rounded-full aspect-square shadow-[9px_9px_27px_rgba(70,64,222,0.2)] w-[152px]">
-            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/23e7a6125dfe1e673384864429b019b158eae7efe5a004c1a6d0df490d635b5d?placeholderIfAbsent=true&apiKey=78537e2ecd9846a991bfdeb4c92e98d3" alt="Job application status chart" className="object-cover absolute inset-0 size-full" />
-            <div className="flex relative shrink-0 w-full h-36 rounded-full border-violet-100 border-solid border-[14.306px]" />
+        <div className="flex flex-col self-stretch my-auto w-[160px]">
+          <div className="flex relative flex-col justify-center p-1 rounded-full aspect-square shadow-[9px_9px_27px_rgba(70,64,222,0.2)] w-[165px]">
+            <canvas ref={chartRef} className="absolute inset-1" style={{ backgroundColor: 'transparent' }} />
           </div>
         </div>
         <div className="flex flex-col self-stretch my-auto leading-relaxed whitespace-nowrap">
           {[
             { color: 'bg-sky-600', percentage: '60%', label: 'Unsuitable' },
-            { color: 'bg-violet-100', percentage: '40%', label: 'Interviewed' }
+            { color: 'bg-violet-200', percentage: '40%', label: 'Interviewed' }
           ].map((item, index) => (
             <div key={index} className="flex gap-4 items-center mt-2 first:mt-0">
               <div className={`flex shrink-0 self-stretch my-auto w-5 h-5 ${item.color} rounded`} />
