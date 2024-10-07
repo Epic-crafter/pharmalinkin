@@ -1,3 +1,4 @@
+"use client"
 import { TabsList } from '../../../../../components/ui/TabsList';
 import { TabsTrigger } from '../../../../../components/ui/tabsTrigger';
 import { TabsContent } from '../../../../../components/ui/tabsContent';

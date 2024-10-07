@@ -1,8 +1,9 @@
+import Dashboard from '@/app/(new)/[userId]/company/dashboard/page'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>Company page</div>
+    <Dashboard />
   )
 }
 
