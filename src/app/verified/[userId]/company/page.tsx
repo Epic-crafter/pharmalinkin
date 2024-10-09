@@ -7,9 +7,7 @@ import Job from './job-posted/pages/index'
 const page = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      {/* <Dashboard/> */}
-      <Job/>
+      <Dashboard/>
     </div>
   )
 }

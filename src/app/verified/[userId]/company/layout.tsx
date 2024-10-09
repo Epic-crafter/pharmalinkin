@@ -1,12 +1,11 @@
-// import Header from '@/app/(new)/[userId]/company/components/Header'
 import React from 'react'
+import Header from './dashboard/Header'
 
 const layout = ({children}:any) => {
   return (
     <div>
-       {/* <Header /> */}
-        {children}
-        
+       <Header />
+        {children}   
     </div>
   )
 }
