@@ -10,7 +10,6 @@ export default function Header() {
           <Button variant="link">Plans and Pricing</Button>
           <Button variant="link">Dashboard</Button>
           <Button variant="link">Post Internship/Job</Button>
-          <Avatar src="/path/to/avatar.jpg" alt=""/>
         </nav>
       </div>
     </header>

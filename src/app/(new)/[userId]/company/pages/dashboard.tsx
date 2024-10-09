@@ -1,40 +1,45 @@
-// import Dashboard from '@/app/(new)/[userId]/company/components/page'
-import React from 'react'
+// pages/index.js
+import { Button } from "../../../../../components/ui/button";
 import Link from "next/link";
-import {Button} from '../../../../../components/ui/button'
-const page = () => {
+
+export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-lg font-semibold">InternShala</h1>
-        <nav className="space-x-4">
-          <Button variant="link">Plans and Pricing</Button>
-          <Button variant="link">Dashboard</Button>
-          <Button variant="link">Post Internship/Job</Button>
-        </nav>
-      </div>
-    </header>
+      <header className="flex items-center justify-between p-4 bg-white shadow">
+        <div className="flex items-center space-x-4">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="h-8" // Replace with your logo
+          />
+          <nav className="hidden md:flex space-x-4">
+            <Link href="/plans" className="text-gray-700 hover:text-blue-600">Plans and Pricing</Link>
+            <Link href="/dashboard" className="text-gray-700 hover:text-blue-600">Dashboard</Link>
+            <Link href="/post-job" className="text-gray-700 hover:text-blue-600">Post Internship/Job</Link>
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+          <button className="hidden md:flex text-gray-700">A</button>
+          <button className="text-gray-700">Help</button>
+        </div>
+      </header>
 
       {/* Banner */}
-      <div className="bg-blue-50 p-4 rounded-md text-center shadow-md mx-6 mt-4">
-      <p className="text-gray-700">
-        Post unlimited listings and get access to features like boosted visibility, applicant contact numbers, etc., with <br></br>Internshala Premium.{" "}
-        <Link href="/premium-plans" className="text-blue-600 underline">
-          View Premium Plans now
-        </Link>
-      </p>
-    </div>
+      <div className="p-4 bg-blue-50 text-center">
+        <span className="block text-gray-700">
+          Post unlimited listings and get access to features like boosted visibility...
+        </span>
+        <a href="#" className="text-blue-600 underline">View Premium Plans</a>
+      </div>
 
       {/* Tabs */}
-      <div className="p-4 flex justify-center">
-  <div className="flex space-x-4">
-    <button className="text-blue-600 border-b-2 border-blue-600">Internships</button>
-    <button className="text-gray-600">Jobs</button>
-  </div>
-</div>
-
+      <div className="p-4">
+        <div className="flex space-x-4">
+          <button className="text-blue-600 border-b-2 border-blue-600">Internships</button>
+          <button className="text-gray-600">Jobs</button>
+        </div>
+      </div>
 
       {/* Internship Table */}
       <div className="overflow-x-auto p-4">
@@ -87,21 +92,10 @@ const page = () => {
         </table>
       </div>
 
-      <div className="flex justify-between ml-8 items-center mt-4">
-      <p>Showing 1 of 1</p>
-      <div className="space-x-2 mr-8">
-        <Button variant="default">Previous</Button>
-        <Button variant="default">Next</Button>
-      </div>
-    </div>
-
-
       {/* Footer Help Button */}
       <div className="fixed bottom-4 right-4">
         <Button variant="outline">Need help?</Button>
       </div>
     </div>
-  )
+  );
 }
-
-export default page

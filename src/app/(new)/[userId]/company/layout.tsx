@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import Dashboard from './dashboard/page';
+import Dashboard from './pages/dashboard';
 
 interface Page {
   children: ReactNode;
