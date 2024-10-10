@@ -8,8 +8,8 @@ const page = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      {/* <Dashboard/> */}
-      <Job/>
+      <Dashboard/>
+      {/* <Job/> */}
     </div>
   )
 }
