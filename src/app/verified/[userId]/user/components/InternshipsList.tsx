@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { FaCalculator, FaCalendar,FaLocationArrow, FaSearchLocation,FaCircle, FaClock, FaDotCircle, FaFilter, FaHome, FaMap, FaPlayCircle, FaRegClock, FaTimesCircle, FaUserClock, FaMoneyCheck, FaMoneyBill, FaCross, FaClosedCaptioning } from "react-icons/fa";
-import { TbFlagCancel } from "react-icons/tb";
+import { FaCalendar,FaCircle,  FaHome,  FaRegClock, FaMoneyBill} from "react-icons/fa";
+
 const InternshipsList = ({ internships }: any) => {
 
   return (

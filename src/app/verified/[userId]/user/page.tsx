@@ -110,8 +110,8 @@ export default function page() {
       <div className="lg:w-3/4 lg:mx-auto pt-4">
 
 
-        <h2 className="pt-6 m-auto text-center font-bold text-xl" style={{ color: "#008bdc" }}>10443 Total Internships</h2>
-        <h3 className=" text-center mt-1 mb-6 text-sm">Latest Summer Internships in India</h3>
+        <h2 className="pt-6 m-auto text-center font-bold text-xl" style={{ color: "#008bdc" }}>10443 Total Jobs</h2>
+        <h3 className=" text-center mt-1 mb-6 text-sm">Latest Summer Jobs in India</h3>
         <div className="block lg:hidden mb-4  ">
 
           <button className="text-lg font-semibold  text-center px-4" onClick={() => setShowFilters(true)}>{showFilters ? '' : 'Filters'} </button>
