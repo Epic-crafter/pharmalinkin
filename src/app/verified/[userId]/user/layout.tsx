@@ -1,9 +1,12 @@
+
 import React from 'react'
 
+// import Header from '../company/dashboard/Header'
 const layout = ({children}:any) => {
   return (
-    <div>layout
-        {children}
+    <div>
+       {/* <Header /> */}
+        {children}   
     </div>
   )
 }
