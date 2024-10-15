@@ -1,8 +1,10 @@
+"use client";
+
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { FaCalendar,FaCircle,  FaHome,  FaRegClock, FaMoneyBill} from "react-icons/fa";
 
-const InternshipsList = ({ internships }: any) => {
+const InternshipsList = ({ internships,onSelect }: any) => {
 
   return (
 
@@ -10,7 +12,7 @@ const InternshipsList = ({ internships }: any) => {
 
       {/* Display Internships */}
       {internships.map((internship: any, idx: any) => (
-        <Card key={idx} className="p-4 bg-white rounded shadow flex border-none justify-between">
+        <Card onClick={() => onSelect(internship)} key={idx} className="p-4 bg-white rounded shadow flex border-none justify-between cursor-pointer">
 
           <div>
             {/* title , companyname and status */}
@@ -53,7 +55,7 @@ const InternshipsList = ({ internships }: any) => {
           {/* Company logo */}
           <img
             src={internship.companyLogo}
-            alt="company logo"
+            alt=""
             className="w-10 h-10 mr-4"
           />
         </Card>
