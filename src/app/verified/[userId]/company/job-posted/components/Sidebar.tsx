@@ -1,20 +1,27 @@
-// components/Sidebar.tsx
 "use client"; // Marking this component as a Client Component
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Importing the useRouter hook
 
 const Sidebar = () => {
+  const router = useRouter();
   const [selected, setSelected] = useState("Applications received");
 
   const menuItems = [
-    { name: "Applications received", count: 98 },
-    { name: "Shortlisted", count: 4 },
-    { name: "Hired", count: 1 },
-    { name: "Not interested", count: 4 },
-    { name: "Assignments", count: 0 },
-    { name: "Interviews", count: 0 },
-    { name: "Chat messages", count: 0 },
+    { name: "Applications received", count: 98, path: "/verified/123/company/job-posted/" },
+    { name: "Shortlisted", count: 4, path: "/verified/123/company/job-posted/shortlisted" },
+    { name: "Hired", count: 1, path: "/verified/123/company/job-posted/hired" },
+    { name: "Not interested", count: 4, path: "/verified/123/company/job-posted/not-interested" },
+    { name: "Assignments", count: 0, path: "/verified/123/company/job-posted/assignments" },
+    { name: "Interviews", count: 0, path: "/verified/123/company/job-posted/interviews" },
+    { name: "Chat messages", count: 0, path: "/verified/123/company/job-posted/chat-messages" },
   ];
+
+  // Explicitly define types for path and name
+  const handleNavigation = (path: string, name: string) => {
+    setSelected(name);
+    router.push(path); // Navigate to the specified path
+  };
 
   return (
     <aside className="w-64 p-4 bg-white border-r">
@@ -28,7 +35,7 @@ const Sidebar = () => {
                 ? "bg-blue-100 text-blue-600"
                 : "text-gray-600"
             }`}
-            onClick={() => setSelected(item.name)}
+            onClick={() => handleNavigation(item.path, item.name)}
           >
             <div className="flex justify-between">
               <span>{item.name}</span>
