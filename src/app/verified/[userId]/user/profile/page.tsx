@@ -1,6 +1,6 @@
 "use client";
 
-import { FaBell, FaCommentDots, FaImage, FaRegBell, FaEllipsisH, FaEllipsisV  } from 'react-icons/fa';
+import {  FaImage, FaRegBell} from 'react-icons/fa';
 // pages/profile.js
 // import Sidebar from '../components/Sidebar';
 import Sidebar from './components/sidebar';
@@ -17,12 +17,7 @@ export default function Profile() {
         accountType: 'job-seeker',
     });
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+   
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
       };
@@ -122,7 +117,7 @@ export default function Profile() {
                                     type="text"
                                     name="fullName"
                                     value={formData.fullName}
-                                    onChange={handleChange}
+                                  
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
                                 />
                             </div>
@@ -134,7 +129,7 @@ export default function Profile() {
                                     type="text"
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
-                                    onChange={handleChange}
+                                    
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     required
                                 />
@@ -147,7 +142,7 @@ export default function Profile() {
                                     type="email"
                                     name="email"
                                     value={formData.email}
-                                    onChange={handleChange}
+                                    
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
                                 />
                             </div>
@@ -159,7 +154,7 @@ export default function Profile() {
                                     type="date"
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
-                                    onChange={handleChange}
+                                    
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
                                 />
                             </div>
@@ -170,7 +165,7 @@ export default function Profile() {
                                 <select
                                     name="gender"
                                     value={formData.gender}
-                                    onChange={handleChange}
+                                    
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
                                 >
                                     <option value="male">Male</option>
@@ -198,7 +193,7 @@ export default function Profile() {
                                         name="accountType"
                                         value="job-seeker"
                                         checked={formData.accountType === 'job-seeker'}
-                                        onChange={handleChange}
+
                                         className="focus:ring-indigo-500 h-4 w-4  border-gray-300"
                                     />
                                     <label className="ml-2 block font-medium text-gray-700">Job Seeker</label>
