@@ -208,7 +208,7 @@ export default function Profile() {
                                         name="accountType"
                                         value="job-seeker"
                                         checked={formData.accountType === 'employer'}
-                                        onChange={handleChange}
+                                       
                                         className="focus:ring-indigo-500 h-4 w-4  border-gray-300"
                                     />
                                     <label className="ml-2 block font-medium text-gray-700">Employer</label>
