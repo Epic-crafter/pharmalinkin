@@ -54,7 +54,7 @@ const InternshipsList = ({ internships,onSelect }: any) => {
           </div>
           {/* Company logo */}
           <img
-            src={internship.companyLogo}
+            src={internship.companyLogo||'https://internshala.com/static/images/search/placeholder_logo.svg'}
             alt=""
             className="w-10 h-10 mr-4"
           />
