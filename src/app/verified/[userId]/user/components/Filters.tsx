@@ -1,16 +1,17 @@
 
+import { X } from "lucide-react";
 import { FaFilter } from "react-icons/fa";
 
 
 // components/Filters.js
 export default function Filters({ filters, showFilters, setShowFilters }: any) {
     return (
-        <div className=" bg-white shadow rounded p-4">
+        <div className=" bg-white shadow rounded p-4 block lg:sticky lg:top-2">
 
-            <div className="flex    lg:justify-center justify-between">
+            <div className="flex  lg:justify-center justify-between">
 
                 <h2 className="text-lg font-semibold mb-4 lg:text-center flex items-center"><FaFilter className="text-blue-500 text-sm" />Filters</h2>
-                {showFilters ? <span className="text-black font-bold lg:hidden" onClick={() => setShowFilters(false)}>x</span> : ""}
+                {showFilters ? <span className="text-black font-bold lg:hidden" onClick={() => setShowFilters(false)}><X/></span> : ""}
             </div>
 
             {/* Preferences */}

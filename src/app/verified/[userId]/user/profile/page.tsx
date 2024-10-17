@@ -26,7 +26,7 @@ export default function Profile() {
             {/* Sidebar */}
 
 
-            <div className={`fixed lg:static z-10 ${sidebarOpen ? 'block' : 'hidden'} lg:block w-64 bg-gray-100 shadow-lg inset-y-0 left-0 transform ${
+            <div className={` lg:static z-10 ${sidebarOpen ? 'block' : 'hidden'} lg:block w-64  bg-gray-100 shadow-lg inset-y-0 left-0 transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       } sm:relative sm:translate-x-0 transition-transform duration-300 ease-in-out md:`}>
                 <Sidebar />
@@ -79,13 +79,13 @@ export default function Profile() {
                     <hr className="border-gray-300 mt-0 " />
                     {/* Profile Photo Section */}
                     <div className="flex gap-4 flex-col md:flex-row items-start md:items-center p-2 m-2">
-                        <div className="w-1/3 sm:w-full">
+                        <div className="lg:w-2/5 sm:w-full">
                             <h2 className="text-lg font-semibold">Profile Photo</h2>
                             <p className=" text-gray-500">
                                 This image will be shown publicly as your profile picture. It will help recruiters recognize you!
                             </p>
                         </div>
-                        <div className="w-2/3 sm:w-full  flex gap-10 flex-row  items-center">
+                        <div className="lg:w-3/5 sm:w-full  flex gap-10 flex-row  items-center">
                             <div className="w-40 h-40 rounded-full flex items-center ">
                                 <img
                                     src='https://s3-alpha-sig.figma.com/img/726e/e4e5/7698f6797df8e06d6a2a95171dcbd1a9?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JCszppyp1ib1l6ypD-D84s~4ZrhE2~FpnV7zsAZDjCzEjHki6DnfoKLbzrUmnDv~zpFpzqh-KJBSJPNKKtIckxBtJDmwScoRivOiQpX5G~oEDA8h53PZbMYGk8ZJF7tXj4MiQodaqmuv~EDqD5LUzNY04-16uFLhpZn62nsC8OCo2i2lvaemFavt8EtObWoXJK~YrFrFLAvr9jG6bVuy9d8hTtGdfwKHJ4gLerBoklBbfI~zsFLUDEuOjm-lnFcRIFop7kZ-MxZprK0shmQvYvX7uu1HgV9t~~LTYtG4hFgHaiy7mY6yq6aiezi-K4-mMIU92VpAmZ5Hk4lRed3r7Q__'
@@ -106,10 +106,10 @@ export default function Profile() {
 
                     {/* Personal Details Section */}
                     <div className="flex flex-col md:flex-row p-2 m-2">
-                        <div className="w-1/3 sm:w-full">
+                        <div className="lg:w-2/5 sm:w-full">
                             <h2 className="text-lg font-semibold">Personal Details</h2>
                         </div>
-                        <div className="w-2/3 sm:w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="lg:w-3/5 sm:w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Full Name */}
                             <div>
                                 <label className="block w-full  font-medium text-gray-700" >Full Name</label>
@@ -179,13 +179,13 @@ export default function Profile() {
 
                     {/* Account Type Section */}
                     <div className="flex flex-col md:flex-row p-2 m-2">
-                        <div className=" sm:w-full w-1/3">
+                        <div className=" sm:w-full w-1/3 lg:w-2/5">
                             <h2 className="text-lg font-semibold">Account Type</h2>
                             <p className=" text-gray-500">
                                 You can update your account type</p>
                         </div>
 
-                        <div className="sm:w-full w-2/3 flex flex-col gap-2 items-start">
+                        <div className="sm:w-full w-2/3 lg:w-3/5 flex flex-col gap-2 items-start">
                             <div className='space-x-8 text-gray-600 '>
                                 <div className='flex gap-2 items-center'>
                                     <input

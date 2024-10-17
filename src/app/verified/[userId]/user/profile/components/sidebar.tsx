@@ -4,7 +4,7 @@ import { FaUser, FaHome, FaEnvelope, FaCog, FaSearch, FaBuilding, FaQuestionCirc
 
 export default function Sidebar() {
     return (
-        <div className={` bg-gray-100 flex gap-10 p-6 `}>
+        <div className={` bg-gray-100 flex gap-10 p-6  `}>
 
 
             <div className="fixed text-gray-500">

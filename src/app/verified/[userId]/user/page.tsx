@@ -294,7 +294,7 @@ const internships = [
   },
 ];
 
-export default function Page() {
+export default function page() {
   const [showFilters, setShowFilters] = useState(false); // Track the state of the filters visibility
   const [selectedInternship, setSelectedInternship] = useState(null); // Track selected internship
 
