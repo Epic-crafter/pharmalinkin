@@ -17,7 +17,7 @@ const resume: React.FC = () => {
         <div
       className={cn(
         "w-[1192px] flex flex-col items-start justify-start gap-10 max-w-full text-left text-base text-color-white font-body-normal-regular mq800:gap-5",
-        
+           
       )}
     >
         <Image

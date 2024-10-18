@@ -1,7 +1,7 @@
 import React from 'react'
 import ApplicationsList from './components/AppList'
 import Filters from './components/Filters'
-import Sidebar from './components/Sidebar'
+
 
 const page = () => {
   return (

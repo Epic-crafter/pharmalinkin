@@ -9,10 +9,12 @@ import SignUp from './sign-up/index'
 const page = () => {
   return (
     <div className="min-h-screen bg-gray-100">
+
       {/* <Dashboard/> */}
       {/* <Job/> */}
       {/* <Shortlist/> */}
       <SignUp/>
+
     </div>
   )
 }
