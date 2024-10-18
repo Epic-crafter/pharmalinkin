@@ -17,7 +17,8 @@ const Sidebar = () => {
     { name: "Chat messages", count: 0, path: "/verified/123/company/job-posted/chat-messages" },
   ];
 
-  const handleNavigation = (path, name) => {
+  // Explicitly define types for path and name
+  const handleNavigation = (path: string, name: string) => {
     setSelected(name);
     router.push(path); // Navigate to the specified path
   };
