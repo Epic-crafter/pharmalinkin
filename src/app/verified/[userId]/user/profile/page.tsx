@@ -24,7 +24,7 @@ export default function Profile() {
             <header className="flex items-center space-x-4 justify-between py-3   px-6 font-bold   ">
                 {/* header-left */}
                 <div className="flex items-center   space-x-3 font-bold ">
-                    <img className='border-2 h-10 w-10 rounded-full bg-blue-400' />
+                    <img className=' h-10 w-10 ' src='http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fframe.4e9ae2d5.png&w=32&q=75' alt='' />
 
                     <h1 className='text-xl' >Pharamalinkin</h1>
 
@@ -48,10 +48,7 @@ export default function Profile() {
                 {/* Sidebar */}
 
 
-                {/* <div className={` lg:static z-10 ${sidebarOpen ? 'block' : 'hidden'} lg:block w-[20%]  bg-gray-100 shadow-lg inset-y-0 left-0 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-                    } sm:relative sm:translate-x-0 transition-transform duration-300 ease-in-out md:relative`}>
-                    <Sidebar />
-                </div> */}
+
                 <div
                     className={`lg:static z-40 ${
                         sidebarOpen ? "absolute inset-y-0 left-0" : "hidden"
