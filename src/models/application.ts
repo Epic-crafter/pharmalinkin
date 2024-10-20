@@ -40,6 +40,7 @@ const jobApplicationSchema = new Schema(
     timestamps: true,
   }
 );
-
 const JobApplication = mongoose.model("JobApplication", jobApplicationSchema);
+
 export { JobApplication };
+

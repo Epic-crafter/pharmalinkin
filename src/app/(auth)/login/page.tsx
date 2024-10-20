@@ -1,9 +1,8 @@
 "use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
@@ -26,6 +25,12 @@ const Login: React.FC = () => {
   const [step, setStep] = useState(1); // Tracks which step the user is on (1: input phone/email, 2: input OTP)
   const [contactInfo, setContactInfo] = useState(""); // Store the entered email/phone
   const [otp, setOtp] = useState(""); // Store the entered OTP
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    role: "user", // Default role (can be changed based on requirements)
+  });
 
   const handleSendOtp = () => {
     if (contactInfo) {
@@ -46,6 +51,38 @@ const Login: React.FC = () => {
       alert("Please enter the OTP.");
     }
   };
+
+  // Adding types for event parameter
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Adding types for event parameter
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (result.status) {
+        alert(result.message);
+        // Redirect or perform further actions after success
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+      alert("Registration failed. Please try again.");
+    }
+  };
+
   return (
     <div
       className={`flex flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
@@ -58,10 +95,13 @@ const Login: React.FC = () => {
           <div className="w-full flex flex-col justify-center items-center">
             <h1 className="text-3xl font-bold mb-6">Welcome back, Dude</h1>
 
-            <form className="w-full max-w-sm">
+            <form className="w-full max-w-sm" onSubmit={handleSubmit}>
               <div className="mb-4">
                 <Input
                   type="text"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Email Address or Mobile Number"
                   className="w-full rounded-none border border-gray-300"
                   required
@@ -71,8 +111,23 @@ const Login: React.FC = () => {
               <div className="mb-4">
                 <Input
                   type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   placeholder="Password"
-                  className="w-full rounded-none  border border-gray-300 outline-none"
+                  className="w-full rounded-none border border-gray-300 outline-none"
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  placeholder="Full Name"
+                  className="w-full rounded-none border border-gray-300 outline-none"
                   required
                 />
               </div>
@@ -84,10 +139,7 @@ const Login: React.FC = () => {
                 </label>
               </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-              >
+              <Button type="submit" className="w-full">
                 Login
               </Button>
 
