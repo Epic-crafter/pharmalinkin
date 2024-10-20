@@ -1,3 +1,5 @@
+import mongoose, { Schema } from "mongoose";
+
 // Job Application Schema
 const jobApplicationSchema = new Schema({
     applicant: {
@@ -30,5 +32,5 @@ const jobApplicationSchema = new Schema({
     timestamps: true,
   });
   
-  const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
+ export const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
   
