@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { Epilogue } from "next/font/google";
 import Image from "next/image";
 import { TbEyeClosed, TbEyeCheck } from "react-icons/tb";
 import Link from "next/link";
+import { EMPLOYEE } from "@/lib/constants";
 
 const epilogue = Epilogue({ subsets: ["latin"], weight: "400" });
 
@@ -39,7 +41,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch("/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export default function SignUp() {
           name: fullName,
           email, // Add email field to the request
           password,
-          role: "jobSeeker", // Set role as job seeker
+          role: EMPLOYEE, // Set role as job seeker
         }),
       });
 
@@ -186,7 +188,7 @@ export default function SignUp() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full py-2 bg-[--primary-color] text-white rounded-none hover:bg-[#4e49ee]"
+              className="w-full py-2 "
               disabled={loading}
             >
               {loading ? "Registering..." : "Register"}
