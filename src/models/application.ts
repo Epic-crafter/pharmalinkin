@@ -1,13 +1,16 @@
+import mongoose, { Schema } from "mongoose";
+
 // Job Application Schema
-const jobApplicationSchema = new Schema({
+const jobApplicationSchema = new Schema(
+  {
     applicant: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     job: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Job',
+      ref: "Job",
       required: true,
     },
     resumeUrl: {
@@ -19,16 +22,24 @@ const jobApplicationSchema = new Schema({
     },
     status: {
       type: String,
-      enum: ['PENDING', 'REVIEWED', 'INTERVIEW_SCHEDULED', 'OFFERED', 'REJECTED'],
-      default: 'PENDING',
+      enum: [
+        "PENDING",
+        "REVIEWED",
+        "INTERVIEW_SCHEDULED",
+        "OFFERED",
+        "REJECTED",
+      ],
+      default: "PENDING",
     },
     appliedDate: {
       type: Date,
       default: Date.now,
     },
-  }, {
+  },
+  {
     timestamps: true,
-  });
-  
-  const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
-  
+  }
+);
+
+const JobApplication = mongoose.model("JobApplication", jobApplicationSchema);
+export { JobApplication };
