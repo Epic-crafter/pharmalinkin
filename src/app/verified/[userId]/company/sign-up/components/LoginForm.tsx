@@ -52,16 +52,14 @@ export const LoginForm = () => {
       <p className="text-center">
         Already on LinkedIn?{" "}
         <Link href="/signin">
-          <a className="text-blue-600 hover:underline">Sign in</a>
+          <Link href={"#"} className="text-blue-600 hover:underline">Sign in</Link>
         </Link>
       </p>
 
       {/* Footer */}
       <div className="text-center mt-6 text-sm text-gray-500">
-        <Link href="/help">
-          <a className="hover:underline">
+        <Link href="/help" className="hover:underline">
             Looking to create a page for a business? Get help
-          </a>
         </Link>
       </div>
     </div>
