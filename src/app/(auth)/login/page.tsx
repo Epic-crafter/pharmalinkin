@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { signIn } from "next-auth/react"; // Import the signIn function from next-auth
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -32,9 +33,10 @@ const Login: React.FC = () => {
     role: "user", // Default role (can be changed based on requirements)
   });
 
+  // Function to handle sending OTP
   const handleSendOtp = () => {
     if (contactInfo) {
-      // Logic for sending OTP to the contactInfo
+      // Logic for sending OTP to the contactInfo (email/phone number)
       alert(`OTP sent to ${contactInfo}`);
       setStep(2); // Proceed to the OTP input step
     } else {
@@ -42,6 +44,7 @@ const Login: React.FC = () => {
     }
   };
 
+  // Function to handle OTP verification
   const handleVerifyOtp = () => {
     if (otp) {
       // Logic for verifying OTP
@@ -52,35 +55,38 @@ const Login: React.FC = () => {
     }
   };
 
-  // Adding types for event parameter
+  // Function to handle login submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { email, password } = formData;
+
+    try {
+      // Call the signIn function from next-auth with the credentials provider
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false, // Prevent automatic redirection, handle it manually
+      });
+
+      if (result?.error) {
+        // Handle login failure
+        alert(`Login failed: ${result.error}`);
+      } else if (result?.ok) {
+        // Handle login success
+        alert("Login successful!");
+        // You can redirect to a protected page or perform further actions here
+        // window.location.href = "/dashboard"; // Example redirect
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+      alert("Login failed. Please try again.");
+    }
+  };
+
+  // Function to handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  // Adding types for event parameter
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-      if (result.status) {
-        alert(result.message);
-        // Redirect or perform further actions after success
-      } else {
-        alert(result.message);
-      }
-    } catch (error) {
-      console.error("Error registering user:", error);
-      alert("Registration failed. Please try again.");
-    }
   };
 
   return (
@@ -120,18 +126,6 @@ const Login: React.FC = () => {
                 />
               </div>
 
-              <div className="mb-4">
-                <Input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Full Name"
-                  className="w-full rounded-none border border-gray-300 outline-none"
-                  required
-                />
-              </div>
-
               <div className="mb-4 flex items-center">
                 <Checkbox id="rememberMe" className="mr-2" />
                 <label htmlFor="rememberMe" className="text-sm">
@@ -149,7 +143,7 @@ const Login: React.FC = () => {
                     Forgot Password?
                   </span>
                   <Link
-                    href="/password-recoveryx"
+                    href="/password-recovery"
                     className="text-[--primary-color] hover:underline"
                   >
                     click
