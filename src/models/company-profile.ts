@@ -1,3 +1,4 @@
+import { Verified } from 'lucide-react';
 import mongoose from 'mongoose';
 
 const CompanyProfileSchema = new mongoose.Schema({
@@ -42,6 +43,7 @@ const CompanyProfileSchema = new mongoose.Schema({
     type: String,
     default: 'https://example.com/default-logo.png',
   },
+  verified: { type: Boolean, default:false},
   createdAt: {
     type: Date,
     default: Date.now,

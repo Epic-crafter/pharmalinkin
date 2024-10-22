@@ -67,7 +67,8 @@ const Login: React.FC = () => {
         password,
         redirect: false, // Prevent automatic redirection, handle it manually
       });
-
+      console.log(result);
+      
       if (result?.error) {
         // Handle login failure
         alert(`Login failed: ${result.error}`);
