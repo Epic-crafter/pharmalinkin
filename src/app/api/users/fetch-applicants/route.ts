@@ -6,9 +6,9 @@ export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
 
-    // Get jobId from query parameters
     const { searchParams } = new URL(req.url);
     const jobId = searchParams.get("jobId");
+    const status = searchParams.get("status"); // New status parameter
 
     if (!jobId) {
       return NextResponse.json(
@@ -17,8 +17,14 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Find job applications related to the jobId and populate applicant details
-    const jobApplications = await JobApplication.find({ job: jobId })
+    // Build the query object based on jobId and optionally status
+    const query: any = { job: jobId };
+    if (status) {
+      query.status = status; // Filter by status if provided
+    }
+
+    // Find job applications related to the jobId and populate applicant and job details
+    const jobApplications = await JobApplication.find(query)
       .populate("applicant", "name email")
       .populate("job", "title");
 
