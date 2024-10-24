@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Epilogue } from "next/font/google";  // Importing the Epilogue font
+import { Epilogue } from "next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import AuthProvider from "@/lib/auth-provider";
 import Verify from "@/lib/verify-user";
-// Importing the Epilogue font from Google Fonts with all weights and italics
+
 const epilogue = Epilogue({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -23,13 +23,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
+
   return (
-    <AuthProvider session={session}>    
     <html lang="en">
       <body className={epilogue.className}>
-      <Verify/>
-        {children}</body>  {/* Apply Epilogue font */}
+        <AuthProvider session={session}>
+          <Verify />
+          {children}
+        </AuthProvider>
+      </body>
     </html>
-    </AuthProvider>
   );
 }

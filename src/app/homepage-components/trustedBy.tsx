@@ -10,7 +10,7 @@ import zoom from "../../assets/zoom.jpg"
 
 const TrustedBy = () => {
   return (
-    <div className='lg:px-32 px-12 py-8 text-center mx-auto flex flex-col items-center space-y-8 lg:mx-0 mx-auto'>
+    <div className='lg:px-32 px-12 py-8 text-center flex flex-col items-center space-y-8 lg:mx-0 mx-auto'>
         <h2>Trusted by 4000+ companies</h2>
         <div className='flex justify-between items-center w-full xs:space-x-2'>
             <Image src={coinbase} alt='' className='lg:w-24 w-16' />
