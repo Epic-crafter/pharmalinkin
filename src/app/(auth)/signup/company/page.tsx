@@ -1,65 +1,71 @@
-"use client";
+"use client"
 import { useState } from "react";
-import Link from "next/link";
-import { ImOffice } from "react-icons/im";
-import { FaUser } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
+import { Input } from "@/components/ui/input";
 import LoginImage from "@/images/LoginElement.jpg";
 import { Epilogue } from "next/font/google";
+import Image from "next/image";
+import { TbEyeClosed, TbEyeCheck } from "react-icons/tb";
+import Link from "next/link";
+import { EMPLOYER } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 const epilogue = Epilogue({ subsets: ["latin"], weight: "400" });
 
-const JoinPage = () => {
-  const [isUser, setIsUser] = useState(false);
-  const [isCompanyManager, setIsCompanyManager] = useState(false);
-  const [isUserButtonPressed, setIsUserButtonPressed] = useState(false);
-  const [isCompanyButtonPressed, setIsCompanyButtonPressed] = useState(false);
-  const router = useRouter();
+export default function SignUp() {
+  const [isWorking, setIsWorking] = useState(false);
+  const [showSecondForm, setShowSecondForm] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState(""); // Add email state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+ const router = useRouter()
+  // Handle form submission
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
 
-  const handleUserCheckboxChange = () => {
-    setIsUser(true);
-    setIsCompanyManager(false);
-  };
+    // Validate password confirmation
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
 
-  const handleCompanyCheckboxChange = () => {
-    setIsCompanyManager(true);
-    setIsUser(false);
-  };
+    try {
+      const response = await fetch("/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          email, // Add email field to the request
+          password,
+          role: EMPLOYER, // Set role as job seeker
+        }),
+      });
 
-  const handleUserMouseDown = () => {
-    setIsUserButtonPressed(true);
-  };
-
-  const handleUserMouseUp = () => {
-    setIsUserButtonPressed(false);
-  };
-
-  const handleCompanyMouseDown = () => {
-    setIsCompanyButtonPressed(true);
-  };
-
-  const handleCompanyMouseUp = () => {
-    setIsCompanyButtonPressed(false);
-  };
-
-  const getButtonText = () => {
-    if (isUser) return "Apply as User";
-    if (isCompanyManager) return "Join as Company";
-    return "Create Account";
-  };
-
-  const handleCreateAccount = () => {
-    if (isUser) {
-      router.push("/signup/user");
-    } else if (isCompanyManager) {
-      router.push("/signup/company");
+      const result = await response.json();
+      if (result.status) {
+        setSuccess("User registered successfully!");
+        router.push("/signup/company/create-profile");
+      } else {
+        setError(result.message || "Something went wrong.");
+      }
+    } catch (err) {
+      setError("Internal server error.");
+    } finally {
+      setLoading(false);
     }
   };
-
-  const isButtonDisabled = !isUser && !isCompanyManager;
 
   return (
     <div
@@ -68,95 +74,134 @@ const JoinPage = () => {
       <div className="min-h-screen w-[40%] relative">
         <Image src={LoginImage} fill={true} objectFit="cover" alt="Login pic" />
       </div>
-      <div className="flex flex-col min-h-screen w-[60%] justify-center items-center">
-        <h1 className="text-3xl font-medium mb-6">Join as a User or Company</h1>
+      <div className="flex flex-col min-h-screen w-[60%] justify-center items-center py-6">
+        <div className="w-[50%]">
+          <h1 className="text-3xl text-center font-bold mb-6">
+            Join us Today
+          </h1>
 
-        <div className="flex space-x-4 mb-6">
-          <Card
-            onClick={handleUserCheckboxChange}
-            onMouseDown={handleUserMouseDown}
-            onMouseUp={handleUserMouseUp}
-            onMouseLeave={handleUserMouseUp}
-            className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 cursor-pointer ${
-              isUser
-                ? "border-2 border-primary bg-[#00000005]"
-                : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isUserButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-primary hover:bg-secondary/90 relative`}
-          >
-            <div>
-              <FaUser size="1.5em" />
-            </div>
-            <div className="text-xl font-semibold mt-8 text-start">
-              I'm a user, looking for work
-            </div>
-            <div
-              className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isUser ? "bg-primary border-none" : "bg-white"
-              }`}
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
+
+          {/* Form to handle user registration */}
+          <form onSubmit={handleRegister}>
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-gray-700"
             >
-              <div className="w-3 h-3 border border-white rounded-full"></div>
-            </div>
-          </Card>
+              Full Name
+            </label>
+            <Input
+              id="fullName"
+              type="text"
+              placeholder="Enter your Full Name"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
 
-          <Card
-            onClick={handleCompanyCheckboxChange}
-            onMouseDown={handleCompanyMouseDown}
-            onMouseUp={handleCompanyMouseUp}
-            onMouseLeave={handleCompanyMouseUp}
-            className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 cursor-pointer ${
-              isCompanyManager
-                ? "border-2 border-[--primary-color] bg-[#00000005]"
-                : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isCompanyButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-[--primary-color] hover:bg-[#00000005] relative`}
-          >
-            <div>
-              <ImOffice size="1.5em" />
-            </div>
-            <div className="text-xl font-semibold mt-8 text-start">
-              I am a Company Manager, hiring
-            </div>
-            <div
-              className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isCompanyManager
-                  ? "bg-[--primary-color] border-none"
-                  : "bg-white"
-              }`}
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
             >
-              <div className="w-3 h-3 border border-white rounded-full"></div>
+              Email
+            </label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <label
+              htmlFor="mobileNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Mobile Number
+            </label>
+            <Input
+              id="mobileNumber"
+              type="text"
+              placeholder="Enter your Mobile Number"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+            />
+
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <div className="relative mb-4 w-full">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                placeholder="Enter your password"
+                className="rounded-none border-gray-300 placeholder:text-gray-400 pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <TbEyeClosed size={20} className="text-gray-400" />
+                ) : (
+                  <TbEyeCheck size={20} className="text-gray-400" />
+                )}
+              </div>
             </div>
-          </Card>
-        </div>
 
-        <Button
-          disabled={isButtonDisabled}
-          // className={`px-6 py-2 font-semibold rounded-lg ${
-          //   isButtonDisabled
-          //     ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-          //     : "bg-[--primary-color] text-white hover:bg-[#4e49ee]"
-          // }`}
-          onClick={handleCreateAccount}
-        >
-          {getButtonText()}
-        </Button>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Confirm Password
+            </label>
+            <div className="relative mb-4 w-full">
+              <Input
+                id="confirmPassword"
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                placeholder="Confirm your password"
+                className="rounded-none border-gray-300 placeholder:text-gray-400 pr-10"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <TbEyeClosed size={20} className="text-gray-400" />
+                ) : (
+                  <TbEyeCheck size={20} className="text-gray-400" />
+                )}
+              </div>
+            </div>
 
-        <div className="mt-6">
-          <p>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              className="w-full py-2 "
+              disabled={loading}
+            >
+              {loading ? "Registering..." : "Register"}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{" "}
-            <Link
-              href="/login/"
-              className="text-[--primary-color] hover:underline"
-            >
-              Log in
+            <Link href="/login" className="text-[--primary-color] hover:underline">
+              Log In
             </Link>
           </p>
         </div>
       </div>
     </div>
   );
-};
-
-export default JoinPage;
+}
