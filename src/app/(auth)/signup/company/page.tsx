@@ -1,162 +1,166 @@
-"use client";
-import { useState } from "react";
-import Link from "next/link";
-import { ImOffice } from "react-icons/im";
-import { FaUser } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import LoginImage from "@/images/LoginElement.jpg";
-import { Epilogue } from "next/font/google";
+"use client"; // This directive makes it a client component
 
-const epilogue = Epilogue({ subsets: ["latin"], weight: "400" });
+import { useState } from 'react';
 
-const JoinPage = () => {
-  const [isUser, setIsUser] = useState(false);
-  const [isCompanyManager, setIsCompanyManager] = useState(false);
-  const [isUserButtonPressed, setIsUserButtonPressed] = useState(false);
-  const [isCompanyButtonPressed, setIsCompanyButtonPressed] = useState(false);
-  const router = useRouter();
+export default function JobPostingForm() {
+  const [companyName, setCompanyName] = useState('');
+  const [tagline, setTagline] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [website, setWebsite] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [orgSize, setOrgSize] = useState('');
+  const [orgType, setOrgType] = useState('');
+  const [logo, setLogo] = useState<string | null>(null); // State for logo image
 
-  const handleUserCheckboxChange = () => {
-    setIsUser(true);
-    setIsCompanyManager(false);
-  };
-
-  const handleCompanyCheckboxChange = () => {
-    setIsCompanyManager(true);
-    setIsUser(false);
-  };
-
-  const handleUserMouseDown = () => {
-    setIsUserButtonPressed(true);
-  };
-
-  const handleUserMouseUp = () => {
-    setIsUserButtonPressed(false);
-  };
-
-  const handleCompanyMouseDown = () => {
-    setIsCompanyButtonPressed(true);
-  };
-
-  const handleCompanyMouseUp = () => {
-    setIsCompanyButtonPressed(false);
-  };
-
-  const getButtonText = () => {
-    if (isUser) return "Apply as User";
-    if (isCompanyManager) return "Join as Company";
-    return "Create Account";
-  };
-
-  const handleCreateAccount = () => {
-    if (isUser) {
-      router.push("/signup/user");
-    } else if (isCompanyManager) {
-      router.push("/signup/company");
+  const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setLogo(URL.createObjectURL(event.target.files[0]));
     }
   };
 
-  const isButtonDisabled = !isUser && !isCompanyManager;
-
   return (
-    <div
-      className={`flex flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
-    >
-      <div className="min-h-screen w-[40%] relative">
-        <Image src={LoginImage} fill={true} objectFit="cover" alt="Login pic" />
+    <div className="min-h-screen flex flex-col">
+      {/* Header Section */}
+      <div className="bg-white shadow-md sticky top-0 z-10 p-6">
+        <h2 className="text-xl font-semibold">Let's get started with a few details about your company.</h2>
       </div>
-      <div className="flex flex-col min-h-screen w-[60%] justify-center items-center">
-        <h1 className="text-3xl font-medium mb-6">Join as a User or Company</h1>
 
-        <div className="flex space-x-4 mb-6">
-          <Card
-            onClick={handleUserCheckboxChange}
-            onMouseDown={handleUserMouseDown}
-            onMouseUp={handleUserMouseUp}
-            onMouseLeave={handleUserMouseUp}
-            className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 cursor-pointer ${
-              isUser
-                ? "border-2 border-primary bg-[#00000005]"
-                : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isUserButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-primary hover:bg-secondary/90 relative`}
-          >
-            <div>
-              <FaUser size="1.5em" />
-            </div>
-            <div className="text-xl font-semibold mt-8 text-start">
-              I'm a user, looking for work
-            </div>
-            <div
-              className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isUser ? "bg-primary border-none" : "bg-white"
-              }`}
-            >
-              <div className="w-3 h-3 border border-white rounded-full"></div>
-            </div>
-          </Card>
+      {/* Main Content Section */}
+      <div className="flex flex-col lg:flex-row gap-8 p-8 flex-grow">
+        {/* Form Section */}
+        <div className="lg:w-1/2 bg-white p-6 rounded-lg shadow-md">
+          <form>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium">Name*</label>
+                <input
+                  type="text"
+                  placeholder="Add your organization’s name"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                />
+              </div>
 
-          <Card
-            onClick={handleCompanyCheckboxChange}
-            onMouseDown={handleCompanyMouseDown}
-            onMouseUp={handleCompanyMouseUp}
-            onMouseLeave={handleCompanyMouseUp}
-            className={`p-8 w-64 rounded-lg flex flex-col transition-transform duration-300 cursor-pointer ${
-              isCompanyManager
-                ? "border-2 border-[--primary-color] bg-[#00000005]"
-                : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isCompanyButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-[--primary-color] hover:bg-[#00000005] relative`}
-          >
-            <div>
-              <ImOffice size="1.5em" />
+              <div>
+                <label className="block text-sm font-medium">linkedin.com/company/*</label>
+                <input
+                  type="url"
+                  placeholder="Add your unique LinkedIn address"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={linkedin}
+                  onChange={(e) => setLinkedin(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Website</label>
+                <input
+                  type="url"
+                  placeholder="Begin with http://, https:// or www."
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Industry*</label>
+                <input
+                  type="text"
+                  placeholder="ex: Information Services"
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={industry}
+                  onChange={(e) => setIndustry(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Organization size*</label>
+                <select
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={orgSize}
+                  onChange={(e) => setOrgSize(e.target.value)}
+                >
+                  <option value="">Select size</option>
+                  <option value="Small">Small</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Large">Large</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Organization type*</label>
+                <select
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={orgType}
+                  onChange={(e) => setOrgType(e.target.value)}
+                >
+                  <option value="">Select type</option>
+                  <option value="Private">Private</option>
+                  <option value="Public">Public</option>
+                  <option value="Non-Profit">Non-Profit</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Logo</label>
+                <input type="file" onChange={handleLogoUpload} className="w-full p-2" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium">Tagline</label>
+                <input
+                  type="text"
+                  placeholder="ex: An information services firm helping small businesses succeed."
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+                  value={tagline}
+                  onChange={(e) => setTagline(e.target.value)}
+                />
+              </div>
+
+              <div className="flex items-start mt-4">
+                <input type="checkbox" className="mr-2" />
+                <p className="text-sm">
+                  I verify that I am an authorized representative of this organization and have the right to act on its behalf in the creation and management of this page.
+                </p>
+              </div>
             </div>
-            <div className="text-xl font-semibold mt-8 text-start">
-              I am a Company Manager, hiring
-            </div>
-            <div
-              className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isCompanyManager
-                  ? "bg-[--primary-color] border-none"
-                  : "bg-white"
-              }`}
+
+            <button
+              type="submit"
+              className="mt-6 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
             >
-              <div className="w-3 h-3 border border-white rounded-full"></div>
-            </div>
-          </Card>
+              Create page
+            </button>
+          </form>
         </div>
 
-        <Button
-          disabled={isButtonDisabled}
-          // className={`px-6 py-2 font-semibold rounded-lg ${
-          //   isButtonDisabled
-          //     ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-          //     : "bg-[--primary-color] text-white hover:bg-[#4e49ee]"
-          // }`}
-          onClick={handleCreateAccount}
-        >
-          {getButtonText()}
-        </Button>
+        {/* Preview Section */}
+        <div className="lg:w-1/2 bg-gray-50 p-6 rounded-lg shadow-md">
+          <h3 className="text-xl font-semibold mb-4">Page Preview</h3>
 
-        <div className="mt-6">
-          <p>
-            Already have an account?{" "}
-            <Link
-              href="/login/"
-              className="text-[--primary-color] hover:underline"
-            >
-              Log in
-            </Link>
-          </p>
+          <div className="border border-gray-300 p-4 rounded-lg bg-white">
+            <div className="flex items-center justify-center mb-4">
+              {logo ? (
+                <img src={logo} alt="Company Logo" className="w-24 h-24 object-cover rounded-md" />
+              ) : (
+                <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center">
+                  <span>No logo</span>
+                </div>
+              )}
+            </div>
+
+            <h4 className="text-lg font-semibold">{companyName || 'Company name'}</h4>
+            <p className="text-sm text-gray-500">{tagline || 'Tagline'}</p>
+            <p className="text-sm text-gray-500">{industry || 'Industry'}</p>
+
+            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+              + Follow
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default JoinPage;
+}
