@@ -28,7 +28,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={epilogue.className}>
         <AuthProvider session={session}>
-          <Verify />
+          {/* <Verify /> */}
           {children}
         </AuthProvider>
       </body>

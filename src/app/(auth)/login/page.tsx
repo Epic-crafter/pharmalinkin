@@ -76,7 +76,7 @@ const Login: React.FC = () => {
         // Handle login success
         alert("Login successful!");
         // You can redirect to a protected page or perform further actions here
-        // window.location.href = "/dashboard"; // Example redirect
+         window.location.href = "/dashboard"; // Example redirect
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
