@@ -23,7 +23,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Internship with job offer",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo: "https://internshala.com/static/images/search/placeholder_logo.svg",
     responsibilities: [
       "Assisting in deploying email marketing campaigns",
@@ -53,7 +53,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Internship with job offer",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F639c57d0634231671190480.png.webp",
       responsibilities: [
@@ -84,7 +84,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Part time",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F159eynqvcak-73530.png.webp",
       responsibilities: [
@@ -115,7 +115,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Internship with job offer",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F639c57d0634231671190480.png.webp",
       responsibilities: [
@@ -146,7 +146,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Part time",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F159eynqvcak-73530.png.webp",
     responsibilities: [
@@ -177,7 +177,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Internship with job offer",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F639c57d0634231671190480.png.webp",
       responsibilities: [
@@ -208,7 +208,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Part time",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F159eynqvcak-73530.png.webp",
       responsibilities: [
@@ -239,7 +239,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Internship with job offer",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F639c57d0634231671190480.png.webp",
       responsibilities: [
@@ -270,7 +270,7 @@ const internships = [
     postedDate: "3 weeks ago",
     hiringStatus: "Actively hiring",
     joboffer: "Part time",
-    applyby:"Apply by 12 Oct' 24",
+    applyby:"Apply by 12 Oct&apos; 24",
     companyLogo:
       "https://internshala-uploads.internshala.com/logo%2F159eynqvcak-73530.png.webp",
       responsibilities: [
@@ -294,7 +294,7 @@ const internships = [
   },
 ];
 
-export default function page() {
+export default function Page () {
   const [showFilters, setShowFilters] = useState(false); // Track the state of the filters visibility
   const [selectedInternship, setSelectedInternship] = useState(null); // Track selected internship
 

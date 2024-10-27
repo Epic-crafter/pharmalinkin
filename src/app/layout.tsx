@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import AuthProvider from "@/lib/auth-provider";
 import Verify from "@/lib/verify-user";
+import { UserProvider } from "@/lib/contexts/user";
 
 const epilogue = Epilogue({
   subsets: ["latin"],
@@ -23,13 +24,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
+  const userId = session?.user?.id || null; 
+  const userRole = session?.user?.role || null; 
 
   return (
     <html lang="en">
       <body className={epilogue.className}>
         <AuthProvider session={session}>
+        <UserProvider userId={userId} userRole={userRole}>
           <Verify />
           {children}
+          </UserProvider>
         </AuthProvider>
       </body>
     </html>

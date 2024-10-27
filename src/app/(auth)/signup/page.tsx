@@ -89,7 +89,7 @@ const JoinPage = () => {
               <FaUser size="1.5em" />
             </div>
             <div className="text-xl font-semibold mt-8 text-start">
-              I'm a user, looking for work
+              I&apos;m a user, looking for work
             </div>
             <div
               className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${

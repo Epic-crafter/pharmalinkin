@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 // Create the context
-const RegistrationContext = createContext();
+const RegistrationContext = createContext<any>(undefined);
 
 // Create a provider component
 export const RegistrationProvider = ({ children }:any) => {

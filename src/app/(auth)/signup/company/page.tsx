@@ -1,168 +1,214 @@
-"use client"; // This directive makes it a client component
+"use client"
+import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import LoginImage from "@/images/LoginElement.jpg";
+import { Epilogue } from "next/font/google";
+import Image from "next/image";
+import { TbEyeClosed, TbEyeCheck } from "react-icons/tb";
+import Link from "next/link";
+import { EMPLOYEE, EMPLOYER } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
-import { useState } from 'react';
+const epilogue = Epilogue({ subsets: ["latin"], weight: "400" });
 
-export default function JobPostingForm() {
-  const [companyName, setCompanyName] = useState('');
-  const [tagline, setTagline] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [website, setWebsite] = useState('');
-  const [linkedin, setLinkedin] = useState('');
-  const [orgSize, setOrgSize] = useState('');
-  const [orgType, setOrgType] = useState('');
-  const [logo, setLogo] = useState<string | null>(null); // State for logo image
+export default function SignUp() {
+  const [isWorking, setIsWorking] = useState(false);
+  const [showSecondForm, setShowSecondForm] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState(""); // Add email state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setLogo(URL.createObjectURL(event.target.files[0]));
+  const router = useRouter() 
+
+  // Handle form submission
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    // Validate password confirmation
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          email, 
+          password,
+          role: EMPLOYER, 
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.status) {
+        console.log(result);
+        router.push(`/signup/company/create-profile/${result.user._id}`)
+        setSuccess("User registered successfully!");
+
+      } else {
+        setError(result.message || "Something went wrong.");
+      }
+    } catch (err) {
+      setError("Internal server error.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header Section */}
-      <div className="bg-white shadow-md sticky top-0 z-10 p-6">
-        <h2 className="text-xl font-semibold">Let's get started with a few details about your company.</h2>
+    <div
+      className={`flex flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
+    >
+      <div className="min-h-screen w-[40%] relative">
+        <Image src={LoginImage} fill={true} objectFit="cover" alt="Login pic" />
       </div>
+      <div className="flex flex-col min-h-screen w-[60%] justify-center items-center py-6">
+        <div className="w-[50%]">
+          <h1 className="text-3xl text-center font-bold mb-6">
+            Join us Today
+          </h1>
 
-      {/* Main Content Section */}
-      <div className="flex flex-col lg:flex-row gap-8 p-8 flex-grow">
-        {/* Form Section */}
-        <div className="lg:w-1/2 bg-white p-6 rounded-lg shadow-md">
-          <form>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium">Name*</label>
-                <input
-                  type="text"
-                  placeholder="Add your organization’s name"
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                />
-              </div>
+          {error && <p className="text-red-500">{error}</p>}
+          {success && <p className="text-green-500">{success}</p>}
 
-              <div>
-                <label className="block text-sm font-medium">linkedin.com/company/*</label>
-                <input
-                  type="url"
-                  placeholder="Add your unique LinkedIn address"
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={linkedin}
-                  onChange={(e) => setLinkedin(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Website</label>
-                <input
-                  type="url"
-                  placeholder="Begin with http://, https:// or www."
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Industry*</label>
-                <input
-                  type="text"
-                  placeholder="ex: Information Services"
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={industry}
-                  onChange={(e) => setIndustry(e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Organization size*</label>
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={orgSize}
-                  onChange={(e) => setOrgSize(e.target.value)}
-                >
-                  <option value="">Select size</option>
-                  <option value="Small">Small</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Large">Large</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Organization type*</label>
-                <select
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={orgType}
-                  onChange={(e) => setOrgType(e.target.value)}
-                >
-                  <option value="">Select type</option>
-                  <option value="Private">Private</option>
-                  <option value="Public">Public</option>
-                  <option value="Non-Profit">Non-Profit</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Logo</label>
-                <input type="file" onChange={handleLogoUpload} className="w-full p-2" />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium">Tagline</label>
-                <input
-                  type="text"
-                  placeholder="ex: An information services firm helping small businesses succeed."
-                  className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-                  value={tagline}
-                  onChange={(e) => setTagline(e.target.value)}
-                />
-              </div>
-
-              <div className="flex items-start mt-4">
-                <input type="checkbox" className="mr-2" />
-                <p className="text-sm">
-                  I verify that I am an authorized representative of this organization and have the right to act on its behalf in the creation and management of this page.
-                </p>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="mt-6 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+          {/* Form to handle user registration */}
+          <form onSubmit={handleRegister}>
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-gray-700"
             >
-              Create page
-            </button>
-          </form>
-        </div>
+              Full Name
+            </label>
+            <Input
+              id="fullName"
+              type="text"
+              placeholder="Enter your Full Name"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
 
-        {/* Preview Section */}
-        <div className="lg:w-1/2 bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 className="text-xl font-semibold mb-4">Page Preview</h3>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <div className="border border-gray-300 p-4 rounded-lg bg-white">
-            <div className="flex items-center justify-center mb-4">
-              {logo ? (
-                <img src={logo} alt="Company Logo" className="w-24 h-24 object-cover rounded-md" />
-              ) : (
-                <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center">
-                  <span>No logo</span>
-                </div>
-              )}
+            <label
+              htmlFor="mobileNumber"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Mobile Number
+            </label>
+            <Input
+              id="mobileNumber"
+              type="text"
+              placeholder="Enter your Mobile Number"
+              className="mb-4 rounded-none border-gray-300 placeholder:text-gray-400"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+            />
+
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <div className="relative mb-4 w-full">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                placeholder="Enter your password"
+                className="rounded-none border-gray-300 placeholder:text-gray-400 pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <TbEyeClosed size={20} className="text-gray-400" />
+                ) : (
+                  <TbEyeCheck size={20} className="text-gray-400" />
+                )}
+              </div>
             </div>
 
-            <h4 className="text-lg font-semibold">{companyName || 'Company name'}</h4>
-            <p className="text-sm text-gray-500">{tagline || 'Tagline'}</p>
-            <p className="text-sm text-gray-500">{industry || 'Industry'}</p>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Confirm Password
+            </label>
+            <div className="relative mb-4 w-full">
+              <Input
+                id="confirmPassword"
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                placeholder="Confirm your password"
+                className="rounded-none border-gray-300 placeholder:text-gray-400 pr-10"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <TbEyeClosed size={20} className="text-gray-400" />
+                ) : (
+                  <TbEyeCheck size={20} className="text-gray-400" />
+                )}
+              </div>
+            </div>
 
-            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
-              + Follow
-            </button>
-          </div>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              className="w-full py-2 "
+              disabled={loading}
+            >
+              {loading ? "Registering..." : "Register"}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-gray-500 mt-6">
+            Already have an account?{" "}
+            <Link href="/login" className="text-[--primary-color] hover:underline">
+              Log In
+            </Link>
+          </p>
         </div>
       </div>
     </div>
   );
 }
-
-

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client"
 import React, { useState } from 'react';
 import {  FaRegQuestionCircle } from 'react-icons/fa';
@@ -50,6 +51,20 @@ function Filters() {
           <span>All applicants</span>
           <span>Good match</span>
           <span>Very good match</span>
+=======
+// components/Filters.js
+export default function Filters() {
+    return (
+      <aside className="w-64 p-4 bg-white border-l">
+        <h3 className="text-lg font-semibold mb-4">Filters</h3>
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Applicant&apos;s location</label>
+          <input
+            type="text"
+            placeholder="e.g. Mumbai"
+            className="w-full p-2 border rounded-lg"
+          />
+>>>>>>> 264da481247e96adc1e2568f8eaccd6bba42d5fd
         </div>
       </div>
 

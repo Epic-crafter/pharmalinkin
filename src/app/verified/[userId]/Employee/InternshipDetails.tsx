@@ -122,7 +122,7 @@ const InternshipDetails= ({
               Key Responsibilities
             </h3>
             <p className="text-gray-600 mb-3">
-              Selected intern's day-to-day responsibilities include:
+              Selected intern&apos;s day-to-day responsibilities include:
             </p>
             <ul className="list-disc list-inside text-gray-600 space-y-1">
               {internship.responsibilities.map((responsibility:any, index:any) => (
@@ -165,7 +165,7 @@ const InternshipDetails= ({
                 with strong attention to detail.
               </li>
             </ul>
-            <p className=" text-gray-600 py-3">Those who complete these tasks will not only contribute to building a better society but also receive recognition for their efforts. Completing all tasks will earn you a Certificate of Completion of Internship. Achieve three tasks successfully, and you'll receive our prestigious Changemaker Award Certificate.</p>
+            <p className=" text-gray-600 py-3">Those who complete these tasks will not only contribute to building a better society but also receive recognition for their efforts. Completing all tasks will earn you a Certificate of Completion of Internship. Achieve three tasks successfully, and you&apos;ll receive our prestigious Changemaker Award Certificate.</p>
           </div>
 
           {/* Perks */}

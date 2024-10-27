@@ -5,6 +5,28 @@ import GoogleProvider from "next-auth/providers/google";
 import { connectToDatabase } from "@/lib/mongo";
 import bcrypt from "bcryptjs"; // Import bcrypt
 
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string;  // Add user ID type
+    role: string;  // Add user role type
+  }
+}
+
+declare module 'next-auth' {
+  interface User {
+    id: string;  // Add user ID type
+    role: string;  // Add user role type
+  }
+
+  interface Session {
+    user: User & {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({

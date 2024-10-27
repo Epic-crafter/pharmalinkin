@@ -1,6 +1,5 @@
 import { FaToggleOn } from "react-icons/fa";
-// import girl from "../../assets/girl.png"
-import girl from "../../assets/girl.png"
+
 import Hero from "../../assets/Hero.png"
 import Image from "next/image";
 
