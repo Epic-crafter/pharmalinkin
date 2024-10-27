@@ -34,6 +34,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     await newUser.save();
     return NextResponse.json({
+      user:newUser,
       message: "User registered successfully",
       status: true,
     });

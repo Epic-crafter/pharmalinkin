@@ -235,7 +235,7 @@ const Login: React.FC = () => {
             <div className="flex items-center justify-center my-6 w-full max-w-sm">
               <div className="flex items-center w-full">
                 <span className="mr-2 text-gray-400 text-md">
-                  Don't have an account?
+                  Don&apos;t have an account?
                 </span>
                 <Link
                   href="/signup"

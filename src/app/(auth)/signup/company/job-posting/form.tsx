@@ -154,7 +154,7 @@ export default function OrganizationForm() {
         <p className="text-sm text-gray-500">Max file size: 1MB and max resolution: 500px x 500px</p>
       </div>
 
-      <Button type="submit" className="w-full bg-blue-600 text-white">
+      <Button type="submit" className="w-full">
         Submit
       </Button>
     </form>
