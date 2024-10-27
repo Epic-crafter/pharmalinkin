@@ -7,7 +7,7 @@ import Image from "next/image";
 const HeroSection = () => {
     return (
         <section className="flex flex-col md:flex-row   items-center justify-between py-12 lg:px-32 px-12 lg:mx-0 mx-auto " >
-            <div className="max-w-lg w-full lg:w-2/5 lg:mx-0 mx-auto">
+            <div className=" w-full lg:w-2/5 lg:mx-0 mx-auto">
                 <div className="flex gap-2 items-center font-semibold">
                     <FaToggleOn className="text-blue-700 text-xl" style={{ fontSize: "30px" }} />
                     <p>Find your dream job</p>
