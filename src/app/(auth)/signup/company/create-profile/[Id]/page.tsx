@@ -43,6 +43,7 @@ export default function JobPostingForm({params}:any) {
       location,
       foundedYear: foundedYear ? parseInt(foundedYear) : undefined, 
       companySize: orgSize,
+      type: orgType,
       socialLinks: {
         linkedin,
         facebook,
@@ -65,7 +66,7 @@ export default function JobPostingForm({params}:any) {
       if (response.ok) {
         router.push("/verified")
       }
-      alert(result.error)
+      if(result.error){alert(result.error)}
     } catch (error) {
       console.error("Error:", error);
     }
@@ -174,9 +175,14 @@ export default function JobPostingForm({params}:any) {
                     <SelectValue placeholder="Select size" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Small">Small</SelectItem>
-                    <SelectItem value="Medium">Medium</SelectItem>
-                    <SelectItem value="Large">Large</SelectItem>
+                    <SelectItem value="1-10">1-10</SelectItem>
+                    <SelectItem value="11-50">11-50</SelectItem>
+                    <SelectItem value="51-200">51-200</SelectItem>
+                    <SelectItem value="201-500">201-500</SelectItem>
+                    <SelectItem value="501-1000">501-1000</SelectItem>
+                    <SelectItem value="1001-5000">1001-5000</SelectItem>
+                    <SelectItem value="5000+">5000+</SelectItem>
+                   
                   </SelectContent>
                 </Select>
               </div>

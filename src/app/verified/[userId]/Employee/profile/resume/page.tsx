@@ -2,46 +2,15 @@
 
 import React, { useState } from 'react';
 import { FaCloudUploadAlt, FaEllipsisV, FaInfo, FaInfoCircle, FaRegBell, FaRegCheckCircle, FaRegEdit, FaRegFileAlt, FaTrash } from 'react-icons/fa';
-import Sidebar from '../components/sidebar';
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="flex items-center bg-white space-x-4 justify-between py-3   px-6 font-bold   ">
-        {/* header-left */}
-        <div className="flex items-center   space-x-3 font-bold ">
-          <img className=' h-10 w-10 ' src='http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fframe.4e9ae2d5.png&w=32&q=75' alt='' />
-
-          <h1 className='text-xl' >Pharamalinkin</h1>
-
-        </div>
-        {/* header-right */}
-
-        <div className='flex items-center gap-4'>
-
-          <button className='border-2 border-gray-300 p-3 text-blue-600  rounded-lg cursor-pointer'>Back to homepage</button>
-          <FaRegBell className='text-lg' />
-          <div className="lg:hidden sm:visible text-black ">
-            {/* Sidebar toggle button for mobile */}
-            <span onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 text-black rounded-md">...</span>
-
-          </div>
-
-        </div>
-      </header>
 
       <div className="flex">
         {/* Sidebar */}
-        <div
-          className={`lg:static z-40 ${sidebarOpen ? "absolute inset-y-0 left-0" : "hidden"
-            } lg:block w-[30%] lg:w-[20%] bg-gray-100 shadow-lg transform transition-transform duration-300 ease-in-out`}
-          style={{ zIndex: 50 }}
-        >
-          <Sidebar />
-        </div>
 
 
         <div className="w-3/5 min-h-screen bg-white text-gray-600 rounded-lg flex-grow ">
