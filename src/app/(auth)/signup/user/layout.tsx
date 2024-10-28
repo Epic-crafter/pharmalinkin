@@ -3,7 +3,7 @@ import React from 'react'
 
 const layout = ({children}:any) => {
   return (
-    <RegistrationProvider>{children}</RegistrationProvider>
+    <RegistrationProvider><div className='flex justify-center h-screen items-center'>{children}</div></RegistrationProvider>
   )
 }
 
