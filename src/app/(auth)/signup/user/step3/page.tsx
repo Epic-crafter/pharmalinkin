@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { useRegistrationContext } from '@/lib/contexts/user-register-context';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Label } from '@/components/ui/label';
 
 const page = () => {
   const { updateRegistrationData } = useRegistrationContext();
@@ -29,18 +30,24 @@ const page = () => {
       </CardHeader>
       <CardContent>
       <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
+      <Label htmlFor="location">Location</Label> 
+
       <Input
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
           />
+          <Label htmlFor="recentJobTitle">Most recent job title</Label> 
+
           <Input
             type="text"
             value={mostRecentJobTitle}
             onChange={(e) => setMostRecentJobTitle(e.target.value)}
             required
           />
+          <Label htmlFor="PreferredJob">Preferred Job Title</Label> 
+
           <Input
             type="text"
             value={preferredJobTitle}
