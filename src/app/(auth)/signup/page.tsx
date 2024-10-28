@@ -123,7 +123,7 @@ const JoinPage = () => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isCompanyManager ? "bg-[--primary-color] border-none" : "bg-white"
+                isCompanyManager ? "bg-primary border-none" : "bg-white"
               }`}
             >
               <div className="w-3 h-3 border border-white rounded-full"></div>

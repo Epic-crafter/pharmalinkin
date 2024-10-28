@@ -1,17 +1,16 @@
-<<<<<<< HEAD
 "use client"
 import React, { useState } from 'react';
 import {  FaRegQuestionCircle } from 'react-icons/fa';
 
 function Filters() {
-  const [relevance, setRelevance] = useState(50);
+  const [relevance, setRelevance] = useState<any>(50);
 
   return (
     <div className="pr-4 py-4 w-full lg:w-72">
       <h3 className="text-lg font-semibold mb-4">Filters</h3>
       
       <div className="mb-4 text-sm ">
-        <label className="block font-medium text-gray-700 flex items-center gap-1">Applicants' locations <FaRegQuestionCircle className='text-xs'/></label>
+        <label className=" font-medium text-gray-700 flex items-center gap-1">Applicants' locations <FaRegQuestionCircle className='text-xs'/></label>
         <input
           type="text"
           placeholder="e.g. Mumbai"
@@ -20,7 +19,7 @@ function Filters() {
       </div>
       
       <div className="mb-4 text-sm ">
-        <label className="block  font-medium text-gray-700 flex items-center gap-1">Skills  <FaRegQuestionCircle className='text-xs'/></label>
+        <label className="  font-medium text-gray-700 flex items-center gap-1">Skills  <FaRegQuestionCircle className='text-xs'/></label>
         <input
           type="text"
           placeholder="e.g. Java"
@@ -29,7 +28,7 @@ function Filters() {
       </div>
       
       <div className="mb-4 text-sm ">
-        <label className="block font-medium text-gray-700 flex items-center gap-1">Academic background  <FaRegQuestionCircle className='text-xs'/></label>
+        <label className=" font-medium text-gray-700 flex items-center gap-1">Academic background  <FaRegQuestionCircle className='text-xs'/></label>
         <input
           type="text"
           placeholder="e.g. MBA & similar"
@@ -38,7 +37,7 @@ function Filters() {
       </div>
       
       <div className="mb-4 text-sm ">
-        <label className="block font-medium text-gray-700 flex gap-1 ">Relevance match <p className=' bg-gray-200 rounded-md ' style={{fontSize:"8px"}} >BETA</p></label>
+        <label className=" font-medium text-gray-700 flex gap-1 ">Relevance match <p className=' bg-gray-200 rounded-md ' style={{fontSize:"8px"}} >BETA</p></label>
         <input
           type="range"
           min="0"
@@ -51,25 +50,11 @@ function Filters() {
           <span>All applicants</span>
           <span>Good match</span>
           <span>Very good match</span>
-=======
-// components/Filters.js
-export default function Filters() {
-    return (
-      <aside className="w-64 p-4 bg-white border-l">
-        <h3 className="text-lg font-semibold mb-4">Filters</h3>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Applicant&apos;s location</label>
-          <input
-            type="text"
-            placeholder="e.g. Mumbai"
-            className="w-full p-2 border rounded-lg"
-          />
->>>>>>> 264da481247e96adc1e2568f8eaccd6bba42d5fd
         </div>
       </div>
 
       <div className="mb-4 text-sm ">
-        <label className="block  font-medium text-gray-700 flex items-center gap-1">Graduation year <FaRegQuestionCircle className='text-xs'/></label>
+        <label className="  font-medium text-gray-700 flex items-center gap-1">Graduation year <FaRegQuestionCircle className='text-xs'/></label>
         <select
           className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:primary text-gray-500"
         >

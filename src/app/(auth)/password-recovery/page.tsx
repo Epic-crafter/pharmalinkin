@@ -71,7 +71,7 @@ const Login: React.FC = () => {
 
               <Button
                 type="submit"
-                className="w-full rounded-none bg-[--primary-color] my-8 text-white hover:bg-[#4e49ee]"
+                className="w-full "
               >
                 Submit
               </Button>
