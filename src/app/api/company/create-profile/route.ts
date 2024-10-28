@@ -1,28 +1,72 @@
-// app/api/company-profile/route.ts
-import { connectToDatabase } from '@/lib/mongo';
-import { CompanyProfile } from '@/models/company-profile';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import { connectToDatabase } from "@/lib/mongo";
+import { CompanyProfile } from "@/models/company-profile";
+import { User } from "@/models/user";
+import { getToken } from "next-auth/jwt";
 
-
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
   try {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token)
+      return NextResponse.json({
+        message: "Invalid User!,Login again",
+        status: false,
+      });
+    const {
+      companyName,
+      industry,
+      location,
+      website,
+      about,
+      foundedYear,
+      companySize,
+      socialLinks,
+      logo,
+    } = await req.json();
+
     await connectToDatabase();
-
-    // Parse the incoming request body
-    const body = await request.json();
-
-    // Ensure required fields are provided
-    const { user, companyName, industry, location } = body;
-    if (!user || !companyName || !industry || !location) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    // Check if user exists
+    const user = await User.findById(token.id);
+    if (!user) {
+      return NextResponse.json(
+        { message: "User not found", success: false },
+        { status: 404 }
+      );
     }
 
-    const newProfile = await CompanyProfile.create(body);
+    // Create new company profile
+    const companyProfile = new CompanyProfile({
+      user: token.id,
+      companyName,
+      industry,
+      location,
+      website,
+      about,
+      foundedYear,
+      companySize,
+      socialLinks,
+      logo,
+    });
 
-    return NextResponse.json(newProfile, { status: 201 });
+    await companyProfile.save();
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Company profile created successfully",
+        data: companyProfile,
+      },
+      { status: 201 }
+    );
   } catch (error) {
-    console.log(error);
-    
-    return NextResponse.json({ error: 'Error creating company profile' }, { status: 500 });
+    console.error("Error creating company profile:", error);
+    return NextResponse.json(
+      {
+        message: "Failed to create company profile.",
+        success: false,
+        error,
+      },
+      { status: 500 }
+    );
   }
 }
