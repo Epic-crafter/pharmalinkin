@@ -12,7 +12,8 @@ const Verify = () => {
       try {
         if (
           currentPath.startsWith("/signup") ||
-          currentPath==="/"
+          currentPath==="/"||
+          currentPath==="/password-recovery"
         ) {
           setLoading(false);
           return;

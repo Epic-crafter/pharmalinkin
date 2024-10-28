@@ -161,7 +161,7 @@ const Login: React.FC = () => {
 
             <Dialog open={otpPopup} onOpenChange={setOtpPopup}>
               <DialogTrigger asChild>
-                <Button className="w-full text-white rounded-none bg-[--primary-color]  hover:bg-[#4e49ee]">
+                <Button variant="secondary" className="w-full">
                   Request OTP
                 </Button>
               </DialogTrigger>
@@ -200,7 +200,6 @@ const Login: React.FC = () => {
                     // Step 1: Send OTP button
                     <Button
                       onClick={handleSendOtp}
-                      className="bg-[--primary-color] text-white hover:bg-[#4e49ee]"
                     >
                       Send OTP
                     </Button>
@@ -210,8 +209,8 @@ const Login: React.FC = () => {
                       <Button
                         variant="link"
                         onClick={() => alert("Resend OTP")}
-                        className="text-[--primary-color] hover:underline"
-                      >
+                       
+                       >
                         Resend OTP
                       </Button>
                       <Button
