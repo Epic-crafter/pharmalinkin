@@ -7,7 +7,6 @@ import { Label } from '@/components/ui/label';
 import { useRegistrationContext } from '@/lib/contexts/user-register-context';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
 const Page = () => {
   const { updateRegistrationData } = useRegistrationContext();
   const [email, setEmail] = useState('');
@@ -22,13 +21,14 @@ const Page = () => {
   };
 
   return (
+    <>
     <Card className='lg:w-[30vw] mx-auto'>
       <CardHeader>
         <h2>Step 1: Contact Information</h2>
       </CardHeader>
       <CardContent >
         <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
-        <Label htmlFor="email">Eamil</Label> 
+        <Label htmlFor="email">Email</Label> 
           <Input
             id='email'
             type="email"
@@ -48,6 +48,8 @@ const Page = () => {
         </form>
       </CardContent>
     </Card>
+    </>
+    
   );
 };
 

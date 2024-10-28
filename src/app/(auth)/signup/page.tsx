@@ -63,15 +63,21 @@ const JoinPage = () => {
 
   return (
     <div
-      className={`flex flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
+      className={`flex flex-col lg:flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
     >
-      <div className="min-h-screen w-[40%] relative">
+      {/* Image section hidden on smaller screens */}
+      <div className="hidden lg:block lg:min-h-screen lg:w-[40%] relative">
         <Image src={LoginImage} fill={true} objectFit="cover" alt="Login pic" />
       </div>
-      <div className="flex flex-col min-h-screen w-[60%] justify-center items-center">
-        <h1 className="text-3xl font-medium mb-6">Join as a User or Company</h1>
 
-        <div className="flex space-x-4 mb-6">
+      {/* Main content section */}
+      <div className="flex flex-col min-h-screen lg:w-[60%] w-full justify-center items-center p-4 md:p-8">
+        <h1 className="text-3xl font-medium mb-6 text-center lg:text-left">
+          Join as a User or Company
+        </h1>
+
+        {/* Card selection section centered in mobile view */}
+        <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 mb-6 items-center">
           <Card
             onClick={handleUserCheckboxChange}
             onMouseDown={handleUserMouseDown}
@@ -81,9 +87,7 @@ const JoinPage = () => {
               isUser
                 ? "border-2 border-primary bg-[#00000005]"
                 : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isUserButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-primary hover:bg-secondary/90 relative`}
+            } ${isUserButtonPressed ? "scale-95" : ""} hover:border-2 hover:border-primary hover:bg-secondary/90 relative`}
           >
             <div>
               <FaUser size="1.5em" />
@@ -109,9 +113,7 @@ const JoinPage = () => {
               isCompanyManager
                 ? "border-2 border-[--primary-color] bg-[#00000005]"
                 : "border-2 border-gray-300 bg-white text-gray-800"
-            } ${
-              isCompanyButtonPressed ? "scale-95" : ""
-            } hover:border-2 hover:border-[--primary-color] hover:bg-[#00000005] relative`}
+            } ${isCompanyButtonPressed ? "scale-95" : ""} hover:border-2 hover:border-[--primary-color] hover:bg-[#00000005] relative`}
           >
             <div>
               <ImOffice size="1.5em" />
@@ -121,9 +123,7 @@ const JoinPage = () => {
             </div>
             <div
               className={`w-6 h-6 border border-gray-300 rounded-full absolute top-3 right-3 flex justify-center items-center ${
-                isCompanyManager
-                  ? "bg-[--primary-color] border-none"
-                  : "bg-white"
+                isCompanyManager ? "bg-[--primary-color] border-none" : "bg-white"
               }`}
             >
               <div className="w-3 h-3 border border-white rounded-full"></div>
@@ -131,19 +131,17 @@ const JoinPage = () => {
           </Card>
         </div>
 
+        {/* Create Account Button */}
         <Button
           disabled={isButtonDisabled}
-          // className={`px-6 py-2 font-semibold rounded-lg ${
-          //   isButtonDisabled
-          //     ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-          //     : "bg-[--primary-color] text-white hover:bg-[#4e49ee]"
-          // }`}
           onClick={handleCreateAccount}
+          className="w-full max-w-xs px-6 py-2 font-semibold rounded-lg md:mt-6"
         >
           {getButtonText()}
         </Button>
 
-        <div className="mt-6">
+        {/* Link to login */}
+        <div className="mt-6 text-center">
           <p>
             Already have an account?{" "}
             <Link
