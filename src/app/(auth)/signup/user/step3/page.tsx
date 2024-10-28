@@ -1,24 +1,25 @@
-// app/register/step1/page.tsx
+// app/register/step3/page.tsx
 "use client";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useRegistrationContext } from '@/lib/contexts/user-register-context';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const Page = () => {
+const page = () => {
   const { updateRegistrationData } = useRegistrationContext();
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
+  const [mostRecentJobTitle, setMostRecentJobTitle] = useState('');
+  const [preferredJobTitle, setPreferredJobTitle] = useState('');
   const router = useRouter();
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    updateRegistrationData('email', email);
-    updateRegistrationData('phone', phone);
-    router.push('/signup/user/step2');
+    updateRegistrationData('location', location);
+    updateRegistrationData('mostRecentJobTitle', mostRecentJobTitle);
+    updateRegistrationData('preferredJobTitle', preferredJobTitle);
+    router.push('/signup/user/complete');
   };
 
   return (
@@ -26,34 +27,31 @@ const Page = () => {
       <CardHeader>
         <h2>Step 3: Job Preferences</h2>
       </CardHeader>
-      <CardContent >
-        <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
-          <Input
-            id='email'
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+      <CardContent>
+      <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
+      <Input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             required
           />
           <Input
-          id='phone'
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            type="text"
+            value={mostRecentJobTitle}
+            onChange={(e) => setMostRecentJobTitle(e.target.value)}
             required
           />
           <Input
-          id='phone'
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            type="text"
+            value={preferredJobTitle}
+            onChange={(e) => setPreferredJobTitle(e.target.value)}
             required
           />
-          <Button type="submit">Next</Button>
+          <Button type="submit">Submit</Button>
         </form>
       </CardContent>
     </Card>
   );
 };
 
-export default Page;
+export default page;
