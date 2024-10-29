@@ -44,7 +44,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch("/api/users/register", {
+      const response = await fetch("/api/company/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

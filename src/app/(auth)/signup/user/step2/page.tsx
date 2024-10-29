@@ -20,7 +20,7 @@ const Page = () => {
     updateRegistrationData("password", password);
     updateRegistrationData("firstName", firstName);
     updateRegistrationData("lastName", lastName);
-    router.push('/signup/user/step3');
+    router.push('/signup/user/selection');
   };
 
   return (

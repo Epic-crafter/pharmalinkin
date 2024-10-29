@@ -18,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Epilogue } from "next/font/google";
+import Header from "../signup/user/header";
 
 const epilogue = Epilogue({ subsets: ["latin"], weight: "400" });
 
@@ -94,6 +95,7 @@ const Login: React.FC = () => {
     <div
       className={`flex flex-row min-w-screen min-h-screen justify-start items-center ${epilogue.className}`}
     >
+      <div className=' absolute top-0 w-full'><Header/></div>
       <div className="min-h-screen w-[40%] relative">
         <Image src={LoginImage} fill={true} objectFit="cover" alt="Login pic" />
       </div>
