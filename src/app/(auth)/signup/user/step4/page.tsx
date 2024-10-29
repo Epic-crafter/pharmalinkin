@@ -1,4 +1,4 @@
-// app/register/step3/page.tsx
+// app/register/step4/page.tsx
 "use client";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -10,50 +10,75 @@ import { Label } from '@/components/ui/label';
 
 const page = () => {
   const { updateRegistrationData } = useRegistrationContext();
-  const [location, setLocation] = useState('');
-  const [mostRecentJobTitle, setMostRecentJobTitle] = useState('');
-  const [preferredJobTitle, setPreferredJobTitle] = useState('');
+  const [collegeName, setCollegeName] = useState('');
+  const [collegeStartDate, setCollegeStartDate] = useState('');
+  const [collegeEndDate, setCollegeEndDate] = useState('');
+  const [degree, setDegree] = useState('');
+  const [fieldOfStudy, setFieldOfStudy] = useState('');
   const router = useRouter();
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    updateRegistrationData('location', location);
-    updateRegistrationData('mostRecentJobTitle', mostRecentJobTitle);
-    updateRegistrationData('preferredJobTitle', preferredJobTitle);
-    router.push('/signup/user/complete');
+    updateRegistrationData('collegeName', collegeName);
+    updateRegistrationData('collegeStartDate', collegeStartDate);
+    updateRegistrationData('collegeEndDate', collegeEndDate);
+    updateRegistrationData('degree', degree);
+    updateRegistrationData('fieldOfStudy', fieldOfStudy);
+    router.push('/signup/user/step5');
   };
 
   return (
     <Card className='lg:w-[30vw] mx-auto'>
       <CardHeader>
-        <h2>Step 3: Job Preferences</h2>
+        <h2>Step 4: College Details</h2>
       </CardHeader>
       <CardContent>
-      <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
-      <Label htmlFor="location">Location</Label> 
-
-      <Input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-          <Label htmlFor="recentJobTitle">Most recent job title</Label> 
-
+        <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <Label htmlFor="collegeName">College Name</Label>
           <Input
             type="text"
-            value={mostRecentJobTitle}
-            onChange={(e) => setMostRecentJobTitle(e.target.value)}
+            id="collegeName"
+            value={collegeName}
+            onChange={(e) => setCollegeName(e.target.value)}
             required
           />
-          <Label htmlFor="PreferredJob">Preferred Job Title</Label> 
 
+          <Label htmlFor="collegeStartDate">College Start Date</Label>
+          <Input
+            type="date"
+            id="collegeStartDate"
+            value={collegeStartDate}
+            onChange={(e) => setCollegeStartDate(e.target.value)}
+            required
+          />
+
+          <Label htmlFor="collegeEndDate">College End Date</Label>
+          <Input
+            type="date"
+            id="collegeEndDate"
+            value={collegeEndDate}
+            onChange={(e) => setCollegeEndDate(e.target.value)}
+            required
+          />
+
+          <Label htmlFor="degree">Degree</Label>
           <Input
             type="text"
-            value={preferredJobTitle}
-            onChange={(e) => setPreferredJobTitle(e.target.value)}
+            id="degree"
+            value={degree}
+            onChange={(e) => setDegree(e.target.value)}
             required
           />
+
+          <Label htmlFor="fieldOfStudy">Field of Study</Label>
+          <Input
+            type="text"
+            id="fieldOfStudy"
+            value={fieldOfStudy}
+            onChange={(e) => setFieldOfStudy(e.target.value)}
+            required
+          />
+
           <Button type="submit">Submit</Button>
         </form>
       </CardContent>
