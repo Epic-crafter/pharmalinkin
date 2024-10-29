@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongo"; // Adjust the path as needed
 import { User } from "@/models/user"; // Adjust the path as needed
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Profile } from "@/models/user-profile";
 
 export async function POST(req: NextRequest) {
