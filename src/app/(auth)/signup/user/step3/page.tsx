@@ -9,18 +9,38 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 
 const page = () => {
-  const { updateRegistrationData } = useRegistrationContext();
+  const { registrationData, updateRegistrationData } = useRegistrationContext();
   const [location, setLocation] = useState('');
   const [mostRecentJobTitle, setMostRecentJobTitle] = useState('');
   const [preferredJobTitle, setPreferredJobTitle] = useState('');
   const router = useRouter();
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    // Update registration data in context
     updateRegistrationData('location', location);
     updateRegistrationData('mostRecentJobTitle', mostRecentJobTitle);
     updateRegistrationData('preferredJobTitle', preferredJobTitle);
-    router.push('/signup/user/complete');
+
+    try {
+      // API call to register the user
+      const response = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (response.ok) {
+        router.push('/signup/user/complete');
+      } else {
+        console.error('Registration failed');
+        // Optionally display an error message to the user
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   return (
@@ -29,25 +49,22 @@ const page = () => {
         <h2>Step 3: Job Preferences</h2>
       </CardHeader>
       <CardContent>
-      <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>
-      <Label htmlFor="location">Location</Label> 
-
-      <Input
+        <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <Label htmlFor="location">Location</Label>
+          <Input
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
           />
-          <Label htmlFor="recentJobTitle">Most recent job title</Label> 
-
+          <Label htmlFor="recentJobTitle">Most Recent Job Title</Label>
           <Input
             type="text"
             value={mostRecentJobTitle}
             onChange={(e) => setMostRecentJobTitle(e.target.value)}
             required
           />
-          <Label htmlFor="PreferredJob">Preferred Job Title</Label> 
-
+          <Label htmlFor="preferredJobTitle">Preferred Job Title</Label>
           <Input
             type="text"
             value={preferredJobTitle}

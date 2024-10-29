@@ -10,18 +10,39 @@ import { Label } from '@/components/ui/label';
 import Switch from '@/components/ui/switch';
 
 const page = () => {
-  const { updateRegistrationData } = useRegistrationContext();
+  const { registrationData, updateRegistrationData } = useRegistrationContext();
   const [preferredJobTitle, setPreferredJobTitle] = useState('');
   const [preferredLocation, setPreferredLocation] = useState('');
   const [openForRemote, setOpenForRemote] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
+    // Update registration data in the context
     updateRegistrationData('preferredJobTitle', preferredJobTitle);
     updateRegistrationData('preferredLocation', preferredLocation);
     updateRegistrationData('openForRemote', openForRemote);
-    router.push('/signup/user/complete');
+    
+    // Make API call to register the user
+    try {
+      const response = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registrationData),
+      });
+
+      if (response.ok) {
+        router.push('/signup/user/complete');
+      } else {
+        console.error('Registration failed');
+        // Optionally handle error (show message, log, etc.)
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
 
   return (
