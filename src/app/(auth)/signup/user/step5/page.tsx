@@ -38,7 +38,6 @@ const page = () => {
         router.push('/signup/user/complete');
       } else {
         console.error('Registration failed');
-        // Optionally handle error (show message, log, etc.)
       }
     } catch (error) {
       console.error('An error occurred:', error);

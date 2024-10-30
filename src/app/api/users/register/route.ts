@@ -51,6 +51,7 @@ export async function POST(req: NextRequest) {
 
     // Create a new user
     const user = new User({
+      name:firstName + " " + lastName,
       email,
       password: hashedPassword,
       role,
@@ -67,17 +68,22 @@ export async function POST(req: NextRequest) {
       lastName,
       email,
       phone,
-      location,
-      mostRecentJobTitle,
-      collegeName,
-      collegeStartDate,
-      collegeEndDate,
-      degree,
-      fieldOfStudy,
-      preferredJobTitle,
-      preferredLocation,
-      openForRemote,
+      location: location || '', 
+      mostRecentJobTitle: mostRecentJobTitle || '', 
+      education: [
+        {
+          institution: collegeName,
+          degree,
+          fieldOfStudy,
+          startDate: collegeStartDate,
+          endDate: collegeEndDate,
+        },
+      ],
+      preferredJobTitle: preferredJobTitle || '', 
+      preferredLocation: preferredLocation || '', 
+      openForRemote: openForRemote || false,
     });
+    
 
     // Save the profile to the database
     await profile.save();
