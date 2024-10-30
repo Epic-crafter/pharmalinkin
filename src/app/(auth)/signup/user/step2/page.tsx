@@ -26,7 +26,7 @@ const Page = () => {
   return (
     <Card className="lg:w-[30vw] mx-auto">
       <CardHeader>
-        <h2>Step 2: Personal Information</h2>
+        <h2>Personal Information</h2>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className=" flex flex-col gap-3">

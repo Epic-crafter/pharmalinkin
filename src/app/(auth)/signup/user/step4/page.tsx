@@ -30,7 +30,7 @@ const page = () => {
   return (
     <Card className='lg:w-[30vw] mx-auto'>
       <CardHeader>
-        <h2>Step 4: College Details</h2>
+        <h2>College Details</h2>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className='flex flex-col gap-3'>

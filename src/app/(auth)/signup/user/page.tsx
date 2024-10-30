@@ -24,7 +24,8 @@ const Page = () => {
     <>
     <Card className='lg:w-[30vw] mx-auto'>
       <CardHeader>
-        <h2>Step 1: Contact Information</h2>
+        <h2>Contact Information</h2>
+        
       </CardHeader>
       <CardContent >
         <form onSubmit={handleSubmit}className=' flex flex-col gap-3'>

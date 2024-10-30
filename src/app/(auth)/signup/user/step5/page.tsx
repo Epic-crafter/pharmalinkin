@@ -35,7 +35,7 @@ const page = () => {
       });
 
       if (response.ok) {
-        router.push('/signup/user/complete');
+        router.push('/login');
       } else {
         console.error('Registration failed');
         // Optionally handle error (show message, log, etc.)
@@ -48,7 +48,7 @@ const page = () => {
   return (
     <Card className='lg:w-[30vw] mx-auto'>
       <CardHeader>
-        <h2>Step 5: Job Preferences</h2>
+        <h2>Job Preferences</h2>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
