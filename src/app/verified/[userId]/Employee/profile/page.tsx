@@ -1,16 +1,39 @@
 "use client";
-import { FaImage } from 'react-icons/fa';
-import { useState } from 'react';
+import { FaImage } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { useUser } from "@/lib/contexts/user";
 
 export default function Profile() {
+    const { userId } = useUser();
     const [formData, setFormData] = useState({
-        fullName: 'Jake Gyll',
-        phoneNumber: '+44 1245 572 135',
-        email: 'Jakegyll@gmail.com',
-        dateOfBirth: '1957-09-09',
-        gender: 'male',
-        accountType: 'job-seeker',
+        fullName: '',
+        phoneNumber: '',
+        email: '',
+        dateOfBirth: '',
+        gender: '',
+        accountType: ''
     });
+
+    // Fetch profile data when the component mounts and userId is available
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            if (userId) {
+                try {
+                    const response = await fetch(`/api/user/profile?userId=${userId}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setFormData(data);
+                    } else {
+                        console.error("Failed to fetch profile data");
+                    }
+                } catch (error) {
+                    console.error("Error fetching profile data:", error);
+                }
+            }
+        };
+        
+        fetchProfileData();
+    }, [userId]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -24,7 +47,7 @@ export default function Profile() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, userId }),
             });
 
             if (response.ok) {
