@@ -14,12 +14,17 @@ export default function Profile() {
         accountType: ''
     });
 
-    // Fetch profile data when the component mounts and userId is available
     useEffect(() => {
         const fetchProfileData = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`/api/user/profile?userId=${userId}`);
+                    const response = await fetch('/api/user/profile', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId }),
+                    });
                     if (response.ok) {
                         const data = await response.json();
                         setFormData(data);
@@ -31,7 +36,7 @@ export default function Profile() {
                 }
             }
         };
-        
+
         fetchProfileData();
     }, [userId]);
 
@@ -39,6 +44,7 @@ export default function Profile() {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+    
 
     const handleSaveProfile = async () => {
         try {
