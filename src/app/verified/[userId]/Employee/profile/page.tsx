@@ -2,6 +2,11 @@
 import { FaImage } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useUser } from "@/lib/contexts/user";
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { CardContent } from '@/components/ui/card';
+import { useRegistrationContext } from '@/lib/contexts/user-register-context';
+import { useRouter } from 'next/navigation';
 
 export default function Profile() {
     const { userId } = useUser();
@@ -63,6 +68,28 @@ export default function Profile() {
             }
         } catch (error) {
             console.error('An error occurred while saving the profile:', error);
+        }
+    };
+
+    const { updateRegistrationData } = useRegistrationContext() || {};
+    const [collegeName, setCollegeName] = useState('');
+    const [collegeStartDate, setCollegeStartDate] = useState('');
+    const [collegeEndDate, setCollegeEndDate] = useState('');
+    const [degree, setDegree] = useState('');
+    const [fieldOfStudy, setFieldOfStudy] = useState('');
+    const router = useRouter();
+  
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        if (updateRegistrationData) {
+            updateRegistrationData('collegeName', collegeName);
+            updateRegistrationData('collegeStartDate', collegeStartDate);
+            updateRegistrationData('collegeEndDate', collegeEndDate);
+            updateRegistrationData('degree', degree);
+            updateRegistrationData('fieldOfStudy', fieldOfStudy);
+            router.push('/signup/user/step5');
+        } else {
+            console.error("updateRegistrationData is undefined");
         }
     };
 
@@ -187,7 +214,74 @@ export default function Profile() {
                                 </div>
                             </div>
                             <hr className="border-gray-300 mt-0" />
+                            
+                            <div className="flex justify-between flex-col md:flex-row p-2 m-2">
+                            <div className="bg-white p-2 m-2">
+                                <h2 className="text-lg font-semibold">Education Details</h2>
+                            </div>
+                            <hr className="border-gray-300 mt-0" />
+                            <div className="lg:w-3/5 md:w-3/5 sm:w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block font-medium text-gray-700">College Name</label>
+                                        <input
+                                            type="text"
+                                            id="collegeName"
+                                            value={collegeName}
+                                            onChange={(e) => setCollegeName(e.target.value)}
+                                            required
+                                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
 
+                                    <div>
+                                        <label className="block font-medium text-gray-700">Degree</label>
+                                        <input
+                                            type="text"
+                                            id="degree"
+                                            value={degree}
+                                            onChange={(e) => setDegree(e.target.value)}
+                                            required
+                                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block font-medium text-gray-700">College Start Date</label>
+                                        <input
+                                            type="date"
+                                            id="collegeStartDate"
+                                            value={collegeStartDate}
+                                            onChange={(e) => setCollegeStartDate(e.target.value)}
+                                            required
+                                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block font-medium text-gray-700">College End Date</label>
+                                        <input
+                                            type="date"
+                                            id="collegeEndDate"
+                                            value={collegeEndDate}
+                                            onChange={(e) => setCollegeEndDate(e.target.value)}
+                                            required
+                                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block font-medium text-gray-700">Field of Study</label>
+                                        <input
+                                            type="text"
+                                            id="fieldOfStudy"
+                                            value={fieldOfStudy}
+                                            onChange={(e) => setFieldOfStudy(e.target.value)}
+                                            required
+                                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    </div>
+                            
+                            </div>
                             {/* Save Button */}
                             <div className="flex justify-end p-2 m-2">
                                 <button
