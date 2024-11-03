@@ -23,7 +23,7 @@ export default function Profile() {
         const fetchProfileData = async () => {
             if (userId) {
                 try {
-                    const response = await fetch('/api/user/profile', {
+                    const response = await fetch('/api/users/profile', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function Profile() {
 
     const handleSaveProfile = async () => {
         try {
-            const response = await fetch('/api/user/profile', {
+            const response = await fetch('/api/users/profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
