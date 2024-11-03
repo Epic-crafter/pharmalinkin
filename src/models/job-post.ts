@@ -82,6 +82,11 @@ const jobSchema = new Schema(
       ref: "User",
       required: true,
     },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CompanyProfile",
+      required: true,
+    },
     applicants: [
       {
         type: mongoose.Schema.Types.ObjectId,

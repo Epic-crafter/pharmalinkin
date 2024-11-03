@@ -80,6 +80,7 @@ export async function POST(req: NextRequest) {
       category,
       skillsRequired,
       createdBy: token.id,
+      company:companyProfile.id
     });
 
     // Save the job to the database
