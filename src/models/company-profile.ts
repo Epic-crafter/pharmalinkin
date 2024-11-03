@@ -1,4 +1,3 @@
-import { Verified } from 'lucide-react';
 import mongoose from 'mongoose';
 
 const CompanyProfileSchema = new mongoose.Schema({

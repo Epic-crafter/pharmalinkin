@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     // Fetch jobs from the database, applying pagination
     const jobs = await Job.find(query)
       .populate('createdBy', 'name')
-      .populate('company')
+      //.populate('company')
     //   .skip((page - 1) * limit)
     //   .limit(limit);
 
