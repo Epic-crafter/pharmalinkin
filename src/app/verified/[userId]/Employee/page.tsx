@@ -9,7 +9,7 @@ export default function Page() {
   const [selectedInternship, setSelectedInternship] = useState(null);
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   // Filter state variables
   const [profileFilter, setProfileFilter] = useState("");

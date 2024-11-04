@@ -48,11 +48,11 @@ export async function POST(req: NextRequest) {
         query.country = { $regex: country, $options: "i" };
       }
 
-      if (jobType) {
+      if (jobType.length > 0) {
         query.jobType = jobType;
       }
 
-      if (experienceLevel) {
+      if (experienceLevel.length > 0) {
         query.experienceLevel = experienceLevel;
       }
 
