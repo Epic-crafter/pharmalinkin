@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   firstName: {
@@ -20,24 +20,24 @@ const ProfileSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    default: '',
+    default: "",
   },
   bio: {
     type: String,
-    default: '',
+    default: "",
   },
   location: {
     type: String,
-    default: '',
+    default: "",
   },
   mostRecentJobTitle: {
     type: String,
-    default: '',
+    default: "",
   },
   socialLinks: {
-    linkedin: { type: String, default: '' },
-    github: { type: String, default: '' },
-    twitter: { type: String, default: '' },
+    linkedin: { type: String, default: "" },
+    github: { type: String, default: "" },
+    twitter: { type: String, default: "" },
   },
   skills: {
     type: [String],
@@ -45,6 +45,11 @@ const ProfileSchema = new mongoose.Schema({
   },
   experience: [
     {
+      uniqueId: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: new mongoose.Types.ObjectId(),
+        required: true,
+      },
       company: { type: String, required: true },
       position: { type: String, required: true },
       startDate: { type: Date, required: true },
@@ -54,6 +59,11 @@ const ProfileSchema = new mongoose.Schema({
   ],
   education: [
     {
+      uniqueId: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: new mongoose.Types.ObjectId(),
+        required: true,
+      },
       institution: { type: String, required: true },
       degree: { type: String, required: true },
       fieldOfStudy: { type: String, required: true },
@@ -63,11 +73,11 @@ const ProfileSchema = new mongoose.Schema({
   ],
   preferredJobTitle: {
     type: String,
-    default: '',
+    default: "",
   },
   preferredLocation: {
     type: String,
-    default: '',
+    default: "",
   },
   openForRemote: {
     type: Boolean,
@@ -79,6 +89,7 @@ const ProfileSchema = new mongoose.Schema({
   },
 });
 
-const Profile = mongoose.models.Profile || mongoose.model('Profile', ProfileSchema);
+const Profile =
+  mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
 
 export { Profile };

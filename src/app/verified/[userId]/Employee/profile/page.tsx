@@ -8,14 +8,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Profile() {
     const { userId } = useUser();
-    const [formData, setFormData] = useState({
-        fullName: '',
-        phoneNumber: '',
-        email: '',
-        dateOfBirth: '',
-        gender: '',
-        accountType: ''
-    });
+    const [formData, setFormData] = useState<any>();
     const [educationDetails, setEducationDetails] = useState([
         {
             collegeName: '',
@@ -40,6 +33,7 @@ export default function Profile() {
                     if (response.ok) {
                         const data = await response.json();
                         setFormData(data);
+                        console.log(data)
                     } else {
                         console.error("Failed to fetch profile data");
                     }
@@ -175,7 +169,7 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             name="fullName"
-                                            value={formData.fullName}
+                                            value={formData?.fullName}
                                             onChange={handleChange}
                                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             required
@@ -186,7 +180,7 @@ export default function Profile() {
                                         <input
                                             type="text"
                                             name="phoneNumber"
-                                            value={formData.phoneNumber}
+                                            value={formData?.phoneNumber}
                                             onChange={handleChange}
                                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             required
@@ -197,7 +191,7 @@ export default function Profile() {
                                         <input
                                             type="email"
                                             name="email"
-                                            value={formData.email}
+                                            value={formData?.email}
                                             onChange={handleChange}
                                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             required
@@ -208,7 +202,7 @@ export default function Profile() {
                                         <input
                                             type="date"
                                             name="dateOfBirth"
-                                            value={formData.dateOfBirth}
+                                            value={formData?.dateOfBirth}
                                             onChange={handleChange}
                                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             required
@@ -218,7 +212,7 @@ export default function Profile() {
                                         <label className="block font-medium text-gray-700">Gender</label>
                                         <select
                                             name="gender"
-                                            value={formData.gender}
+                                            value={formData?.gender}
                                             onChange={handleChange}
                                             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             required
