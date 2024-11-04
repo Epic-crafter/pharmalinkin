@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     // Connect to the database
     await connectToDatabase();
-    mongoose.model('CompanyProfile', CompanyProfileSchema);
+    mongoose.models.CompanyProfile || mongoose.model('CompanyProfile', CompanyProfileSchema);
     // Parse the request body
     const body = await req.json().catch(() => ({}));
     
@@ -90,7 +90,6 @@ export async function POST(req: NextRequest) {
     //   .limit(limit);
 
     const totalJobs = await Job.countDocuments(query); // Total count for pagination
- console.log(jobs);
  
     // Send response back to the client
     return NextResponse.json({ success: true, jobs, totalJobs}, { status: 200 });

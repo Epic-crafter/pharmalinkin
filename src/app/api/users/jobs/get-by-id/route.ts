@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongo";
 import { Job } from "@/models/job-post";
+import { CompanyProfileSchema } from "@/models/company-profile";
+import mongoose from "mongoose";
 
 export async function GET(req: NextRequest) {
   try {
     // Connect to the database
     await connectToDatabase();
+    mongoose.models.CompanyProfile || mongoose.model('CompanyProfile', CompanyProfileSchema);
 
     // Extract jobId from query parameters
     const { searchParams } = new URL(req.url);
