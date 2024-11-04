@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 // Job Schema
@@ -80,6 +81,11 @@ const jobSchema = new Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CompanyProfile",
       required: true,
     },
     applicants: [

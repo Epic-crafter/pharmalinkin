@@ -1,7 +1,13 @@
+
 "use client";
 import { FaImage } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useUser } from "@/lib/contexts/user";
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { CardContent } from '@/components/ui/card';
+import { useRegistrationContext } from '@/lib/contexts/user-register-context';
+import { useRouter } from 'next/navigation';
 
 export default function Profile() {
     const { userId } = useUser();
@@ -13,13 +19,27 @@ export default function Profile() {
         gender: '',
         accountType: ''
     });
+    const [educationDetails, setEducationDetails] = useState([
+        {
+            collegeName: '',
+            collegeStartDate: '',
+            collegeEndDate: '',
+            degree: '',
+            fieldOfStudy: ''
+        }
+    ]);
 
-    // Fetch profile data when the component mounts and userId is available
     useEffect(() => {
         const fetchProfileData = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`/api/user/profile?userId=${userId}`);
+                    const response = await fetch('/api/users/profile', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId }),
+                    });
                     if (response.ok) {
                         const data = await response.json();
                         setFormData(data);
@@ -31,7 +51,7 @@ export default function Profile() {
                 }
             }
         };
-        
+
         fetchProfileData();
     }, [userId]);
 
@@ -39,15 +59,15 @@ export default function Profile() {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
+    
     const handleSaveProfile = async () => {
         try {
-            const response = await fetch('/api/user/profile', {
+            const response = await fetch('/api/users/profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...formData, userId }),
+                body: JSON.stringify({ ...formData, userId, educationDetails }),
             });
 
             if (response.ok) {
@@ -57,6 +77,39 @@ export default function Profile() {
             }
         } catch (error) {
             console.error('An error occurred while saving the profile:', error);
+        }
+    };
+
+    const { updateRegistrationData } = useRegistrationContext() || {};
+    const router = useRouter();
+
+    const handleEducationChange = (index: number, field: string, value: string) => {
+        const updatedEducation = educationDetails.map((detail, i) =>
+            i === index ? { ...detail, [field]: value } : detail
+        );
+        setEducationDetails(updatedEducation);
+    };
+
+    const addEducationEntry = () => {
+        setEducationDetails([
+            ...educationDetails,
+            { collegeName: '', collegeStartDate: '', collegeEndDate: '', degree: '', fieldOfStudy: '' }
+        ]);
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (updateRegistrationData) {
+            educationDetails.forEach((education, index) => {
+                updateRegistrationData(`collegeName_${index}`, education.collegeName);
+                updateRegistrationData(`collegeStartDate_${index}`, education.collegeStartDate);
+                updateRegistrationData(`collegeEndDate_${index}`, education.collegeEndDate);
+                updateRegistrationData(`degree_${index}`, education.degree);
+                updateRegistrationData(`fieldOfStudy_${index}`, education.fieldOfStudy);
+            });
+            router.push('/signup/user/step5');
+        } else {
+            console.error("updateRegistrationData is undefined");
         }
     };
 
@@ -181,7 +234,73 @@ export default function Profile() {
                                 </div>
                             </div>
                             <hr className="border-gray-300 mt-0" />
-
+                            <div className="bg-white p-2 m-2">
+                                <h2 className="text-lg font-semibold">Education Details</h2>
+                                {educationDetails.map((education, index) => (
+                                    <div key={index} className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label className="block font-medium text-gray-700">College Name</label>
+                                            <input
+                                                type="text"
+                                                value={education.collegeName}
+                                                onChange={(e) => handleEducationChange(index, 'collegeName', e.target.value)}
+                                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium text-gray-700">Degree</label>
+                                            <input
+                                                type="text"
+                                                value={education.degree}
+                                                onChange={(e) => handleEducationChange(index, 'degree', e.target.value)}
+                                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium text-gray-700">College Start Date</label>
+                                            <input
+                                                type="date"
+                                                value={education.collegeStartDate}
+                                                onChange={(e) => handleEducationChange(index, 'collegeStartDate', e.target.value)}
+                                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium text-gray-700">College End Date</label>
+                                            <input
+                                                type="date"
+                                                value={education.collegeEndDate}
+                                                onChange={(e) => handleEducationChange(index, 'collegeEndDate', e.target.value)}
+                                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block font-medium text-gray-700">Field of Study</label>
+                                            <input
+                                                type="text"
+                                                value={education.fieldOfStudy}
+                                                onChange={(e) => handleEducationChange(index, 'fieldOfStudy', e.target.value)}
+                                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                                                required
+                                            />
+                                        </div>
+                                        {index < educationDetails.length - 1 && (
+                                            <hr className="col-span-2 my-4 border-gray-200" />
+                                        )}
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={addEducationEntry}
+                                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                                >
+                                    Add More
+                                </button>
+                            </div>
                             {/* Save Button */}
                             <div className="flex justify-end p-2 m-2">
                                 <button
@@ -198,4 +317,4 @@ export default function Profile() {
             </div>
         </div>
     );
-}
+}  

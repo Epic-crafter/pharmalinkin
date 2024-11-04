@@ -69,7 +69,7 @@ export default function Page() {
           {loading ? "Loading..." : `${internships.length} Total Jobs`}
         </h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <h3 className="text-center mt-1 mb-6 text-sm">Latest Summer Jobs in India</h3>
+        <h3 className="text-center mt-1 mb-6 text-sm">Latest Jobs in India</h3>
         
         <div className="block lg:hidden mb-4">
           <button className="text-lg font-semibold text-center px-4" onClick={() => setShowFilters(true)}>
