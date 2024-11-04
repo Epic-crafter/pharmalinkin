@@ -3,9 +3,6 @@
 import { FaImage } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useUser } from "@/lib/contexts/user";
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { CardContent } from '@/components/ui/card';
 import { useRegistrationContext } from '@/lib/contexts/user-register-context';
 import { useRouter } from 'next/navigation';
 
