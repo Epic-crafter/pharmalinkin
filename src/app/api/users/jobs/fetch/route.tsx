@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongo";
 import { Job } from "@/models/job-post";
+import mongoose from "mongoose";
+import { CompanyProfileSchema } from "@/models/company-profile";
 
 // POST request handler for fetching jobs with multiple filters
 export async function POST(req: NextRequest) {
   try {
     // Connect to the database
     await connectToDatabase();
-
+    mongoose.models.CompanyProfile || mongoose.model('CompanyProfile', CompanyProfileSchema);
     // Parse the request body
     const body = await req.json().catch(() => ({}));
     
@@ -79,12 +81,16 @@ export async function POST(req: NextRequest) {
     // Fetch jobs from the database, applying pagination
     const jobs = await Job.find(query)
       .populate('createdBy', 'name')
-      //.populate('company')
+      .populate({
+        path: 'company',
+        model: 'CompanyProfile',
+        select: 'companyName industry socialLinks logo location website',
+      })
     //   .skip((page - 1) * limit)
     //   .limit(limit);
 
     const totalJobs = await Job.countDocuments(query); // Total count for pagination
-
+ 
     // Send response back to the client
     return NextResponse.json({ success: true, jobs, totalJobs}, { status: 200 });
   } catch (error) {

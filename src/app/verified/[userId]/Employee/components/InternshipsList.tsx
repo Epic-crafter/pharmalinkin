@@ -3,13 +3,15 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FaCalendar, FaCircle, FaHome, FaRegClock, FaMoneyBill } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const InternshipsList = ({ internships, onSelect }: any) => {
+  const router = useRouter()
   return (
     <div className="space-y-5">
       {/* Display Internships */}
       {internships.map((internship: any, idx: any) => (
-        <Card onClick={() => onSelect(internship)} key={idx} className="p-4 bg-white rounded shadow flex border-none justify-between cursor-pointer">
+        <Card onClick={() => router.push(`Employee/jobs/${internship._id}`)} key={idx} className="p-4 bg-white rounded shadow flex border-none justify-between cursor-pointer">
           <div>
             {/* title, companyname and status */}
             <div className="flex justify-between items-center mb-6 text-sm">
