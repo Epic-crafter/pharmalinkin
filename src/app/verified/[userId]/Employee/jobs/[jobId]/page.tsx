@@ -203,7 +203,7 @@ const page = ({ params }: any) => {
           <div className="flex justify-left mt-4">
             <Dialog open={isDialogOpen} onOpenChange={()=>setIsDialogOpen(!isDialogOpen)}>
               <DialogTrigger asChild>
-                <Button variant="outline">Apply now</Button>
+                <Button>Apply now</Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogTitle className="text-lg font-semibold mb-2">
