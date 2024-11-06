@@ -201,8 +201,8 @@ const page = ({params}: any) => {
       </div>
       {isDialogOpen && 
       
-      <Dialog >
-        <div className="fixed bg-white p-6 rounded-lg shadow-lg max-w-sm w-full absolute z-index-1 top-0">
+      <Dialog open={isDialogOpen} onOpenChange={()=>setIsDialogOpen(!isDialogOpen)}>
+        <div className="">
           <h3 className="text-lg font-semibold mb-2">Confirm Application</h3>
           <p className="text-gray-600 mb-4">Are you sure you want to apply for this job?</p>
           <div className="flex justify-end space-x-3">
