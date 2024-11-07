@@ -55,7 +55,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 p-4 bg-white border-r">
+    <aside className="w-64 p-4 h-[calc(100vh-80px)] bg-white border-r">
       <h2 className="text-xl font-semibold mb-4">Applications</h2>
       <ul className="space-y-1">
         {menuItems.map((item) => (

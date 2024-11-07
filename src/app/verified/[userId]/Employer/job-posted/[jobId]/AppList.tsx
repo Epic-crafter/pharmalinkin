@@ -51,19 +51,19 @@ const applications = [
   },
 ];
 
-export default function ApplicationCard() {
+export default function ApplicationsList() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
-  const [selectedApplications, setSelectedApplications] = useState([]);
+  const [selectedApplications, setSelectedApplications] = useState<any>([]);
 
   // Toggle dropdown for action buttons
-  const toggleDropdown = (id) => {
+  const toggleDropdown = (id:any) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
 
   // Handle checkbox selection for each application
-  const toggleApplicationSelection = (id) => {
+  const toggleApplicationSelection = (id:any) => {
     if (selectedApplications.includes(id)) {
-      setSelectedApplications(selectedApplications.filter((appId) => appId !== id));
+      setSelectedApplications(selectedApplications.filter((appId:any) => appId !== id));
     } else {
       setSelectedApplications([...selectedApplications, id]);
     }
@@ -85,7 +85,7 @@ export default function ApplicationCard() {
         </div> */}
       {/* First part */}
       <div className="border-b-2 shadow-sm p-6">
-        <div className="bg-red-50 shadow-sm shadow-red-300 text-sm text-gray-800 px-4 py-2 rounded-lg mb-4 flex items-start border border-red-200 border-1 shadow gap-2">
+        <div className="bg-red-50 shadow-red-300 text-sm text-gray-800 px-4 py-2 rounded-lg mb-4 flex items-start border border-red-200 border-1 shadow gap-2">
           <FaExclamationTriangle className="text-red-500 text-xl" />
           <div className=" flex justify-between">
             <p><span className="text-red-600">87 new applications are hidden! </span> Upgrade to Premium now to view all and get 10x more applications.</p>

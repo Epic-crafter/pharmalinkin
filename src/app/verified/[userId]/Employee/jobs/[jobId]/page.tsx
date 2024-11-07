@@ -3,6 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import Textarea from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -264,7 +265,7 @@ const page = ({ params }: any) => {
                   <label htmlFor="coverletter" className="text-gray-700 text-sm">
                     Cover Letter
                   </label>
-                  <textarea
+                  <Textarea
                     id="coverletter"
                     rows='4'
                     className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"

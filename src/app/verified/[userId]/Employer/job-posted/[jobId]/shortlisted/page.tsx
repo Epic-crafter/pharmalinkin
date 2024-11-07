@@ -1,6 +1,6 @@
 // pages/index.tsx
 import Sidebar from "../components/Sidebar";
-import ApplicationList from "../components/AppList";
+import ApplicationList from "../AppList";
 import Filters from "../components/Filters";
 
 export default function Home() {
