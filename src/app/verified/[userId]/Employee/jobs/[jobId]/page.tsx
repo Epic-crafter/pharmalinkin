@@ -26,6 +26,7 @@ import {
   FaLinkedin,
   FaTwitterSquare,
   FaRupeeSign,
+  FaUpload,
 } from "react-icons/fa";
 
 const page = ({ params }: any) => {
@@ -36,28 +37,61 @@ const page = ({ params }: any) => {
   console.log("JOB ID-----", jobId);
   const [job, setJob] = useState<any>();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [coverLetter, setCoverLetter] = useState("");
+  const [resumeLink, setResumeLink] = useState("");
+
   useEffect(() => {
     const fetchJobDetails = async () => {
-      const response = await fetch(`/api/users/jobs/get-by-id?jobId=${jobId}`);
-      const data = await response.json();
-      setJob(data.job);
-      console.log("JOB DETAILS------", data.job); // Log data.job directly here
+      try {
+        const response = await fetch(`/api/users/jobs/get-by-id?jobId=${jobId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setJob(data.job);
+        } else {
+          console.error("Failed to fetch job details.");
+        }
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      }
     };
 
     fetchJobDetails();
   }, [jobId]);
 
 
+ 
+  const handleApplicationSubmit = async () => {
+    if (!resumeLink) {
+      alert("Please provide your resume link.");
+      return;
+    }
 
-  const handleDialogConfirm = () => {
-    setIsDialogOpen(false); // Close the dialog before redirecting
-    router.push(`/verified/${userId}/Employee`); // Redirect to the desired route
+    try {
+      const response = await fetch("/api/users/jobs/apply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify({
+          jobId,
+          applicantId: userId,
+          resumeUrl: resumeLink,
+          coverLetter: coverLetter,
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert("Application submitted successfully");
+        router.push(`/verified/${userId}/Employee`);
+      } else {
+        alert(result.message || "Failed to apply");
+      }
+    } catch (error) {
+      console.error("Error applying for job:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
-
-  const handleDialogCancel = () => {
-    setIsDialogOpen(false); // Close the dialog when "Cancel" is clicked
-  };
-
   return (
     <div className=" flex items-center justify-center py-8 lg:py-16">
       <div className="bg-white w-12/12 md:w-[80%] lg:w-[70%] rounded-lg lg:shadow-lg p-6 max-h-full overflow-y-auto">
@@ -99,7 +133,7 @@ const page = ({ params }: any) => {
               ) : (
                 <>
                   <img
-                    src="http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flocation.84937215.png&w=32&q=75" // Ensure this image exists in the public folder
+                    src="http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flocation.84937215.png&w=32&q=75"
                     alt="Location Icon"
                     className="h-4 w-4"
                   />
@@ -201,7 +235,7 @@ const page = ({ params }: any) => {
 
           <hr className="border-gray-300" />
           <div className="flex justify-left mt-4">
-            <Dialog open={isDialogOpen} onOpenChange={()=>setIsDialogOpen(!isDialogOpen)}>
+          <Dialog open={isDialogOpen} onOpenChange={() => setIsDialogOpen(!isDialogOpen)}>
               <DialogTrigger asChild>
                 <Button>Apply now</Button>
               </DialogTrigger>
@@ -210,13 +244,41 @@ const page = ({ params }: any) => {
                   Confirm Application
                 </DialogTitle>
                 <p className="text-gray-600 mb-4">
-                  Are you sure you want to apply for this job?
+                  Are you sure you want to apply for this job? Please provide your resume and cover
+                  letter.
                 </p>
-                <div className="flex justify-end space-x-3">
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                    Yes, Apply
-                  </button>
+
+                <div className="mb-4">
+                  <label htmlFor="resumeLink" className="text-gray-700 text-sm">
+                    Resume Link
+                  </label>
+                  <input
+                    type="url"
+                    id="resumeLink"
+                    value={resumeLink}
+                    onChange={(e) => setResumeLink(e.target.value)}
+                    className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
+                  />
                 </div>
+                <div className="mt-2">
+                  <label htmlFor="coverletter" className="text-gray-700 text-sm">
+                    Cover Letter
+                  </label>
+                  <textarea
+                    id="coverletter"
+                    rows="4"
+                    className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
+                    value={coverLetter}
+                    onChange={(e) => setCoverLetter(e.target.value)}
+                  />
+                </div>
+
+                <Button
+                  // className="mt-4 w-full bg-primary text-white"
+                  onClick={handleApplicationSubmit}
+                >
+                  Submit Application
+                </Button>
               </DialogContent>
             </Dialog>
           </div>
