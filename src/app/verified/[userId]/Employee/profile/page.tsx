@@ -171,39 +171,39 @@ export default function Profile() {
                 </div>
                 <div className="lg:w-3/5 md:w-3/5 sm:w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block font-medium text-gray-900">Full Name</label>
+                    <label className="block font-bold  text-gray-900">Full Name</label>
                     <p className="mt-1">{firstName} {lastName}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Phone Number</label>
+                    <label className="block font-bold text-gray-900">Phone Number</label>
                     <p className="mt-1">{phone || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Email</label>
+                    <label className="block font-bold text-gray-900">Email</label>
                     <p className="mt-1">{email}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Location</label>
+                    <label className="block font-bold text-gray-900">Location</label>
                     <p className="mt-1">{location || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Bio</label>
+                    <label className="block font-bold text-gray-900">Bio</label>
                     <p className="mt-1">{bio || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Most Recent Job Title</label>
+                    <label className="block font-bold text-gray-900">Most Recent Job Title</label>
                     <p className="mt-1">{mostRecentJobTitle || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Preferred Job Title</label>
+                    <label className="block font-bold text-gray-900">Preferred Job Title</label>
                     <p className="mt-1">{preferredJobTitle || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Preferred Location</label>
+                    <label className="block font-bold text-gray-900">Preferred Location</label>
                     <p className="mt-1">{preferredLocation || "Not Provided"}</p>
                   </div>
                   <div>
-                    <label className="block font-medium text-gray-900">Open for Remote</label>
+                    <label className="block font-bold text-gray-900">Open for Remote</label>
                     <p className="mt-1">{openForRemote ? "Yes" : "No"}</p>
                   </div>
                 </div>
@@ -221,25 +221,25 @@ export default function Profile() {
       <div key={index} className="my-6 border-b-2">
         <div className="grid grid-cols-2 gap-4">
           <div className="w-full">
-            <label className="block font-medium text-gray-900">Institution</label>
+            <label className="block font-bold text-gray-900">Institution</label>
             <p className="mt-1">{edu.institution}</p>
           </div>
           <div className="w-full">
-            <label className="block font-medium text-gray-900">Degree</label>
+            <label className="block font-bold text-gray-900">Degree</label>
             <p className="mt-1">{edu.degree}</p>
           </div>
           <div className="w-full">
-            <label className="block font-medium text-gray-900">Field of Study</label>
+            <label className="block font-bold text-gray-900">Field of Study</label>
             <p className="mt-1">{edu.fieldOfStudy}</p>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="w-full">
-            <label className="block font-medium text-gray-900">Start Date</label>
+            <label className="block font-bold text-gray-900">Start Date</label>
             <p className="mt-1">{edu.startDate}</p>
           </div>
           <div className="w-full">
-            <label className="block font-medium text-gray-900">End Date</label>
+            <label className="block font-bold text-gray-900">End Date</label>
             <p className="mt-1">{edu.endDate}</p>
           </div>
         </div>
@@ -319,9 +319,11 @@ export default function Profile() {
                 {showEducationForm ? "Cancel" : "+ Add More Education"}
               </button>
             </div>
-            <div className="flex justify-center pb-4">
-                                <button type="submit" className="mt-4 p-2 bg-blue-500 text-white rounded">Submit</button>
-                            </div>
+            <div className='lg:w-2/3 px-16 mb-4 mr-16 w-full flex justify-end'>
+  <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+    See Preview
+  </button>
+</div>
           </main>
         </div>
       </div>
