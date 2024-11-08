@@ -5,7 +5,7 @@ import Header from './Header'
 // import Header from '../company/dashboard/Header'
 const layout = ({children}:any) => {
   return (
-    <div>
+    <div className='pt-20'>
        <Header />
         {children}   
     </div>

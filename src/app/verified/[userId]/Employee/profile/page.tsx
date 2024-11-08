@@ -133,6 +133,7 @@ export default function Profile() {
             </div>
             <hr className="border-gray-300 mt-0" />
 
+          3.
             <div className="bg-white space-y-8">
               <div className="bg-white p-2 m-2">
                 <h2 className="text-lg font-semibold">Basic Information</h2>

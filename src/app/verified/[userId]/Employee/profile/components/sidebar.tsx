@@ -31,13 +31,10 @@ export function AppSidebar() {
       ]
   return (
     <Sidebar>
-        <SidebarHeader className="p-4">
-        <h1 className="text-lg font-semibold">Pharmalinkin</h1>  
-        </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="pt-24">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
