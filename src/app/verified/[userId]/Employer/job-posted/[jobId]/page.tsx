@@ -4,9 +4,7 @@ import ApplicationsList from './AppList'
 import Filters from './components/Filters'
 
 
-const page = ({params}:any) => {
-  const {jobId} = params;
-  console.log("JOBID_________", jobId);
+const page = () => {
   return (
     <div className="flex space-x-4">
     <div className="flex-grow">

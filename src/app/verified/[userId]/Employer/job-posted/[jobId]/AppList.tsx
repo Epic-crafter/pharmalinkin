@@ -8,7 +8,7 @@ import { useJobContext } from "@/lib/contexts/jobId-context";
 export default function ApplicationsList() {
 const status = "";
   const { jobId } = useJobContext();
-  // console.log("JOB ID------", jobId);
+   console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [selectedApplications, setSelectedApplications] = useState<any>([]);
@@ -148,7 +148,7 @@ const status = "";
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
 
                   <p className="">SKILL(S)</p>
-                  <p className="text-sm">{app.skills.join(", ")}</p>
+                  <p className="text-sm">{app?.skills?.join(", ")}</p>
                 </div>
                 {/* Cover Letter */}
                 <div className="grid  lg:grid-cols-[1fr_3fr] grid-cols-1 items-start">

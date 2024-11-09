@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 // Job Schema
-const jobSchema = new Schema(
+export const jobSchema = new Schema(
   {
     title: {
       type: String,

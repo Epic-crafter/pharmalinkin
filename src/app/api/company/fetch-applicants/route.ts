@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongo";
 import { JobApplication } from "@/models/application";
+import { jobSchema } from "@/models/job-post";
+import mongoose from "mongoose";
 
 export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
+    const Job = mongoose.models.Job || mongoose.model("Job", jobSchema);
 
     const { searchParams } = new URL(req.url);
     const jobId = searchParams.get("jobId");
@@ -25,7 +28,7 @@ export async function GET(req: NextRequest) {
 
     // Find job applications related to the jobId and populate applicant and job details
     const jobApplications = await JobApplication.find(query)
-      .populate("applicant", "name email")
+      .populate("applicant")
       .populate("job", "title");
 
     if (!jobApplications.length) {

@@ -23,11 +23,12 @@ export const DELETE = async (req: NextRequest) => {
     }
 
     await connectToDatabase();
-
+   console.log(educationId);
+   
     // Find the user profile and remove the education entry by educationId
     const profile = await Profile.findOneAndUpdate(
       { user: userId },
-      { $pull: { education: { uniqueId: educationId } } },
+      { $pull: { education: { _id: educationId } } },
       { new: true }
     );
 
@@ -37,7 +38,8 @@ export const DELETE = async (req: NextRequest) => {
         status: false,
       });
     }
-
+ console.log(profile);
+ 
     return NextResponse.json({
       message: "Education entry deleted successfully",
       status: true,

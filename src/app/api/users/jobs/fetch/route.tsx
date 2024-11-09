@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongo";
 import { Job } from "@/models/job-post";
-import mongoose from "mongoose";
 import { CompanyProfileSchema } from "@/models/company-profile";
+import mongoose from "mongoose";
 
 // POST request handler for fetching jobs with multiple filters
 export async function POST(req: NextRequest) {
   try {
     // Connect to the database
     await connectToDatabase();
-    mongoose.models.CompanyProfile || mongoose.model('CompanyProfile', CompanyProfileSchema);
     // Parse the request body
+    mongoose.models.CompanyProfile || mongoose.model('CompanyProfile', CompanyProfileSchema);
+
     const body = await req.json().catch(() => ({}));
     
     // Initialize the query object

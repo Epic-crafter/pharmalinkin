@@ -5,7 +5,7 @@ import { useUser } from "@/lib/contexts/user";
 import { useRouter } from "next/navigation";
 
 interface Education {
-    
+  _id: string;
   institution: string;
   degree: string;
   fieldOfStudy: string;
@@ -43,7 +43,7 @@ export default function Profile() {
   const { userId } = useUser();
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [newEducation, setNewEducation] = useState<Education>({
-    id: "",
+    _id: "",
     institution: "",
     degree: "",
     fieldOfStudy: "",
@@ -52,29 +52,29 @@ export default function Profile() {
   });
   const [showEducationForm, setShowEducationForm] = useState(false); // State to manage form visibility
 
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      if (userId) {
-        try {
-          const response = await fetch("/api/users/profile", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId }),
-          });
-          if (response.ok) {
-            const data = await response.json();
-            setProfileData(data); // Set the profile data from the API
-            console.log("Fetched Profile Data:", data); // Displaying fetched data in console
-          } else {
-            console.error("Failed to fetch profile data");
-          }
-        } catch (error) {
-          console.error("Error fetching profile data:", error);
+  const fetchProfileData = async () => {
+    if (userId) {
+      try {
+        const response = await fetch("/api/users/profile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data); // Set the profile data from the API
+          console.log("Fetched Profile Data:", data); // Displaying fetched data in console
+        } else {
+          console.error("Failed to fetch profile data");
         }
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
       }
-    };
+    }
+  };
+  useEffect(() => {
 
     fetchProfileData();
   }, [userId]);
@@ -100,22 +100,14 @@ export default function Profile() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId, education: newEducation }),
+          body: JSON.stringify({ userId, ...newEducation }),
         });
 
         if (response.ok) {
           const addedEducation = await response.json(); // Assuming the new education item (with ID) is returned
-          setProfileData((prevState) => {
-            if (!prevState) return prevState;
-            return {
-              ...prevState,
-              profile: {
-                ...prevState.profile,
-                education: [...prevState.profile.education, addedEducation],
-              },
-            };
-          });
+          if(addedEducation.status){fetchProfileData()}
           setNewEducation({
+            _id:'',
             institution: "",
             degree: "",
             fieldOfStudy: "",
@@ -133,9 +125,9 @@ export default function Profile() {
   };
 
   const deleteEducation = async (educationId: string) => {
-    // Ensure both userId and educationId are valid
+    
     if (!userId || !educationId) {
-      console.error("User ID and Education ID are required");
+      console.error("User ID and Education ID are required!");
       return;
     }
   
@@ -153,14 +145,14 @@ export default function Profile() {
   
       const data = await response.json();
       if (data.status) {
-        console.log("Education entry deleted successfully:", data);
+        alert("Education entry deleted successfully");
         setProfileData((prevState) => {
           if (!prevState) return prevState;
           return {
             ...prevState,
             profile: {
               ...prevState.profile,
-              education: prevState.profile.education.filter((edu) => edu.id !== educationId),
+              education: prevState.profile.education.filter((edu:any) => edu._id !== educationId),
             },
           };
         });
@@ -277,10 +269,10 @@ export default function Profile() {
 
               <div className="pl-4">
               {education.length > 0 ? (
-education.map((edu, index) => (
+    education.map((edu:any, index) => (
         <div key={edu.id} className="my-6 border-b-2 relative">
       <button
-        onClick={() => deleteEducation(edu.id)}
+        onClick={() => deleteEducation(edu._id)}
         className="absolute top-0 right-0 p-2 text-red-600"
       >
         <FaTrash className="inline-block" />
@@ -343,14 +335,14 @@ education.map((edu, index) => (
                     className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
                   />
                   <input
-                    type="text"
+                    type="date"
                     value={newEducation.startDate}
                     onChange={(e) => handleInputChange(e, "startDate")}
                     placeholder="Start Date"
                     className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
                   />
                   <input
-                    type="text"
+                    type="date"
                     value={newEducation.endDate}
                     onChange={(e) => handleInputChange(e, "endDate")}
                     placeholder="End Date"

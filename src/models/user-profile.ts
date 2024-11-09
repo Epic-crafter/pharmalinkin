@@ -45,11 +45,6 @@ const ProfileSchema = new mongoose.Schema({
   },
   experience: [
     {
-      uniqueId: {
-        type: mongoose.Schema.Types.ObjectId,
-        default: new mongoose.Types.ObjectId(),
-        required: true,
-      },
       company: { type: String, required: true },
       position: { type: String, required: true },
       startDate: { type: Date, required: true },
@@ -59,11 +54,6 @@ const ProfileSchema = new mongoose.Schema({
   ],
   education: [
     {
-      uniqueId: {
-        type: mongoose.Schema.Types.ObjectId,
-        default: new mongoose.Types.ObjectId(),
-        required: true,
-      },
       institution: { type: String, required: true },
       degree: { type: String, required: true },
       fieldOfStudy: { type: String, required: true },
