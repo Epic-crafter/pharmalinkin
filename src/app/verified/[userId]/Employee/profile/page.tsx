@@ -1,10 +1,11 @@
 "use client";
-import { FaImage } from "react-icons/fa";
+import { FaImage, FaTrash } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useUser } from "@/lib/contexts/user";
 import { useRouter } from "next/navigation";
 
 interface Education {
+    
   institution: string;
   degree: string;
   fieldOfStudy: string;
@@ -42,6 +43,7 @@ export default function Profile() {
   const { userId } = useUser();
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [newEducation, setNewEducation] = useState<Education>({
+    id: "",
     institution: "",
     degree: "",
     fieldOfStudy: "",
@@ -84,7 +86,7 @@ export default function Profile() {
     });
   };
 
-  const handleAddEducation = () => {
+  const handleAddEducation = async () => {
     if (
       newEducation.institution &&
       newEducation.degree &&
@@ -92,29 +94,86 @@ export default function Profile() {
       newEducation.startDate &&
       newEducation.endDate
     ) {
-      setProfileData((prevState) => {
-        if (!prevState) return prevState;
-        return {
-          ...prevState,
-          profile: {
-            ...prevState.profile,
-            education: [...prevState.profile.education, newEducation],
+      try {
+        const response = await fetch("/api/users/profile/add-education", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        };
-      });
-      setNewEducation({
-        institution: "",
-        degree: "",
-        fieldOfStudy: "",
-        startDate: "",
-        endDate: "",
-      });
-      setShowEducationForm(false); // Hide the form after adding education
+          body: JSON.stringify({ userId, education: newEducation }),
+        });
+
+        if (response.ok) {
+          const addedEducation = await response.json(); // Assuming the new education item (with ID) is returned
+          setProfileData((prevState) => {
+            if (!prevState) return prevState;
+            return {
+              ...prevState,
+              profile: {
+                ...prevState.profile,
+                education: [...prevState.profile.education, addedEducation],
+              },
+            };
+          });
+          setNewEducation({
+            institution: "",
+            degree: "",
+            fieldOfStudy: "",
+            startDate: "",
+            endDate: "",
+          });
+          setShowEducationForm(false);
+        } else {
+          console.error("Failed to add education");
+        }
+      } catch (error) {
+        console.error("Error adding education:", error);
+      }
     }
   };
 
+  const deleteEducation = async (educationId: string) => {
+    // Ensure both userId and educationId are valid
+    if (!userId || !educationId) {
+      console.error("User ID and Education ID are required");
+      return;
+    }
+  
+    try {
+      const response = await fetch("/api/users/profile/delete-education", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId, // Ensure userId is passed here
+          educationId, // Ensure educationId is passed here
+        }),
+      });
+  
+      const data = await response.json();
+      if (data.status) {
+        console.log("Education entry deleted successfully:", data);
+        setProfileData((prevState) => {
+          if (!prevState) return prevState;
+          return {
+            ...prevState,
+            profile: {
+              ...prevState.profile,
+              education: prevState.profile.education.filter((edu) => edu.id !== educationId),
+            },
+          };
+        });
+      } else {
+        console.error("Failed to delete education entry:", data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
   if (!profileData) {
-    return <div>Loading...</div>; // Show loading state if profileData is not yet available
+    return <div>Loading...</div>;
   }
 
   const { user, firstName, lastName, email, phone, bio, location, mostRecentJobTitle, preferredJobTitle, preferredLocation, openForRemote, education, socialLinks } = profileData.profile;
@@ -217,107 +276,99 @@ export default function Profile() {
               <hr className="border-gray-300 mt-0" />
 
               <div className="pl-4">
-  {education.length > 0 ? (
-    education.map((edu: Education, index: number) => (
-      <div key={index} className="my-6 border-b-2">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="w-full">
-            <label className="block font-bold text-gray-900">Institution</label>
-            <p className="mt-1">{edu.institution}</p>
-          </div>
-          <div className="w-full">
-            <label className="block font-bold text-gray-900">Degree</label>
-            <p className="mt-1">{edu.degree}</p>
-          </div>
-          <div className="w-full">
-            <label className="block font-bold text-gray-900">Field of Study</label>
-            <p className="mt-1">{edu.fieldOfStudy}</p>
-          </div>
+              {education.length > 0 ? (
+education.map((edu, index) => (
+        <div key={edu.id} className="my-6 border-b-2 relative">
+      <button
+        onClick={() => deleteEducation(edu.id)}
+        className="absolute top-0 right-0 p-2 text-red-600"
+      >
+        <FaTrash className="inline-block" />
+      </button>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="w-full">
+          <label className="block font-bold text-gray-900">Institution</label>
+          <p className="mt-1">{edu.institution}</p>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="w-full">
-            <label className="block font-bold text-gray-900">Start Date</label>
-            <p className="mt-1">{edu.startDate}</p>
-          </div>
-          <div className="w-full">
-            <label className="block font-bold text-gray-900">End Date</label>
-            <p className="mt-1">{edu.endDate}</p>
-          </div>
+        <div className="w-full">
+          <label className="block font-bold text-gray-900">Degree</label>
+          <p className="mt-1">{edu.degree}</p>
         </div>
       </div>
-    ))
-  ) : (
-    <p>No educational details available.</p>
-  )}
-</div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="w-full">
+          <label className="block font-bold text-gray-900">Field of Study</label>
+          <p className="mt-1">{edu.fieldOfStudy}</p>
+        </div>
+        <div className="w-full">
+          <label className="block font-bold text-gray-900">Start Date</label>
+          <p className="mt-1">{edu.startDate}</p>
+        </div>
+        <div className="w-full">
+          <label className="block font-bold text-gray-900">End Date</label>
+          <p className="mt-1">{edu.endDate}</p>
+        </div>
+      </div>
+    </div>
+  ))
+) : (
+  <p>No education information available.</p>
+)}
 
+              </div>
 
-              {/* Show Add Education Form */}
               {showEducationForm && (
-                <div className="border-2 border-dashed p-4 my-6">
-                  <h3 className="text-lg font-semibold">Add New Education</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block font-medium text-gray-900">Institution</label>
-                      <input
-                        type="text"
-                        value={newEducation.institution}
-                        onChange={(e) => handleInputChange(e, "institution")}
-                        className="w-full border-2 p-2 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-gray-900">Degree</label>
-                      <input
-                        type="text"
-                        value={newEducation.degree}
-                        onChange={(e) => handleInputChange(e, "degree")}
-                        className="w-full border-2 p-2 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-gray-900">Field of Study</label>
-                      <input
-                        type="text"
-                        value={newEducation.fieldOfStudy}
-                        onChange={(e) => handleInputChange(e, "fieldOfStudy")}
-                        className="w-full border-2 p-2 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-gray-900">Start Date</label>
-                      <input
-                        type="date"
-                        value={newEducation.startDate}
-                        onChange={(e) => handleInputChange(e, "startDate")}
-                        className="w-full border-2 p-2 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-medium text-gray-900">End Date</label>
-                      <input
-                        type="date"
-                        value={newEducation.endDate}
-                        onChange={(e) => handleInputChange(e, "endDate")}
-                        className="w-full border-2 p-2 rounded-lg"
-                      />
-                    </div>
-                    <button
-                      onClick={handleAddEducation}
-                      className="bg-blue-600 text-white p-2 rounded-lg mt-4"
-                    >
-                      Add Education
-                    </button>
-                  </div>
+                <div className="border-2 p-4 mt-8">
+                  <h3 className="text-lg font-semibold">Add Education</h3>
+                  <input
+                    type="text"
+                    value={newEducation.institution}
+                    onChange={(e) => handleInputChange(e, "institution")}
+                    placeholder="Institution"
+                    className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    value={newEducation.degree}
+                    onChange={(e) => handleInputChange(e, "degree")}
+                    placeholder="Degree"
+                    className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    value={newEducation.fieldOfStudy}
+                    onChange={(e) => handleInputChange(e, "fieldOfStudy")}
+                    placeholder="Field of Study"
+                    className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    value={newEducation.startDate}
+                    onChange={(e) => handleInputChange(e, "startDate")}
+                    placeholder="Start Date"
+                    className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
+                  />
+                  <input
+                    type="text"
+                    value={newEducation.endDate}
+                    onChange={(e) => handleInputChange(e, "endDate")}
+                    placeholder="End Date"
+                    className="w-full p-2 mt-2 mb-4 border border-gray-300 rounded"
+                  />
+                  <button
+                    className="bg-blue-600 text-white py-2 px-4 rounded mt-4"
+                    onClick={handleAddEducation}
+                  >
+                    Add Education
+                  </button>
                 </div>
               )}
-
-              {/* Add Education Button */}
               <button
-                onClick={() => setShowEducationForm(!showEducationForm)}
                 className="text-blue-600  pl-4 border-blue-600 pb-2 font-semibold mt-6"
+                onClick={() => setShowEducationForm(!showEducationForm)}
               >
-                {showEducationForm ? "Cancel" : "+ Add More Education"}
+                {showEducationForm ? "Cancel" : "Add Education"}
               </button>
             </div>
             <div className='lg:w-2/3 px-16 mb-4 mr-16 w-full flex justify-end'>
