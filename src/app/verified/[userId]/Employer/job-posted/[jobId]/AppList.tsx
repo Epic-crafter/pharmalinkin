@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaUserCheck } from "react-icons/fa";
+import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaLinkedin, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaTwitter, FaUserCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi"
 import { useJobContext } from "@/lib/contexts/jobId-context";
 
 
 export default function ApplicationsList() {
-const status = "";
+  const status = "";
   const { jobId } = useJobContext();
-   console.log("JOB ID1------", jobId);
+  console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [selectedApplications, setSelectedApplications] = useState<any>([]);
@@ -30,19 +30,19 @@ const status = "";
   // Handle select all applications
   const selectAll = () => {
     if (selectedApplications.length === applicants.length) {
-      setSelectedApplications([]); 
+      setSelectedApplications([]);
     } else {
-      setSelectedApplications(applicants.map((app:any,index:any) => app.id)); 
+      setSelectedApplications(applicants.map((app: any, index: any) => app.id));
     }
   };
   const fetchApplicants = async () => {
     try {
-    
+
       const response = await fetch(`/api/company/fetch-applicants?jobId=${jobId}&status=${status}`);
       const data = await response.json();
-
       if (data.success) {
         setApplicants(data.applicants);
+        console.log("Applicants List-------", data.applicants)
       } else {
         console.error("Error fetching applicants:", data.message);
       }
@@ -89,14 +89,14 @@ const status = "";
       </div>
       {/* second part */}
       <div className="mt-2 text-sm  p-6">
-        {applicants.map((app: any) => (
-          <div key={app.id} className="border border-gray-200 shadow-sm  rounded-xl mb-4 space-y-4">
-            <div className={`${app?.match === "Very Good match" && " bg-gradient-to-r from-green-300 via-blue-100  to-white"} w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
+        {applicants.map((app: any, index: any) => (
+          <div key={app?._id} className="border border-gray-200 shadow-sm  rounded-xl mb-4 space-y-4">
+            <div className={` w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
               <div className={` flex gap-4 items-center `}>
-                <button className={`${app?.match === "Very Good match" ? "bg-teal-500" : "bg-primary"} text-white flex px-2 py-1 gap-2 rounded-full items-center `}><FaRegClock /> {app?.match} </button>
+                <button className={`bg-red-200 border-2 text-red-500 border-red-400 flex px-2 py-1 gap-2 rounded-lg items-center `}><FaRegClock /> {app?.status} </button>
                 <p className="text-primary">Know more</p>
               </div>
-              <div className=" text-gray-500">Applied 9 days ago</div>
+              <div className=" text-gray-500">Applied on {app?.appliedDate}</div>
 
             </div>
             <div className="flex items-start justify-start p-4 ">
@@ -112,8 +112,10 @@ const status = "";
                 <div className="flex justify-between items-start pb-4">
                   <div className="flex items-center">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">{app?.name}</h3>
-                      <p className=" text-sm flex items-center font-medium">{app?.location} &nbsp; <FaCircle style={{ fontSize: "5px" }} /> &nbsp; Total work experience : 1 year 5 months&nbsp;<FiInfo className="text-primary  " /></p>
+                      <h3 className="text-lg font-semibold text-gray-700">{app?.aplicantProfile.firstName} {app?.aplicantProfile.lastName}</h3>
+                      <p >{app?.aplicantProfile.location} </p>
+                      <p >{app?.aplicantProfile.bio} </p>
+                      {/* <p className=" text-sm flex items-center font-medium">Total work experience : &nbsp;<FiInfo className="text-primary  " /></p> */}
                     </div>
                   </div>
                 </div>
@@ -121,23 +123,18 @@ const status = "";
                 {/* Experience Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">EXPERIENCE </p>
-                  <p className="text-sm font-semibold">{app?.experience}</p>
+                  <p className="text-sm font-semibold">{app?.aplicantProfile.experience}</p>
                 </div>
                 {/* Education Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">EDUCATION</p>
-                  <p className="text-sm font-semibold">{app?.education} <br />
-                    {app?.institute}</p>
+                  <p className="text-sm font-semibold">{app?.aplicantProfile.education}</p>
                 </div>
                 {/* Portfolio */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">PORTFOLIO / WORK SAMPLES</p>
                   <p className="flex gap-4">
-
-                    <a href={app.portfolio} className="text-blue-500 ">
-                      <FaGithub />
-                    </a>
-                    <a href={app.portfolio} className="text-blue-500">
+                    <a href={app?.resumeUrl} className="text-blue-500 ">
                       <FaLink />
                     </a>
 
@@ -148,7 +145,7 @@ const status = "";
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
 
                   <p className="">SKILL(S)</p>
-                  <p className="text-sm">{app?.skills?.join(", ")}</p>
+                  <p className="text-sm">{app?.aplicantProfile.skills.join(", ")}</p>
                 </div>
                 {/* Cover Letter */}
                 <div className="grid  lg:grid-cols-[1fr_3fr] grid-cols-1 items-start">
@@ -160,16 +157,53 @@ const status = "";
                   <p className="flex items-center gap-1"><span>AVAILABILITY </span><span><FiInfo className="text-gray-500 text-xs" /></span> </p>
                   <p className="text-sm">{app.availability}</p>
                 </div>
+                {/* Previous Job Position */}
+                <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
+                  <p className="flex items-center gap-1"><span>PREVIOUS JOB POSITION </span> </p>
+                  <p className="text-sm">{app.aplicantProfile.mostRecentJobTitle}</p>
+                </div>
+                {/* Preferred Jobs */}
+                <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
+                  <p className="flex items-center gap-1"><span>PREFERRED JOB </span><span><FiInfo className="text-gray-500 text-xs" /></span> </p>
+                  <p className="text-sm">{app.aplicantProfile.preferredJobTitle}, {app.aplicantProfile.preferredLocation}</p>
+                </div>
+                {/* social links */}
+                <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
+                  <p className="">SOCIAL LINKS</p>
+                  <p className="flex gap-4">
 
+                    <a href={app.aplicantProfile.socialLinks.github} className="text-blue-500 ">
+                      <FaGithub />
+                    </a>
+
+                    <a href={app.aplicantProfile.socialLinks.linkedin} className="text-blue-500">
+                      <FaLinkedin />
+                    </a>
+                    <a href={app.aplicantProfile.socialLinks.twitter} className="text-blue-500">
+                      <FaTwitter />
+                    </a>
+                  </p>
+
+                </div>
+                {/* email */}
+                <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
+                  <p className="flex items-center gap-1"><span>EMAIL</span> </p>
+                  <a href={app?.applicant.email}>{app?.applicant.email}</a>
+                </div>
+                {/* Phone no. */}
+                <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
+                  <p className="flex items-center gap-1"><span>PHONE</span> </p>
+                  <a href={`tel:${app?.aplicantProfile.phone}}`}>{app?.aplicantProfile.phone}</a>
+                </div>
                 {/* Action Buttons */}
                 <div className="flex justify-between items-center text-sm font-semibold ">
                   <div className="mt-4 flex gap-4 items-center">
                     <p className="text-primary ">
                       View full application
                     </p>
-                    <p className="text-primary flex gap-1 items-center">
+                    {/* <p className="text-primary flex gap-1 items-center">
                       <FaRegFile /> Add notes
-                    </p>
+                    </p> */}
                   </div>
                   {/* not interesed and next step buttons */}
                   <div className="flex items-center gap-2 ">
