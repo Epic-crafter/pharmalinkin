@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
 
     // Find job applications related to the jobId and populate applicant and job details
     const jobApplications = await JobApplication.find(query)
-      .populate("applicant")
+      .populate("applicant").populate("aplicantProfile")
       .populate("job", "title");
 
     if (!jobApplications.length) {

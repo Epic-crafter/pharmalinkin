@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/mongo";
 import { Job } from "@/models/job-post";
 import { JobApplication } from "@/models/application";
 import { User } from "@/models/user";
+import { Profile } from "@/models/user-profile";
 
 export async function POST(req: NextRequest) {
   try {
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
-
+    
     // Check if the applicant has already applied
     const alreadyApplied = await JobApplication.findOne({
       job: jobId,
@@ -40,9 +41,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const aplicantProfile = await Profile.findOne({user:applicantId});
+
     // Create a new job application
     const jobApplication = new JobApplication({
       applicant: applicantId,
+      aplicantProfile:aplicantProfile.id,
       job: jobId,
       resumeUrl,
       coverLetter,

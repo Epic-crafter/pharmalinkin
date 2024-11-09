@@ -8,6 +8,11 @@ const jobApplicationSchema = new Schema(
       ref: "User",
       required: true,
     },
+    aplicantProfile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Profile",
+      required: true,
+    },
     job: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Job",
