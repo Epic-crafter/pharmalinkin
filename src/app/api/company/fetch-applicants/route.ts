@@ -3,11 +3,13 @@ import { connectToDatabase } from "@/lib/mongo";
 import { JobApplication } from "@/models/application";
 import { jobSchema } from "@/models/job-post";
 import mongoose from "mongoose";
+import { ProfileSchema } from "@/models/user-profile";
 
 export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
-    const Job = mongoose.models.Job || mongoose.model("Job", jobSchema);
+    mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
+    mongoose.models.Job || mongoose.model("Job", jobSchema);
 
     const { searchParams } = new URL(req.url);
     const jobId = searchParams.get("jobId");
