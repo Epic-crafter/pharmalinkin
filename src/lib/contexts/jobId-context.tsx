@@ -1,4 +1,5 @@
 // context/JobContext.tsx
+"use client";
 import React, { createContext, useContext, ReactNode } from "react";
 
 type JobContextType = {

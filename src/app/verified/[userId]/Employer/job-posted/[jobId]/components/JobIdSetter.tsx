@@ -11,3 +11,4 @@ const JobSetter = ({ jobId }: { jobId: string }) => {
   
     return null; 
   };
+  export default JobSetter;

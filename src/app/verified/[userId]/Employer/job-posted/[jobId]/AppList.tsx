@@ -1,69 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaUserCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi"
+import { useJobContext } from "@/lib/contexts/jobId-context";
 
-// Dummy data
-const applications = [
-  {
-    id: 1,
-    name: "Ravi Dubey",
-    location: "Panipat (Open to relocate)",
-    experience: "Machine Learning at AICTE LAB PIET KUK • Jul'23 - Sep'23 • 2 months (Internship)",
-    education: "B.Tech, Computer Science & Engineering (2021 - 2025)",
-    institute: "PANIPAT INSTITUTE OF ENGINEERING AND TECHNOLOGY",
-    portfolio: "https://portfolio-link.com",
-    skills: ["CSS", "Flutter", "HTML", "Java", "Python"],
-    coverLetter:
-      "You should hire me because I bring a combination of skills, experience, and a strong sense of responsibility. I am passionate about solving problems using technology and have a keen sense of when to deliver work in demanding environments.",
-    availability: "Yes, I am available to join immediately.",
-    match: "Very Good match"
-  },
-  {
-    id: 2,
-    name: "Neha",
-    location: "Mumbai",
-    experience: "Frontend Developer Intern at XYZ Corp • Jun'23 - Aug'23 • 3 months (Internship)",
-    education: "B.Sc. in Information Technology (2020 - 2024)",
-    institute: "UNIVERSITY OF MUMBAI",
-    portfolio: "https://portfolio-neha.com",
-    skills: ["React.js", "Tailwind CSS", "JavaScript", "HTML", "Node.js"],
-    coverLetter:
-      "I have experience building responsive web applications using modern front-end technologies. I am eager to contribute and grow in a dynamic team, and I can bring a blend of creativity and technical expertise.",
-    availability: "I can start from November 2024.",
-    match: "Good match"
-
-  },
-  {
-    id: 3,
-    name: "Rahul",
-    location: "Delhi",
-    experience: "Mobile App Developer Intern at ABC Tech • May'23 - Jul'23 • 2 months (Internship)",
-    education: "B.Tech, Information Technology (2021 - 2025)",
-    institute: "INDIAN INSTITUTE OF TECHNOLOGY, DELHI",
-    portfolio: "https://rahul-app-dev.com",
-    skills: ["Kotlin", "Swift", "React Native", "CSS", "HTML"],
-    coverLetter:
-      "With hands-on experience in mobile app development, I have built and deployed several applications on both Android and iOS platforms. I am excited to bring my skills and learning mindset to your team.",
-    availability: "Available to start immediately.",
-    match: "Very Good match"
-
-  },
-];
 
 export default function ApplicationsList() {
+const status = "";
+  const { jobId } = useJobContext();
+  // console.log("JOB ID------", jobId);
+  const [applicants, setApplicants] = useState<any>([]);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [selectedApplications, setSelectedApplications] = useState<any>([]);
 
   // Toggle dropdown for action buttons
-  const toggleDropdown = (id:any) => {
+  const toggleDropdown = (id: any) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
   };
 
   // Handle checkbox selection for each application
-  const toggleApplicationSelection = (id:any) => {
+  const toggleApplicationSelection = (id: any) => {
     if (selectedApplications.includes(id)) {
-      setSelectedApplications(selectedApplications.filter((appId:any) => appId !== id));
+      setSelectedApplications(selectedApplications.filter((appId: any) => appId !== id));
     } else {
       setSelectedApplications([...selectedApplications, id]);
     }
@@ -71,12 +29,33 @@ export default function ApplicationsList() {
 
   // Handle select all applications
   const selectAll = () => {
-    if (selectedApplications.length === applications.length) {
-      setSelectedApplications([]); // Unselect all if already selected
+    if (selectedApplications.length === applicants.length) {
+      setSelectedApplications([]); 
     } else {
-      setSelectedApplications(applications.map((app) => app.id)); // Select all
+      setSelectedApplications(applicants.map((app:any,index:any) => app.id)); 
     }
   };
+  const fetchApplicants = async () => {
+    try {
+    
+      const response = await fetch(`/api/company/fetch-applicants?jobId=${jobId}&status=${status}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setApplicants(data.applicants);
+      } else {
+        console.error("Error fetching applicants:", data.message);
+      }
+    } catch (error) {
+      console.error("Failed to fetch applicants:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (jobId) {
+      fetchApplicants();
+    }
+  }, [jobId]);
 
   return (
     <div className="text-gray-600 border-r border-gray-200">
@@ -94,7 +73,7 @@ export default function ApplicationsList() {
 
         </div>
         <div className="font-semibold  mb-4 py-2">
-          Showing {applications.length} results out of {applications.length} applications
+          Showing {applicants.length} results out of {applicants.length} applications
         </div>
 
         {/* Select All checkbox */}
@@ -102,7 +81,7 @@ export default function ApplicationsList() {
           <input
             type="checkbox"
             className="mr-2"
-            checked={selectedApplications.length === applications.length}
+            checked={selectedApplications.length === applicants.length}
             onChange={selectAll}
           />
           <label className="">Select All</label>
@@ -110,11 +89,11 @@ export default function ApplicationsList() {
       </div>
       {/* second part */}
       <div className="mt-2 text-sm  p-6">
-        {applications.map((app) => (
+        {applicants.map((app: any) => (
           <div key={app.id} className="border border-gray-200 shadow-sm  rounded-xl mb-4 space-y-4">
-            <div className={`${app.match === "Very Good match" && " bg-gradient-to-r from-green-300 via-blue-100  to-white"} w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
+            <div className={`${app?.match === "Very Good match" && " bg-gradient-to-r from-green-300 via-blue-100  to-white"} w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
               <div className={` flex gap-4 items-center `}>
-                <button className={`${app.match === "Very Good match" ? "bg-teal-500" : "bg-primary"} text-white flex px-2 py-1 gap-2 rounded-full items-center `}><FaRegClock /> {app.match} </button>
+                <button className={`${app?.match === "Very Good match" ? "bg-teal-500" : "bg-primary"} text-white flex px-2 py-1 gap-2 rounded-full items-center `}><FaRegClock /> {app?.match} </button>
                 <p className="text-primary">Know more</p>
               </div>
               <div className=" text-gray-500">Applied 9 days ago</div>
@@ -125,16 +104,16 @@ export default function ApplicationsList() {
               <input
                 type="checkbox"
                 className="mr-4 mt-2"
-                checked={selectedApplications.includes(app.id)}
-                onChange={() => toggleApplicationSelection(app.id)}
+                checked={selectedApplications.includes(app?.id)}
+                onChange={() => toggleApplicationSelection(app?.id)}
               />
               {/* All Information */}
               <div className="space-y-6 ">
                 <div className="flex justify-between items-start pb-4">
                   <div className="flex items-center">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">{app.name}</h3>
-                      <p className=" text-sm flex items-center font-medium">{app.location} &nbsp; <FaCircle style={{ fontSize: "5px" }} /> &nbsp; Total work experience : 1 year 5 months&nbsp;<FiInfo className="text-primary  " /></p>
+                      <h3 className="text-lg font-semibold text-gray-700">{app?.name}</h3>
+                      <p className=" text-sm flex items-center font-medium">{app?.location} &nbsp; <FaCircle style={{ fontSize: "5px" }} /> &nbsp; Total work experience : 1 year 5 months&nbsp;<FiInfo className="text-primary  " /></p>
                     </div>
                   </div>
                 </div>
@@ -142,13 +121,13 @@ export default function ApplicationsList() {
                 {/* Experience Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">EXPERIENCE </p>
-                  <p className="text-sm font-semibold">{app.experience}</p>
+                  <p className="text-sm font-semibold">{app?.experience}</p>
                 </div>
                 {/* Education Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">EDUCATION</p>
-                  <p className="text-sm font-semibold">{app.education} <br />
-                    {app.institute}</p>
+                  <p className="text-sm font-semibold">{app?.education} <br />
+                    {app?.institute}</p>
                 </div>
                 {/* Portfolio */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">

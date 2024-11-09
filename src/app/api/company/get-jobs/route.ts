@@ -21,7 +21,8 @@ export async function GET(req: NextRequest) {
     await connectToDatabase();
 
     // Fetch jobs that the user has posted using the user ID from the token
-    const jobs = await Job.find({ createdBy: token.id }).populate("company");
+    const jobs = await Job.find({ createdBy: token.id })
+    // .populate("company");
 
     // If no jobs are found, return a message
     if (!jobs || jobs.length === 0) {
