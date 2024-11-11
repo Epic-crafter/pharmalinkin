@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaLinkedin, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaTwitter, FaUserCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi"
 import { useJobContext } from "@/lib/contexts/jobId-context";
+import { formatRelativeTime } from "@/lib/formatRelativeTime";
 
 
-export default function ApplicationsList() {
-  const status = "";
+export default function ApplicationsList({params}:any) {
+  const [status,setStatus]=useState("");
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
@@ -35,6 +36,33 @@ export default function ApplicationsList() {
       setSelectedApplications(applicants.map((app: any, index: any) => app.id));
     }
   };
+
+  const fetchStatus = async (applicationId:any,status:any) => {
+    try {
+      const res = await fetch(`/api/users/jobs/update-status`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          applicationId , 
+          status, 
+        }),
+      });
+  
+      if (!res.ok) {
+        throw new Error(`Failed to update status: ${res.status}`);
+      }
+  
+      const newData = await res.json();
+      console.log("STATUS----------", newData);
+      setStatus(newData.updatedApplication.status);
+    } catch (error) {
+      console.error("Error fetching applicants:", error);
+    }
+  };
+  
+
   const fetchApplicants = async () => {
     try {
 
@@ -54,6 +82,7 @@ export default function ApplicationsList() {
   useEffect(() => {
     if (jobId) {
       fetchApplicants();
+      
     }
   }, [jobId]);
 
@@ -93,10 +122,10 @@ export default function ApplicationsList() {
           <div key={app?._id} className="border border-gray-200 shadow-sm  rounded-xl mb-4 space-y-4">
             <div className={` w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
               <div className={` flex gap-4 items-center `}>
-                <button className={`bg-red-200 border-2 text-red-500 border-red-400 flex px-2 py-1 gap-2 rounded-lg items-center `}><FaRegClock /> {app?.status} </button>
+                <button onClick={()=>fetchStatus(app._id,app.status)} className={`bg-red-200 border-2 text-red-500 border-red-400 flex px-2 py-1 gap-2 rounded-lg items-center `}><FaRegClock /> {app?.status} </button>
                 <p className="text-primary">Know more</p>
               </div>
-              <div className=" text-gray-500">Applied on {app?.appliedDate}</div>
+              <div className=" text-gray-500">Applied {formatRelativeTime(app?.appliedDate)}</div>
 
             </div>
             <div className="flex items-start justify-start p-4 ">
@@ -123,7 +152,14 @@ export default function ApplicationsList() {
                 {/* Experience Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
                   <p className="">EXPERIENCE </p>
-                  <p className="text-sm font-semibold">{app?.aplicantProfile.experience}</p>
+                   <p className="text-sm ">{app?.aplicantProfile.experience.map((exp:any,index:any)=>(
+                    <div key={index}>
+                      <p className="font-bold">{exp.position}</p>
+                      <p>{exp.company}</p>
+                      <p>{exp.description}</p>
+                      <p className="flex items-center gap-2"><FaCircle style={{fontSize:"5px"}} /> {exp.startDate} - {exp.endDate}</p>
+                    </div>
+                  ))}</p> 
                 </div>
                 {/* Education Section */}
                 <div className=" grid  lg:grid-cols-[1fr_3fr] grid-cols-1">
