@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaLinkedin, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaTwitter, FaUserCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi"
 import { useJobContext } from "@/lib/contexts/jobId-context";
+import { formatRelativeTime } from "@/lib/formatRelativeTime";
 
 
 export default function ApplicationsList({params}:any) {
@@ -124,7 +125,7 @@ export default function ApplicationsList({params}:any) {
                 <button onClick={()=>fetchStatus(app._id,app.status)} className={`bg-red-200 border-2 text-red-500 border-red-400 flex px-2 py-1 gap-2 rounded-lg items-center `}><FaRegClock /> {app?.status} </button>
                 <p className="text-primary">Know more</p>
               </div>
-              <div className=" text-gray-500">Applied on {app?.appliedDate}</div>
+              <div className=" text-gray-500">Applied {formatRelativeTime(app?.appliedDate)}</div>
 
             </div>
             <div className="flex items-start justify-start p-4 ">
