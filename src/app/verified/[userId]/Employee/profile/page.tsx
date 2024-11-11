@@ -13,6 +13,16 @@ interface Education {
   endDate: string;
 }
 
+interface Experience {
+  uniqueId: string;
+  title: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  description?: string;
+  position: string;
+}
+
 interface ProfileData {
   profile: {
     user: {
@@ -31,6 +41,7 @@ interface ProfileData {
     preferredLocation: string;
     openForRemote: boolean;
     education: Education[];
+    experience: Experience[];
     socialLinks: {
       linkedin: string;
       github: string;
@@ -50,7 +61,17 @@ export default function Profile() {
     startDate: "",
     endDate: "",
   });
-  const [showEducationForm, setShowEducationForm] = useState(false); // State to manage form visibility
+  const [showEducationForm, setShowEducationForm] = useState(false);
+  const [newExperience, setNewExperience] = useState<Experience>({
+    uniqueId: "",
+    title: "",
+    position: "", 
+  company: "",
+  startDate: "",
+  endDate: "",
+  description: "",
+  });
+  const [showExperienceForm, setShowExperienceForm] = useState(false);
 
   const fetchProfileData = async () => {
     if (userId) {
@@ -64,8 +85,8 @@ export default function Profile() {
         });
         if (response.ok) {
           const data = await response.json();
-          setProfileData(data); // Set the profile data from the API
-          console.log("Fetched Profile Data:", data); // Displaying fetched data in console
+          setProfileData(data);
+          console.log("Fetched Profile Data:", data);
         } else {
           console.error("Failed to fetch profile data");
         }
@@ -75,16 +96,20 @@ export default function Profile() {
     }
   };
   useEffect(() => {
-
     fetchProfileData();
   }, [userId]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    setNewEducation({
-      ...newEducation,
-      [field]: e.target.value,
-    });
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,  // Handle both input and textarea
+    field: string
+  ) => {
+    const { value } = e.target;
+    setNewExperience((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
+  
 
   const handleAddEducation = async () => {
     if (
@@ -104,10 +129,10 @@ export default function Profile() {
         });
 
         if (response.ok) {
-          const addedEducation = await response.json(); // Assuming the new education item (with ID) is returned
-          if(addedEducation.status){fetchProfileData()}
+          const addedEducation = await response.json();
+          if (addedEducation.status) fetchProfileData();
           setNewEducation({
-            _id:'',
+            _id: "",
             institution: "",
             degree: "",
             fieldOfStudy: "",
@@ -125,24 +150,20 @@ export default function Profile() {
   };
 
   const deleteEducation = async (educationId: string) => {
-    
     if (!userId || !educationId) {
       console.error("User ID and Education ID are required!");
       return;
     }
-  
+
     try {
       const response = await fetch("/api/users/profile/delete-education", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          userId, // Ensure userId is passed here
-          educationId, // Ensure educationId is passed here
-        }),
+        body: JSON.stringify({ userId, educationId }),
       });
-  
+
       const data = await response.json();
       if (data.status) {
         alert("Education entry deleted successfully");
@@ -152,7 +173,7 @@ export default function Profile() {
             ...prevState,
             profile: {
               ...prevState.profile,
-              education: prevState.profile.education.filter((edu:any) => edu._id !== educationId),
+              education: prevState.profile.education.filter((edu: any) => edu._id !== educationId),
             },
           };
         });
@@ -163,12 +184,88 @@ export default function Profile() {
       console.error("Error:", error);
     }
   };
-  
+
+  const handleExperienceInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+    setNewExperience({
+      ...newExperience,
+      [field]: e.target.value,
+    });
+  };
+
+  const handleAddExperience = async () => {
+    if (newExperience.title && newExperience.company && newExperience.startDate && newExperience.endDate) {
+      try {
+        const response = await fetch("/api/users/profile/add-experience", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, ...newExperience }),
+        });
+
+        if (response.ok) {
+          const addedExperience = await response.json();
+          if (addedExperience.status) fetchProfileData();
+          setNewExperience({
+            uniqueId: "",
+            title: "",
+            position: "",  
+  company: "",
+  startDate: "",
+  endDate: "",
+  description: "",
+          });
+          setShowExperienceForm(false);
+        } else {
+          console.error("Failed to add experience");
+        }
+      } catch (error) {
+        console.error("Error adding experience:", error);
+      }
+    }
+  };
+
+  const deleteExperience = async (experienceId: string) => {
+    if (!userId || !experienceId) {
+      console.error("User ID and Experience ID are required!");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/users/profile/delete-experience", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, experienceId }),
+      });
+
+      const data = await response.json();
+      if (data.status) {
+        alert("Experience entry deleted successfully");
+        setProfileData((prevState) => {
+          if (!prevState) return prevState;
+          return {
+            ...prevState,
+            profile: {
+              ...prevState.profile,
+              experience: prevState.profile.experience.filter((exp: any) => exp.uniqueId !== experienceId),
+            },
+          };
+        });
+      } else {
+        console.error("Failed to delete experience entry:", data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   if (!profileData) {
     return <div>Loading...</div>;
   }
 
-  const { user, firstName, lastName, email, phone, bio, location, mostRecentJobTitle, preferredJobTitle, preferredLocation, openForRemote, education, socialLinks } = profileData.profile;
+  const { user, firstName, lastName, email, phone, bio, location, mostRecentJobTitle, preferredJobTitle, preferredLocation, openForRemote, education, experience, socialLinks } = profileData.profile;
 
   return (
     <div>
@@ -183,8 +280,6 @@ export default function Profile() {
               <button className="text-gray-500 pb-2 hover:text-blue-600">Notifications</button>
             </div>
             <hr className="border-gray-300 mt-0" />
-
-          3.
             <div className="bg-white space-y-8">
               <div className="bg-white p-2 m-2">
                 <h2 className="text-lg font-semibold">Basic Information</h2>
@@ -261,12 +356,10 @@ export default function Profile() {
                 </div>
               </div>
               <hr className="border-gray-300 mt-0" />
-
               <div className="p-2 m-2">
                 <h2 className="text-lg font-semibold">Educational Details</h2>
               </div>
               <hr className="border-gray-300 mt-0" />
-
               <div className="pl-4">
               {education.length > 0 ? (
     education.map((edu:any, index) => (
@@ -360,14 +453,130 @@ export default function Profile() {
                 className="text-blue-600  pl-4 border-blue-600 pb-2 font-semibold mt-6"
                 onClick={() => setShowEducationForm(!showEducationForm)}
               >
-                {showEducationForm ? "Cancel" : "Add Education"}
+                {showEducationForm ? "Cancel" : "+ Add Education"}
               </button>
             </div>
+           
+
+<div className="bg-white space-y-8">
+              {/* Experience Details Section */}
+              <div className="p-2 m-2">
+                <h2 className="text-lg font-semibold">Experience Details</h2>
+              </div>
+              <hr className="border-gray-300 mt-0" />
+              <div className="pl-4">
+                {experience.length > 0 ? (
+                  experience.map((exp: any) => (
+                    <div key={exp.uniqueId} className="my-6 border-b-2 relative">
+                      <button
+                        onClick={() => deleteExperience(exp.uniqueId)}
+                        className="absolute top-0 right-0 p-2 text-red-600"
+                      >
+                        <FaTrash className="inline-block" />
+                      </button>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="w-full">
+                          <label className="block font-bold text-gray-900">Company</label>
+                          <p className="mt-1">{exp.company}</p>
+                        </div>
+                        <div className="w-full">
+                          <label className="block font-bold text-gray-900">Position</label>
+                          <p className="mt-1">{exp.position}</p>
+                        </div>
+                        <div className="w-full">
+                          <label className="block font-bold text-gray-900">Start Date</label>
+                          <p className="mt-1">{exp.startDate}</p>
+                        </div>
+                        <div className="w-full">
+                          <label className="block font-bold text-gray-900">End Date</label>
+                          <p className="mt-1">{exp.endDate || "Present"}</p>
+                        </div>
+                        <div className="w-full">
+                          <label className="block font-bold text-gray-900">Description</label>
+                          <p className="mt-1">{exp.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No experience details available.</p>
+                )}
+              </div>
+              
+              {/* Toggle Add Experience Form */}
+              <button
+                className="text-blue-600  pl-4 border-blue-600 pb-2 font-semibold mt-6"
+                onClick={() => setShowExperienceForm(!showExperienceForm)}
+              >
+                {showExperienceForm ? "Close" : "+ Add Experience"}
+              </button>
+
+              {/* Add Experience Form */}
+              {showExperienceForm && (
+                <div className="mt-4 p-4 border border-gray-300 rounded-lg">
+                  <div>
+                    <label className="block text-gray-700 font-bold">Company</label>
+                    <input
+                      type="text"
+                      value={newExperience.company}
+                      onChange={(e) => handleInputChange(e, "company")}
+                      className="w-full p-2 border rounded-lg mt-1"
+                      placeholder="Company Name"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <label className="block text-gray-700 font-bold">Position</label>
+                    <input
+                      type="text"
+                      value={newExperience.position}
+                      onChange={(e) => handleInputChange(e, "position")}
+                      className="w-full p-2 border rounded-lg mt-1"
+                      placeholder="Position"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <label className="block text-gray-700 font-bold">Start Date</label>
+                    <input
+                      type="date"
+                      value={newExperience.startDate}
+                      onChange={(e) => handleInputChange(e, "startDate")}
+                      className="w-full p-2 border rounded-lg mt-1"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <label className="block text-gray-700 font-bold">End Date</label>
+                    <input
+                      type="date"
+                      value={newExperience.endDate || ""}
+                      onChange={(e) => handleInputChange(e, "endDate")}
+                      className="w-full p-2 border rounded-lg mt-1"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <label className="block text-gray-700 font-bold">Description</label>
+                    <textarea
+                      value={newExperience.description}
+                      onChange={(e) => handleInputChange(e, "description")}
+                      className="w-full p-2 border rounded-lg mt-1"
+                      placeholder="Describe your role and responsibilities"
+                    />
+                  </div>
+                  <button
+                    onClick={handleAddExperience}
+                    className="bg-blue-600 text-white py-2 px-4 rounded mt-4"
+                  >
+                    Add Experience
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div className='lg:w-2/3 px-16 mb-4 mr-16 w-full flex justify-end'>
   <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
     See Preview
   </button>
 </div>
+
           </main>
         </div>
       </div>
