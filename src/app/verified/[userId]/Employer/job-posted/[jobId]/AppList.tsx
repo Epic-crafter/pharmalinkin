@@ -243,7 +243,7 @@ export default function ApplicationsList({params}:any) {
                   </div>
                   {/* not interesed and next step buttons */}
                   <div className="flex items-center gap-2 ">
-                    <button className="bg-red-100 text-red-500  rounded-md py-2 px-4">Not Interested</button>
+                    <button onClick={() => fetchStatus(app._id, "REJECTED")} className="bg-red-100 text-red-500  rounded-md py-2 px-4">Not Interested</button>
                     {/* Dropdown Button */}
                     <button
                       onClick={() => toggleDropdown(app.id)}
