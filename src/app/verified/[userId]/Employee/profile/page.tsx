@@ -100,7 +100,7 @@ export default function Profile() {
   }, [userId]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,  // Handle both input and textarea
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     field: string
   ) => {
     const { value } = e.target;
@@ -109,6 +109,7 @@ export default function Profile() {
       [field]: value,
     }));
   };
+  
   
 
   const handleAddEducation = async () => {
@@ -230,7 +231,7 @@ export default function Profile() {
       console.error("User ID and Experience ID are required!");
       return;
     }
-
+  
     try {
       const response = await fetch("/api/users/profile/delete-experience", {
         method: "DELETE",
@@ -239,8 +240,20 @@ export default function Profile() {
         },
         body: JSON.stringify({ userId, experienceId }),
       });
-
+  
+      // Check if the response is successful
+      if (!response.ok) {
+        if (response.status === 404) {
+          console.error("API endpoint not found (404). Please check the URL.");
+        } else {
+          console.error(`Failed with status ${response.status}: ${response.statusText}`);
+        }
+        return;
+      }
+  
       const data = await response.json();
+  
+      // Check if the response has a status property indicating success
       if (data.status) {
         alert("Experience entry deleted successfully");
         setProfileData((prevState) => {
@@ -249,7 +262,7 @@ export default function Profile() {
             ...prevState,
             profile: {
               ...prevState.profile,
-              experience: prevState.profile.experience.filter((exp: any) => exp.uniqueId !== experienceId),
+              experience: prevState.profile.experience.filter((exp: any) => exp._id !== experienceId),
             },
           };
         });
@@ -260,6 +273,7 @@ export default function Profile() {
       console.error("Error:", error);
     }
   };
+  
 
   if (!profileData) {
     return <div>Loading...</div>;
@@ -469,7 +483,7 @@ export default function Profile() {
                   experience.map((exp: any) => (
                     <div key={exp.uniqueId} className="my-6 border-b-2 relative">
                       <button
-                        onClick={() => deleteExperience(exp.uniqueId)}
+                        onClick={() => deleteExperience(exp._id)}
                         className="absolute top-0 right-0 p-2 text-red-600"
                       >
                         <FaTrash className="inline-block" />
