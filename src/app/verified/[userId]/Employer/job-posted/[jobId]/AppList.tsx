@@ -4,6 +4,7 @@ import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaLinkedin, FaRegCal
 import { FiInfo } from "react-icons/fi"
 import { useJobContext } from "@/lib/contexts/jobId-context";
 import { formatRelativeTime } from "@/lib/formatRelativeTime";
+import { Button } from "@/components/ui/button";
 
 
 export default function ApplicationsList({params}:any) {
@@ -243,7 +244,7 @@ export default function ApplicationsList({params}:any) {
                   </div>
                   {/* not interesed and next step buttons */}
                   <div className="flex items-center gap-2 ">
-                    <button onClick={() => fetchStatus(app._id, "REJECTED")} className="bg-red-100 text-red-500  rounded-md py-2 px-4">Not Interested</button>
+                    <Button onClick={() => fetchStatus(app._id, "REJECTED")} className="bg-red-100 text-red-500  rounded-md py-2 px-4">Not Interested</Button>
                     {/* Dropdown Button */}
                     <button
                       onClick={() => toggleDropdown(app.id)}

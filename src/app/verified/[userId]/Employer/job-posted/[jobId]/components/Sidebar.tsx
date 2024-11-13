@@ -5,47 +5,39 @@ import { useRouter } from "next/navigation"; // Importing the useRouter hook
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useUser } from "@/lib/contexts/user";
+import { useJobContext } from "@/lib/contexts/jobId-context";
 
 const Sidebar = () => {
   const router = useRouter();
   const [selected, setSelected] = useState("Applications received");
   const { userId, userRole } = useUser();
+  const { jobId } = useJobContext();
   const menuItems = [
     {
       name: "Applications received",
       count: 98,
-      path: `/verified/${userId}/${userRole}/job-posted/`,
+      path: `/verified/${userId}/${userRole}/job-posted/${jobId}`,
     },
     {
       name: "Shortlisted",
       count: 4,
-      path: `/verified/${userId}/${userRole}/job-posted/shortlisted`,
+      path: `/verified/${userId}/${userRole}/job-posted/${jobId}/shortlisted`,
     },
     {
       name: "Hired",
       count: 1,
-      path: `/verified/${userId}/${userRole}/job-posted/hired`,
+      path: `/verified/${userId}/${userRole}/job-posted/${jobId}/hired`,
     },
     {
       name: "Not interested",
       count: 4,
-      path: `/verified/${userId}/${userRole}/job-posted/not-interested `,
-    },
-    {
-      name: "Assignments",
-      count: 0,
-      path: `/verified/${userId}/${userRole}/job-posted/assignments`,
+      path: `/verified/${userId}/${userRole}/job-posted/${jobId}/not-interested `,
     },
     {
       name: "Interviews",
       count: 0,
-      path: `/verified/${userId}/${userRole}/job-posted/interviews`,
-    },
-    {
-      name: "Chat messages",
-      count: 0,
-      path: `/verified/${userId}/${userRole}/job-posted/chat-messages`,
-    },
+      path: `/verified/${userId}/${userRole}/job-posted/${jobId}/interviews`,
+    }
   ];
 
   // Explicitly define types for path and name
