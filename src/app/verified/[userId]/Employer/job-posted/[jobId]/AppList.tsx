@@ -7,11 +7,12 @@ import { formatRelativeTime } from "@/lib/formatRelativeTime";
 import { Button } from "@/components/ui/button";
 
 
-export default function ApplicationsList({params}:any) {
-  const [status,setStatus]=useState("");
+
+export default function ApplicationsList({applicants,setApplicants,status,setStatus}:any) {
+
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
-  const [applicants, setApplicants] = useState<any>([]);
+  // const [applicants, setApplicants] = useState<any>([]);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [selectedApplications, setSelectedApplications] = useState<any>([]);
 
@@ -64,28 +65,7 @@ export default function ApplicationsList({params}:any) {
   };
   
 
-  const fetchApplicants = async () => {
-    try {
-
-      const response = await fetch(`/api/company/fetch-applicants?jobId=${jobId}&status=${status}`);
-      const data = await response.json();
-      if (data.success) {
-        setApplicants(data.applicants);
-        console.log("Applicants List-------", data.applicants)
-      } else {
-        console.error("Error fetching applicants:", data.message);
-      }
-    } catch (error) {
-      console.error("Failed to fetch applicants:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (jobId) {
-      fetchApplicants();
-      
-    }
-  }, [jobId]);
+ 
 
   return (
     <div className="text-gray-600 border-r border-gray-200">
@@ -242,9 +222,12 @@ export default function ApplicationsList({params}:any) {
                       <FaRegFile /> Add notes
                     </p> */}
                   </div>
-                  {/* not interesed and next step buttons */}
+                  {/* not interesed,shortlisted and next step buttons */}
                   <div className="flex items-center gap-2 ">
                     <Button onClick={() => fetchStatus(app._id, "REJECTED")} className="bg-red-100 text-red-500  rounded-md py-2 px-4">Not Interested</Button>
+                    {/* shortlisted */}
+                    <Button onClick={() => fetchStatus(app._id, "SHORTLISTED")} className="bg-blue-100 text-blue-500  rounded-md py-2 px-4">Shortlist</Button>
+                    
                     {/* Dropdown Button */}
                     <button
                       onClick={() => toggleDropdown(app.id)}
