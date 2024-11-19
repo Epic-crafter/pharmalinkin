@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Filters from "./components/Filters";
 import InternshipsList from "./components/InternshipsList";
 import Card from "./components/Card";
+import Carousel from "./components/Carousel";
 
 export default function Page() {
   const [showFilters, setShowFilters] = useState(false);
@@ -78,8 +79,9 @@ export default function Page() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-3 mx-auto">
-        <div className="lg:w-1/4 p-2">
+        <div className="lg:w-1/4 p-2 space-y-6">
             <Card/>
+            <Carousel/>
           </div>
           <div className={`lg:w-2/4 w-full p-2 mx-auto ${showFilters ? "hidden lg:block" : "block"}`}>
             <InternshipsList internships={internships} onSelect={handleSelectInternship} />
