@@ -5,7 +5,7 @@ import Filters from "../components/Filters";
 import { useEffect, useState } from "react";
 import { useJobContext } from "@/lib/contexts/jobId-context";
 
-export default function Home() {
+export default function Page() {
   const [status,setStatus]=useState("");
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);

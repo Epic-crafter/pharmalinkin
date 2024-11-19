@@ -15,22 +15,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-
 const jobTypes = [
-  "FULL_TIME",
-  "PART_TIME",
-  "CONTRACT",
-  "FREELANCE",
-  "INTERNSHIP",
-  "TEMPORARY",
+  { name: "Full Time", value: "FULL_TIME" },
+  { name: "Part Time", value: "PART_TIME" },
+  { name: "Contract", value: "CONTRACT" },
+  { name: "Freelance", value: "FREELANCE" },
+  { name: "Internship", value: "INTERNSHIP" },
+  { name: "Temporary", value: "TEMPORARY" },
 ];
+
 const experienceLevels = [
-  "ENTRY_LEVEL",
-  "MID_LEVEL",
-  "SENIOR_LEVEL",
-  "EXECUTIVE",
+  { name: "Entry Level", value: "ENTRY_LEVEL" },
+  { name: "Mid Level", value: "MID_LEVEL" },
+  { name: "Senior Level", value: "SENIOR_LEVEL" },
+  { name: "Executive", value: "EXECUTIVE" },
 ];
-const industries = ["IT", "Finance", "Healthcare", "Education", "Construction"];
+
+const industries = [
+  { name: "IT", value: "IT" },
+  { name: "Finance", value: "FINANCE" },
+  { name: "Healthcare", value: "HEALTHCARE" },
+  { name: "Education", value: "EDUCATION" },
+  { name: "Construction", value: "CONSTRUCTION" },
+];
 
 export default function JobForm() {
   const [formData, setFormData] = useState({
@@ -162,8 +169,8 @@ export default function JobForm() {
               <SelectContent id={"jobtitle"}>
                 <SelectGroup>
                   <SelectLabel>Jobs</SelectLabel>
-                  {jobTypes.map((type) => (
-                    <SelectItem value={type}>{type}</SelectItem>
+                  {jobTypes.map((data) => (
+                    <SelectItem key={data.value} value={data.value}>{data.name}</SelectItem>
                   ))}
                 </SelectGroup>
               </SelectContent>
@@ -180,8 +187,8 @@ export default function JobForm() {
               <SelectContent id={"experienceLevels"}>
                 <SelectGroup>
                   <SelectLabel>Experience Level</SelectLabel>
-                  {experienceLevels.map((type) => (
-                    <SelectItem value={type}>{type}</SelectItem>
+                  {experienceLevels.map((data) => (
+                    <SelectItem key={data.value} value={data.value}>{data.name}</SelectItem>
                   ))}
                 </SelectGroup>
               </SelectContent>
@@ -199,8 +206,8 @@ export default function JobForm() {
               <SelectContent id={"category"}>
                 <SelectGroup>
                   <SelectLabel>Category</SelectLabel>
-                  {industries.map((type) => (
-                    <SelectItem value={type}>{type}</SelectItem>
+                  {industries.map((data) => (
+                    <SelectItem key={data.value} value={data.value}>{data.value}</SelectItem>
                   ))}
                 </SelectGroup>
               </SelectContent>

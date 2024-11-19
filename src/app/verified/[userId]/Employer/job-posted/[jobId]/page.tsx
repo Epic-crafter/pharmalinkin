@@ -5,10 +5,9 @@ import Filters from './components/Filters'
 import { useJobContext } from '@/lib/contexts/jobId-context';
 
 
-const page = () => {
+const Page = () => {
   const [status,setStatus]=useState("");
   const { jobId } = useJobContext();
-  console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
   const fetchApplicants = async () => {
     try {
@@ -44,4 +43,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

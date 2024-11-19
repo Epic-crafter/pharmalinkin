@@ -22,7 +22,7 @@ const InternshipsList = ({ internships, onSelect }: any) => {
                 <div className="flex gap-3">
                   <p className="text-md text-gray-600">{internship.companyName}</p>
                   {internship.status && (
-                    <Badge className="text-xs font-medium text-blue-400 border-blue-400 bg-transparent">{internship.status}</Badge>
+                    <Badge className="text-xs font-medium">{internship.status}</Badge>
                   )}
                 </div>
               </div>

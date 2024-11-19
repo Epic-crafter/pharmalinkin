@@ -227,13 +227,13 @@ export default function JobPostingForm({params}:any) {
                 <p className="text-sm">
                   I verify that I am an authorized representative of this
                   organization and have the right to act on its behalf in the
-                  creation and management of this page.
+                  creation and management of this Page.
                 </p>
               </div>
             </div>
 
             <Button disabled={!accepted} type="submit" className="mt-6 w-full">
-              Create page
+              Create Page
             </Button>
           </form>
         </div>

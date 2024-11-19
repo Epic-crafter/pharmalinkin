@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Filters from "./components/Filters";
 import InternshipsList from "./components/InternshipsList";
-import InternshipDetails from "./InternshipDetails";
 
 export default function Page() {
   const [showFilters, setShowFilters] = useState(false);
@@ -98,8 +97,6 @@ export default function Page() {
             />
           </div>
         </div>
-
-        {selectedInternship && <InternshipDetails internship={selectedInternship} onClose={closeModal} />}
       </div>
     </div>
   );

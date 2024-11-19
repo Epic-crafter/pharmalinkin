@@ -90,7 +90,7 @@ export default function CompanyProfile() {
               <div className="flex justify-between gap-4 flex-col md:flex-row items-start md:items-center md:justify-between p-2 m-2">
                 <div className="lg:w-1/5 md:w-2/5 sm:w-full">
                   <h2 className="text-lg font-semibold">Company Logo</h2>
-                  <p className="text-gray-500">This image will be shown as your company's logo.</p>
+                  <p className="text-gray-500">This image will be shown as your company&apos;s logo.</p>
                 </div>
                 <div className="lg:w-3/5 md:w-3/5 sm:w-full sm:justify-center md:justify-center flex gap-10 flex-row items-center">
                   <div className="w-40 h-40 rounded-full flex items-center">

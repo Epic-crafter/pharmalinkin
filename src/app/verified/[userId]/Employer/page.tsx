@@ -1,18 +1,14 @@
-// import Dashboard from '@/app/(new)/[userId]/company/components/page'
+// import Dashboard from '@/app/(new)/[userId]/company/components/Page'
 import React from 'react'
-import Dashboard from './dashboard/page';
 import SignUp from './sign-up/index'
-const page = () => {
+const Page = () => {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      <Dashboard/>
-      {/* <Job/> */}
-      {/* <Shortlist/> */}
-      <SignUp/>
+     <h2>Go to dashboard</h2>
 
     </div>
   )
 }
 
-export default page
+export default Page

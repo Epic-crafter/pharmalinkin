@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ApplicationsList from '../AppList'
 import { useJobContext } from '@/lib/contexts/jobId-context';
 
-const page = () => {
+const Page = () => {
   const [status,setStatus]=useState("");
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
@@ -35,4 +35,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

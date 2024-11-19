@@ -30,7 +30,7 @@ import {
   FaUpload,
 } from "react-icons/fa";
 
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const router = useRouter();
   console.log(params);
   const { jobId } = params;
@@ -267,7 +267,7 @@ const page = ({ params }: any) => {
                   </label>
                   <Textarea
                     id="coverletter"
-                    rows='4'
+                    rows={4}
                     className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
                     value={coverLetter}
                     onChange={(e) => setCoverLetter(e.target.value)}
@@ -289,4 +289,4 @@ const page = ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;

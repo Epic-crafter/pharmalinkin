@@ -1,4 +1,4 @@
-// app/register/step2/page.tsx
+// app/register/step2/Page.tsx
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
