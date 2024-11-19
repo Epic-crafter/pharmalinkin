@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Filters from "./components/Filters";
 import InternshipsList from "./components/InternshipsList";
+import Card from "./components/Card";
 
 export default function Page() {
   const [showFilters, setShowFilters] = useState(false);
@@ -21,7 +22,7 @@ export default function Page() {
   const [salaryRange, setSalaryRange] = useState([0, 9000000]); // Minimum and maximum salary range
 
   const handleSelectInternship = (internship:any) => setSelectedInternship(internship);
-  const closeModal = () => setSelectedInternship(null);
+
 
   // Fetch internships from the backend with filters
   const fetchInternships = async () => {
@@ -63,7 +64,7 @@ export default function Page() {
 
   return (
     <div style={{ backgroundColor: "#f8f8f8" }}>
-      <div className="lg:w-3/4 lg:mx-auto pt-4">
+      <div className="lg:w-[90%] lg:mx-auto pt-4">
         <h2 className="pt-6 m-auto text-center font-bold text-xl" style={{ color: "#008bdc" }}>
           {loading ? "Loading..." : `${internships.length} Total Jobs`}
         </h2>
@@ -76,12 +77,15 @@ export default function Page() {
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-5 mx-auto">
-          <div className={`lg:w-2/3 w-full p-2 mx-auto ${showFilters ? "hidden lg:block" : "block"}`}>
+        <div className="flex flex-col lg:flex-row gap-3 mx-auto">
+        <div className="lg:w-1/4 p-2">
+            <Card/>
+          </div>
+          <div className={`lg:w-2/4 w-full p-2 mx-auto ${showFilters ? "hidden lg:block" : "block"}`}>
             <InternshipsList internships={internships} onSelect={handleSelectInternship} />
           </div>
 
-          <div className={`lg:w-1/3 lg:block p-2 ${showFilters ? "block" : "block"}`}>
+          <div className={`lg:w-1/4 lg:block p-2 ${showFilters ? "block" : "block"}`}>
             <Filters
               showFilters={showFilters}
               setShowFilters={setShowFilters}
@@ -96,8 +100,10 @@ export default function Page() {
               salaryRange={salaryRange}
             />
           </div>
+          
         </div>
-      </div>
+
+          </div>
     </div>
   );
 }
