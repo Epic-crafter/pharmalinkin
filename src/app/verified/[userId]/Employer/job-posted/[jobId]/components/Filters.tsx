@@ -10,7 +10,7 @@ function Filters() {
       <h3 className="text-lg font-semibold mb-4">Filters</h3>
       
       <div className="mb-4 text-sm ">
-        <label className=" font-medium text-gray-700 flex items-center gap-1">Applicants' locations <FaRegQuestionCircle className='text-xs'/></label>
+        <label className=" font-medium text-gray-700 flex items-center gap-1">Applicants&apos; locations <FaRegQuestionCircle className='text-xs'/></label>
         <input
           type="text"
           placeholder="e.g. Mumbai"

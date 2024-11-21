@@ -272,6 +272,7 @@ const Page = ({ params }: any) => {
                   </label>
                   <Textarea
                     id="coverletter"
+                    rows={4}
                     className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
                     value={coverLetter}
                     onChange={(e) => setCoverLetter(e.target.value)}

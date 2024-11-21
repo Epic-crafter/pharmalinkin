@@ -13,10 +13,10 @@ import {
 import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const [jobs, setJobs] = useState<any>([]);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 const router = useRouter();
   // Function to fetch jobs posted by the user
   const fetchJobs = async () => {
@@ -111,4 +111,4 @@ const router = useRouter();
   );
 };
 
-export default page;
+export default Page;

@@ -1,4 +1,4 @@
-// app/register/step3/page.tsx
+// app/register/step3/Page.tsx
 "use client";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import Switch from '@/components/ui/switch';
 
-const page = () => {
+const Page = () => {
   const { registrationData, updateRegistrationData } = useRegistrationContext();
   const [preferredJobTitle, setPreferredJobTitle] = useState('');
   const [preferredLocation, setPreferredLocation] = useState('');
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

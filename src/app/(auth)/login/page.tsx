@@ -76,7 +76,7 @@ const Login: React.FC = () => {
       } else if (result?.ok) {
         // Handle login success
         alert("Login successful!");
-        // You can redirect to a protected page or perform further actions here
+        // You can redirect to a protected Page or perform further actions here
          window.location.href = "/verified"; // Example redirect
       }
     } catch (error) {

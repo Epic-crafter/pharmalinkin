@@ -11,7 +11,6 @@ interface SocialLinks {
 }
 
 interface CompanyProfileData {
-  profile: {
     user: {
       name: string;
       email: string;
@@ -28,7 +27,6 @@ interface CompanyProfileData {
     verified: boolean;
     createdAt: string;
     socialLinks: SocialLinks;
-  };
 }
 
 export default function CompanyProfile() {
@@ -38,7 +36,7 @@ export default function CompanyProfile() {
   const fetchCompanyData = async () => {
     if (userId) {
       try {
-        const response = await fetch("/api/companies/profile", {
+        const response = await fetch("/api/company/get-profile", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +45,9 @@ export default function CompanyProfile() {
         });
         if (response.ok) {
           const data = await response.json();
-          setCompanyData(data);
+          console.log(data[0]);
+          
+          setCompanyData(data[0]);
           console.log("Fetched Company Data:", data);
         } else {
           console.error("Failed to fetch company data");
@@ -66,7 +66,7 @@ export default function CompanyProfile() {
     return <div>Loading...</div>;
   }
 
-  const { user, companyName, industry, location, website, about, type, foundedYear, companySize, logo, verified, createdAt, socialLinks } = companyData.profile;
+  const {companyName, industry, location, website, about, type, foundedYear, companySize, logo, verified, createdAt, socialLinks } = companyData;
 
   return (
     <div>
@@ -90,7 +90,7 @@ export default function CompanyProfile() {
               <div className="flex justify-between gap-4 flex-col md:flex-row items-start md:items-center md:justify-between p-2 m-2">
                 <div className="lg:w-1/5 md:w-2/5 sm:w-full">
                   <h2 className="text-lg font-semibold">Company Logo</h2>
-                  <p className="text-gray-500">This image will be shown as your company's logo.</p>
+                  <p className="text-gray-500">This image will be shown as your company&apos;s logo.</p>
                 </div>
                 <div className="lg:w-3/5 md:w-3/5 sm:w-full sm:justify-center md:justify-center flex gap-10 flex-row items-center">
                   <div className="w-40 h-40 rounded-full flex items-center">

@@ -59,7 +59,7 @@ export const LoginForm = () => {
       {/* Footer */}
       <div className="text-center mt-6 text-sm text-gray-500">
         <Link href="/help" className="hover:underline">
-            Looking to create a page for a business? Get help
+            Looking to create a Page for a business? Get help
         </Link>
       </div>
     </div>

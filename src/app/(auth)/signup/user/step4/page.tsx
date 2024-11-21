@@ -1,4 +1,4 @@
-// app/register/step4/page.tsx
+// app/register/step4/Page.tsx
 "use client";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 
-const page = () => {
+const Page = () => {
   const { updateRegistrationData } = useRegistrationContext();
   const [collegeName, setCollegeName] = useState('');
   const [collegeStartDate, setCollegeStartDate] = useState('');
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

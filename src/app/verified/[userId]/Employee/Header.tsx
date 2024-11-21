@@ -13,6 +13,7 @@ export default function Header() {
         <nav className="space-x-4">
           <Button variant="link"><Link href={`/verified/${userId}/${userRole}/`}>Jobs</Link></Button>
           <Button variant="link"><Link href="">Plans and Pricing</Link></Button>
+          <Button variant="link"><Link href={`/verified/${userId}/Employee/register-company`}>Register Company</Link></Button>
           <Button variant="link" className="text-lg"><Link href={`/verified/${userId}/${userRole}/profile`}><FaRegUserCircle/></Link></Button>
         </nav>
       </div>

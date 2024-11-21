@@ -36,7 +36,7 @@ const Verify = () => {
           }
           return;
         }
-        // Redirect to login page if the token is invalid
+        // Redirect to login Page if the token is invalid
         router.push("/login");
       } catch (error) {
         setLoading(false);

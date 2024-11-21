@@ -2,13 +2,36 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FaCalendar, FaCircle, FaHome, FaRegClock, FaMoneyBill } from "react-icons/fa";
+import { FaCalendar, FaCircle, FaHome, FaRegClock, FaMoneyBill, FaExternalLinkAlt, FaFacebookSquare, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const InternshipsList = ({ internships, onSelect }: any) => {
+  const [message, setMessage] = useState<string | null>(null);
   const router = useRouter()
+  const handleCopyUrl = (jobId: string) => {
+    const jobUrl = `${window.location.origin}/Employee/jobs/${jobId}`;
+    navigator.clipboard
+      .writeText(jobUrl)
+      .then(() => {
+        setMessage("Job URL copied to clipboard!"); 
+        setTimeout(() => setMessage(null), 5000); 
+      })
+      .catch((err) => {
+        console.error("Failed to copy URL:", err);
+        setMessage("Failed to copy URL. Please try again.");
+        setTimeout(() => setMessage(null), 5000);
+      });
+  };
+
   return (
     <div className="space-y-5">
+       {/* Success message */}
+       {message && (
+        <div className="top-24 p-2 text-sm text-green-500 bg-green-100 border border-green-500 rounded text-center">
+          {message}
+        </div>
+      )}
       {/* Display Internships */}
       {internships.map((internship: any, idx: any) => (
         <Card onClick={() => router.push(`Employee/jobs/${internship._id}`)} key={idx} className="p-4 bg-white rounded shadow flex border-none justify-between cursor-pointer">
@@ -22,7 +45,7 @@ const InternshipsList = ({ internships, onSelect }: any) => {
                 <div className="flex gap-3">
                   <p className="text-md text-gray-600">{internship.companyName}</p>
                   {internship.status && (
-                    <Badge className="text-xs font-medium text-blue-400 border-blue-400 bg-transparent">{internship.status}</Badge>
+                    <Badge className="text-xs font-medium">{internship.status}</Badge>
                   )}
                 </div>
               </div>
@@ -44,11 +67,21 @@ const InternshipsList = ({ internships, onSelect }: any) => {
                 )}
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 text-blue-400">
               <Badge className="text-xs font-medium text-blue-400 bg-blue-50 flex gap-2"><FaRegClock />{internship.postedDate}</Badge>
-              {internship.joboffer &&
-                <Badge className="text-xs font-medium text-gray-400 bg-transparent flex items-center gap-2"><FaCircle className="text-gray-400 w-2" />{internship.joboffer}</Badge>
-              }
+              <FaExternalLinkAlt onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopyUrl(internship._id);
+                }}/>
+                <a href={internship?.company.socialLinks.facebook}>
+              <FaFacebookSquare />{" "}
+            </a>
+            <a href={internship?.company.socialLinks.linkedin}>
+              <FaLinkedin />
+            </a>
+            <a href={internship?.company.socialLinks.twitter}>
+              <FaTwitterSquare />
+            </a>
             </div>
           </div>
           {/* Company logo */}
