@@ -83,7 +83,7 @@ const router = useRouter();
                 <TableCell className="p-2 text-green-600">{job?.status}</TableCell>
                 <TableCell className="p-2">{job?.totalViews}</TableCell>
                 <TableCell className="p-2">
-                  <Button size="sm" variant="outline" onClick={()=>router.push(`Employer/job-posted/${job?._id}`)}>View Applicants</Button>
+                  <Button size="sm" variant="outline" onClick={()=>router.push(`job-posted/${job?._id}`)}>View Applicants</Button>
                 </TableCell>
                 <TableCell className="p-2 text-yellow-600">Upgrade</TableCell>
                 <TableCell className="p-2">
