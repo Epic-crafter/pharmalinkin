@@ -4,7 +4,7 @@ import { JobApplication } from "@/models/application";
 import { jobSchema } from "@/models/job-post";
 import mongoose from "mongoose";
 import { ProfileSchema } from "@/models/user-profile";
-
+export const dynamic = 'force-dynamic';
 export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
