@@ -30,7 +30,7 @@ import {
   FaUpload,
 } from "react-icons/fa";
 
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const router = useRouter();
   console.log(params);
   const { jobId } = params;
@@ -237,9 +237,14 @@ const page = ({ params }: any) => {
           <hr className="border-gray-300" />
           <div className="flex justify-left mt-4">
           <Dialog open={isDialogOpen} onOpenChange={() => setIsDialogOpen(!isDialogOpen)}>
-              <DialogTrigger asChild>
-                <Button>Apply now</Button>
-              </DialogTrigger>
+          <DialogTrigger asChild>
+              <Button>Apply now</Button>
+              
+            </DialogTrigger>
+            <DialogTrigger asChild className="ml-4">
+              <Button>View Contact</Button>
+              
+            </DialogTrigger>
               <DialogContent>
                 <DialogTitle className="text-lg font-semibold mb-2">
                   Confirm Application
@@ -267,7 +272,6 @@ const page = ({ params }: any) => {
                   </label>
                   <Textarea
                     id="coverletter"
-                    rows='4'
                     className="border-2 p-2 text-sm focus:border-indigo-500 focus:ring-indigo-500 rounded-md w-full"
                     value={coverLetter}
                     onChange={(e) => setCoverLetter(e.target.value)}
@@ -289,4 +293,4 @@ const page = ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;
