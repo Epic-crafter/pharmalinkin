@@ -6,7 +6,7 @@ import { FaCalendar, FaCircle, FaHome, FaRegClock, FaMoneyBill, FaExternalLinkAl
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const InternshipsList = ({ internships, onSelect }: any) => {
+const InternshipsList = ({ internships, onSelect, loading, error }: any) => {
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter()
   const handleCopyUrl = (jobId: string) => {
@@ -14,8 +14,8 @@ const InternshipsList = ({ internships, onSelect }: any) => {
     navigator.clipboard
       .writeText(jobUrl)
       .then(() => {
-        setMessage("Job URL copied to clipboard!"); 
-        setTimeout(() => setMessage(null), 5000); 
+        setMessage("Job URL copied to clipboard!");
+        setTimeout(() => setMessage(null), 5000);
       })
       .catch((err) => {
         console.error("Failed to copy URL:", err);
@@ -26,8 +26,14 @@ const InternshipsList = ({ internships, onSelect }: any) => {
 
   return (
     <div className="space-y-5">
-       {/* Success message */}
-       {message && (
+
+      <h2 className="pt-4 m-auto text-center font-bold text-xl" style={{ color: "#008bdc" }}>
+        {loading ? "Loading..." : `${internships.length} Total Jobs`}
+      </h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      <h3 className="text-center mt-1 mb-6 text-lg font-semibold">Latest Jobs in India</h3>
+      {/* Success message */}
+      {message && (
         <div className="top-24 p-2 text-sm text-green-500 bg-green-100 border border-green-500 rounded text-center">
           {message}
         </div>
@@ -70,18 +76,18 @@ const InternshipsList = ({ internships, onSelect }: any) => {
             <div className="flex gap-4 text-blue-400">
               <Badge className="text-xs font-medium text-blue-400 bg-blue-50 flex gap-2"><FaRegClock />{internship.postedDate}</Badge>
               <FaExternalLinkAlt onClick={(e) => {
-                  e.stopPropagation();
-                  handleCopyUrl(internship._id);
-                }}/>
-                <a href={internship?.company.socialLinks.facebook}>
-              <FaFacebookSquare />{" "}
-            </a>
-            <a href={internship?.company.socialLinks.linkedin}>
-              <FaLinkedin />
-            </a>
-            <a href={internship?.company.socialLinks.twitter}>
-              <FaTwitterSquare />
-            </a>
+                e.stopPropagation();
+                handleCopyUrl(internship._id);
+              }} />
+              <a href={internship?.company.socialLinks.facebook}>
+                <FaFacebookSquare />{" "}
+              </a>
+              <a href={internship?.company.socialLinks.linkedin}>
+                <FaLinkedin />
+              </a>
+              <a href={internship?.company.socialLinks.twitter}>
+                <FaTwitterSquare />
+              </a>
             </div>
           </div>
           {/* Company logo */}

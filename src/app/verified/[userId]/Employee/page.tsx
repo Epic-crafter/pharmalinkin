@@ -22,8 +22,7 @@ export default function Page() {
   const [experienceFilter, setExperienceFilter] = useState([]);
   const [salaryRange, setSalaryRange] = useState([0, 9000000]); // Minimum and maximum salary range
 
-  const handleSelectInternship = (internship:any) => setSelectedInternship(internship);
-
+  const handleSelectInternship = (internship: any) => setSelectedInternship(internship);
 
   // Fetch internships from the backend with filters
   const fetchInternships = async () => {
@@ -43,7 +42,7 @@ export default function Page() {
           companyName: companyFilter,
           experienceLevel: experienceFilter,
           salaryRange: salaryRange.join('-'),
-          page:1
+          page: 1
         }),
       });
       const data = await response.json();
@@ -64,30 +63,28 @@ export default function Page() {
   }, [profileFilter, locationFilter, countryFilter, categoryFilter, jobTypeFilter, companyFilter, experienceFilter, salaryRange]);
 
   return (
-    <div style={{ backgroundColor: "#f8f8f8" }}>
-      <div className="lg:w-[90%] lg:mx-auto pt-4">
-        <h2 className="pt-6 m-auto text-center font-bold text-xl" style={{ color: "#008bdc" }}>
-          {loading ? "Loading..." : `${internships.length} Total Jobs`}
-        </h2>
-        {error && <p className="text-red-500 text-center">{error}</p>}
-        <h3 className="text-center mt-1 mb-6 text-sm">Latest Jobs in India</h3>
-        
+    <div className="h-screen bg-gray-100 overflow-hidden">
+      <div className="lg:w-[95%] lg:mx-auto pt-2">
         <div className="block lg:hidden mb-4">
           <button className="text-lg font-semibold text-center px-4" onClick={() => setShowFilters(true)}>
             {showFilters ? "" : "Filters"}
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-3 mx-auto">
-        <div className="lg:w-1/4 p-2 space-y-6">
-            <Card/>
-            <Carousel/>
-          </div>
-          <div className={`lg:w-2/4 w-full p-2 mx-auto ${showFilters ? "hidden lg:block" : "block"}`}>
-            <InternshipsList internships={internships} onSelect={handleSelectInternship} />
+        <div className="flex flex-col lg:flex-row gap-3 h-screen">
+          {/* Left Section */}
+          <div className="lg:w-1/4 p-2 space-y-2 lg:fixed top-18 left-4 h-screen hidden lg:block">
+            <Card />
+            <Carousel />
           </div>
 
-          <div className={`lg:w-1/4 lg:block p-2 ${showFilters ? "block" : "block"}`}>
+          {/* Center Section */}
+          <div className="lg:w-2/4 w-full p-2 mx-auto lg:ml-[25%] overflow-y-auto h-screen">
+            <InternshipsList internships={internships} onSelect={handleSelectInternship} loading={loading} error={error} />
+          </div>
+
+          {/* Right Section */}
+          <div className={`lg:w-1/4 p-2 lg:fixed top-18 right-4 h-screen ${showFilters ? "block" : "hidden lg:block"}`}>
             <Filters
               showFilters={showFilters}
               setShowFilters={setShowFilters}
@@ -102,10 +99,11 @@ export default function Page() {
               salaryRange={salaryRange}
             />
           </div>
-          
         </div>
-
-          </div>
+      </div>
     </div>
   );
 }
+
+
+         
