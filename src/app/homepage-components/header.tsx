@@ -5,6 +5,7 @@ import logo from "../../assets/logo.jpg";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { SidePannel } from "./Sidebar";
 
 export default function Header() {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -13,13 +14,18 @@ export default function Header() {
   return (
     <header className="flex items-center space-x-4 justify-between lg:px-20 px-8 py-4 font-bold">
       {/* Header-left */}
-      <div className="flex items-center space-x-3 font-bold cursor-pointer" onClick={() => router.push("/")}>
+      <div className="flex items-center space-x-3 font-bold cursor-pointer">
+      <div className="flex items-center"><SidePannel />
+     </div>
+     <div  onClick={() => router.push("/")} className="flex items-center space-x-2">
+
         <Image className="h-10 w-10 rounded-full" src={logo} alt="Logo" />
         <h1 className="text-xl">Pharmalinkin</h1>
+     </div>
       </div>
 
       {/* Header-right */}
-      <div className="flex items-center justify-between gap-2">
+      <div className="hidden lg:flex items-center justify-between gap-2">
         {/* Nav links (visible only on large screens) */}
         <nav className="space-x-4 text-black font-semibold hidden lg:block">
           <span className="cursor-pointer">Find a Job</span>
