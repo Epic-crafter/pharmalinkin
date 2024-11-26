@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FaCircle, FaExclamationTriangle, FaGithub, FaLink, FaLinkedin, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaTwitter, FaUserCheck } from "react-icons/fa";
+import { FaCircle, FaExclamationTriangle, FaExpandAlt, FaGithub, FaLink, FaLinkedin, FaRegCalendarAlt, FaRegClipboard, FaRegClock, FaRegCommentAlt, FaRegFile, FaSortUp, FaTwitter, FaUserCheck } from "react-icons/fa";
 import { FiInfo } from "react-icons/fi"
 import { useJobContext } from "@/lib/contexts/jobId-context";
 import { formatRelativeTime } from "@/lib/formatRelativeTime";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 
 
 export default function ApplicationsList({applicants,setApplicants,status,setStatus}:any) {
-
+const router = useRouter();
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
   // const [applicants, setApplicants] = useState<any>([]);
@@ -122,7 +123,7 @@ export default function ApplicationsList({applicants,setApplicants,status,setSta
                 <div className="flex justify-between items-start pb-4">
                   <div className="flex items-center">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-700">{app?.aplicantProfile.firstName} {app?.aplicantProfile.lastName}</h3>
+                      <h3 className="text-lg font-semibold text-gray-700 flex gap-2 items-center">{app?.aplicantProfile.firstName} {app?.aplicantProfile.lastName} <FaExpandAlt className="text-sm font-medium mb-1 text-primary cursor-pointer" onClick={()=>router.push(`/verified/${jobId}/Employer/applicant/231`)}  /> </h3>
                       <p >{app?.aplicantProfile.location} </p>
                       <p >{app?.aplicantProfile.bio} </p>
                       {/* <p className=" text-sm flex items-center font-medium">Total work experience : &nbsp;<FiInfo className="text-primary  " /></p> */}

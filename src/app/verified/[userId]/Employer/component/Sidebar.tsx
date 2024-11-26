@@ -7,6 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useUser } from "@/lib/contexts/user";
 import {
   Bookmark,
   CircleHelp,
@@ -21,8 +22,42 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 export function SidePannel({handleSheetOpenChange}:any) {
- 
+  const { userId } = useUser();
+  const [userData, setUserData] = useState<any>([]);
+
+  const fetchUserData = async () => {
+    if (userId) {
+      try {
+        const response = await fetch("/api/company/get-profile", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data[0]);
+          
+          setUserData(data[0]);
+          console.log("Fetched Company Data:", data);
+        } else {
+          console.error("Failed to fetch company data");
+        }
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+      }
+    }
+    
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, [userId]);
+
+
   return (
  <Sheet onOpenChange={handleSheetOpenChange}>
         <SheetTrigger asChild className="lg:hidden block">
@@ -34,7 +69,7 @@ export function SidePannel({handleSheetOpenChange}:any) {
             <Avatar className="h-16 w-16 ">
               <AvatarImage
                 className="rounded-full z-20"
-                src={`https://avatar.iran.liara.run/username?username=Adarsh+yadav`}
+                src={userData?.logo}
                 alt="@shadcn"
               />
               <AvatarFallback>Dn</AvatarFallback>
@@ -47,7 +82,7 @@ export function SidePannel({handleSheetOpenChange}:any) {
             </div>
           </div>
           </div>
-          <SheetTitle className="text-xl z-20 text-white"> dummy name</SheetTitle>
+          <SheetTitle className="text-xl z-20 text-white">{userData.companyName}</SheetTitle>
           <SheetDescription className="text-white opacity-85">
             +91 667575657
           </SheetDescription>

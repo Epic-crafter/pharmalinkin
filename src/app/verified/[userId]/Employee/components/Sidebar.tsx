@@ -23,10 +23,41 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@/lib/contexts/user";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function SidePannel({handleSheetOpenChange}:any) {
     const { userId,userRole } = useUser();
- 
+   
+    const [userData, setUserData] = useState<any>(null);
+  
+   
+    const router = useRouter();
+    const fetchProfileData = async () => {
+      if (userId) {
+        try {
+          const response = await fetch("/api/users/profile", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId }),
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setUserData(data.profile);
+            console.log("Fetched Profile Data:", data);
+          } else {
+            console.error("Failed to fetch profile data");
+          }
+        } catch (error) {
+          console.error("Error fetching profile data:", error);
+        }
+      }
+    };
+    useEffect(() => {
+      fetchProfileData();
+    }, [userId]);
   return (
  <Sheet onOpenChange={handleSheetOpenChange}>
         <SheetTrigger asChild className="lg:hidden block">
@@ -38,7 +69,7 @@ export function SidePannel({handleSheetOpenChange}:any) {
             <Avatar className="h-16 w-16 ">
               <AvatarImage
                 className="rounded-full z-20"
-                src={`https://avatar.iran.liara.run/username?username=Adarsh+yadav`}
+                src={userData?.user.profilePicture}
                 alt="@shadcn"
               />
               <AvatarFallback>Dn</AvatarFallback>
