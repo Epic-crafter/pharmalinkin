@@ -35,7 +35,7 @@ const Page = () => {
       });
 
       if (response.ok) {
-        router.push('/login');
+        router.push('/signup/user/email-verification');
       } else {
         console.error('Registration failed');
       }

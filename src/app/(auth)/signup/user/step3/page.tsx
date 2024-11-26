@@ -33,7 +33,7 @@ const Page = () => {
       });
 
       if (response.ok) {
-        router.push('/login');
+        router.push(`/signup/user/email-verification?email=${registrationData.email}`);
       } else {
         console.error('Registration failed');
         // Optionally display an error message to the user

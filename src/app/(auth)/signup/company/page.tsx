@@ -61,7 +61,7 @@ export default function SignUp() {
 
       if (result.status) {
         console.log(result);
-        router.push(`/signup/company/create-profile/${result.user._id}`)
+        router.push(`/signup/company/email-verification`)
         setSuccess("User registered successfully!");
 
       } else {
