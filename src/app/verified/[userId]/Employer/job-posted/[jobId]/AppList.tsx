@@ -102,10 +102,10 @@ const router = useRouter();
       <div className="mt-2 text-sm  p-6">
         {applicants.map((app: any, index: any) => (
           <div key={app?._id} className="border border-gray-200 shadow-sm  rounded-xl mb-4 space-y-4">
-            <div className={` w-full text-xs rounded-t-xl flex lg:justify-between flex-col-1 items-start border-b border-gray-200  p-4 font-semibold `}>
+            <div className={` w-full text-xs rounded-t-xl flex justify-between xs:justify-around flex-col-1 items-center border-b border-gray-200  p-4 font-semibold `}>
               <div className={` flex gap-4 items-center `}>
                 <button onClick={()=>fetchStatus(app._id,app.status)} className={`bg-red-200 border-2 text-red-500 border-red-400 flex px-2 py-1 gap-2 rounded-lg items-center `}><FaRegClock /> {app?.status} </button>
-                <p className="text-primary">Know more</p>
+                {/* <p className="text-primary">Know more</p> */}
               </div>
               <div className=" text-gray-500">Applied {formatRelativeTime(app?.appliedDate)}</div>
 
@@ -234,7 +234,7 @@ const router = useRouter();
                       onClick={() => toggleDropdown(app.id)}
                       className="bg-gray-100 py-2 px-4 bg-primary text-white rounded-md flex items-center gap-2"
                     >
-                      <p> Next steps </p><FaSortUp className="mt-2" />
+                      <p> Next Steps </p><FaSortUp className="mt-2" />
                     </button>
                     <div className="relative " style={{ marginTop: "-450px" }}>
                       {openDropdownId === app.id && (

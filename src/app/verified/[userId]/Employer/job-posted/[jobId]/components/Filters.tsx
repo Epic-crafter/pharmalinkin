@@ -6,7 +6,7 @@ function Filters() {
   const [relevance, setRelevance] = useState<any>(50);
 
   return (
-    <div className="pr-4 py-4 w-full lg:w-72">
+    <div className="pr-4 py-4 w-full lg:w-72 hidden lg:block">
       <h3 className="text-lg font-semibold mb-4">Filters</h3>
       
       <div className="mb-4 text-sm ">

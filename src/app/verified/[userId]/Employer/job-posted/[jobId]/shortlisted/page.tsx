@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useJobContext } from "@/lib/contexts/jobId-context";
 
 export default function Page() {
-  const [status,setStatus]=useState("");
+  const [status,setStatus]=useState("SHORTLISTED");
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
