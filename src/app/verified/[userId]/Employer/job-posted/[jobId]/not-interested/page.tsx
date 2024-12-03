@@ -4,7 +4,7 @@ import ApplicationsList from '../AppList'
 import { useJobContext } from '@/lib/contexts/jobId-context';
 
 const Page = () => {
-  const [status,setStatus]=useState("");
+  const [status,setStatus]=useState("REJECTED");
   const { jobId } = useJobContext();
   console.log("JOB ID1------", jobId);
   const [applicants, setApplicants] = useState<any>([]);
