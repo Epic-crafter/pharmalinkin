@@ -11,6 +11,7 @@ export const POST = async (req: NextRequest) => {
     if (!userId || !institution || !degree || !fieldOfStudy || !startDate) {
       return NextResponse.json({
         message: "All required fields must be provided",
+
         status: false,
       });
     }
