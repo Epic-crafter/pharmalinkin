@@ -26,8 +26,15 @@ export const jobSchema = new Schema(
       type: String,
       required: true,
     },
+    jobcategory:{
+         type:String,
+         enum:[],
+         required:true,
+         default:"Full Stack",
+    },
     jobType: {
       type: String,
+      required:true,
       enum: [
         "FULL_TIME",
         "PART_TIME",
@@ -57,22 +64,63 @@ export const jobSchema = new Schema(
       enum: ["ENTRY_LEVEL", "MID_LEVEL", "SENIOR_LEVEL", "EXECUTIVE"],
       default: "ENTRY_LEVEL",
     },
-    postedDate: {
-      type: Date,
-      default: Date.now,
-    },
     applicationDeadline: {
       type: Date,
       required: true,
+    },
+    imageurl:{
+      type:String,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    address:{  
+      type:String,
+    },
+    contactperson:{
+      type:String,
+    },
+    mobile:{
+      type:String,
+    },
+    email:{
+      type:String,
+    },
+    coverimageurl:{
+      type:String,
+    },
+    postalcode :{
+      type:String,
+    },
+    salaryoffer:{
+      type:Number,
+    },
+    qualification:{
+      type:String,
+    },
+    experience:{
+      type:String,
+    },
+    videourl:{
+      type:String,
+      required:true,
+    },
+    fileurl:{
+      type:String,
+    },
+    closingdate:{
+      type:Date,
+      default:Date.now,
+    },
+    postedDate: {
+      type: Date,
+      default: Date.now,
     },
     status: {
       type: String,
       enum: ["ACTIVE", "INACTIVE", "FILLED", "CLOSED"],
       default: "ACTIVE",
-    },
-    category: {
-      type: String,
-      required: true,
     },
     skillsRequired: {
       type: [String],
@@ -81,7 +129,7 @@ export const jobSchema = new Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     company: {
       type: mongoose.Schema.Types.ObjectId,
